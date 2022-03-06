@@ -2,35 +2,40 @@ DROP TABLE IF EXISTS military_armies;
 DROP TABLE IF EXISTS military_districts__subjects;
 DROP TABLE IF EXISTS dislocations;
 
+-- Субъекты РФ
 DROP TABLE IF EXISTS subjects;
 CREATE TABLE subjects (
     id   serial PRIMARY KEY,
     name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
 );
 
+-- Тип дислокации (Город, населенный пункт и т.д.)
 DROP TABLE IF EXISTS dislocation_types;
 CREATE TABLE dislocation_types (
     id   serial PRIMARY KEY,
     name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
 );
 
+-- Дислокации
 CREATE TABLE dislocations (
     id         serial PRIMARY KEY,
-    name       text   NOT NULL UNIQUE CHECK (LENGTH(name) > 0),
+    name       text   NOT NULL CHECK (LENGTH(name) > 0),
     type_id    serial NOT NULL,
     subject_id serial NOT NULL,
     FOREIGN KEY (type_id) REFERENCES dislocation_types (id),
     FOREIGN KEY (subject_id) REFERENCES subjects (id)
 );
 
+-- Военные округа
 DROP TABLE IF EXISTS military_districts;
 CREATE TABLE military_districts (
     id                serial PRIMARY KEY,
-    name              text NOT NULL CHECK (LENGTH(name) > 0),
-    headquarters      text NOT NULL CHECK (LENGTH(headquarters) > 0),
+    name              text NOT NULL UNIQUE CHECK (LENGTH(name) > 0),
+    headquarters      text NOT NULL UNIQUE CHECK (LENGTH(headquarters) > 0),
     date_of_formation date NOT NULL
 );
 
+-- Связи военных округов с субъектами РФ
 CREATE TABLE military_districts__subjects (
     military_district_id serial NOT NULL,
     subject_id           serial NOT NULL,
@@ -38,6 +43,7 @@ CREATE TABLE military_districts__subjects (
     FOREIGN KEY (subject_id) REFERENCES subjects (id)
 );
 
+-- Армии
 CREATE TABLE military_armies (
     id                serial PRIMARY KEY,
     name              text   NOT NULL CHECK (LENGTH(name) > 0),
@@ -48,11 +54,19 @@ CREATE TABLE military_armies (
     FOREIGN KEY (district_id) REFERENCES military_districts (id)
 );
 
+-- Дивизии
 DROP TABLE IF EXISTS military_divisions;
 CREATE TABLE military_divisions (
     id      serial PRIMARY KEY,
     name    text NOT NULL CHECK (LENGTH(name) > 0),
     address text NOT NULL CHECK (LENGTH(address) > 0)
+);
+
+-- Воинские специальности
+DROP TABLE IF EXISTS military_specialties;
+CREATE TABLE military_specialties (
+    id   serial PRIMARY KEY,
+    name text NOT NULL CHECK (LENGTH(name) > 0)
 );
 
 INSERT INTO subjects
@@ -253,3 +267,36 @@ INSERT INTO military_armies
 VALUES (DEFAULT, '29-я общевойсковая армия', '23-aug-2010', 1, 4),
        (DEFAULT, '1-я гвардейская танковая Краснознамённая армия', '13-nov-2014', 2, 1),
        (DEFAULT, '6-я общевойсковая Краснознамённая армия', '9-aug-2010', 3, 1);
+
+INSERT INTO military_specialties
+VALUES (DEFAULT, 'Артиллерист'),
+       (DEFAULT, 'Лётчик'),
+       (DEFAULT, 'Переводчик'),
+       (DEFAULT, 'Связист'),
+       (DEFAULT, 'Десантник'),
+       (DEFAULT, 'Зенитчик'),
+       (DEFAULT, 'Пограничник'),
+       (DEFAULT, 'Разведчик'),
+       (DEFAULT, 'Ракетчик'),
+       (DEFAULT, 'Сапёр'),
+       (DEFAULT, 'Танкист'),
+       (DEFAULT, 'Шифровальщик (Криптограф)'),
+       (DEFAULT, 'Штурман'),
+       (DEFAULT, 'Специалист по обеспечению');
+
+SELECT military_armies.name,
+       military_armies.date_of_formation,
+       dislocation_types.name  AS dislocation_type,
+       dislocations.name       AS dislocation_name,
+       subjects.name           AS subject_name,
+       military_districts.name AS military_district_name
+FROM military_armies,
+     dislocation_types,
+     dislocations,
+     subjects,
+     military_districts
+WHERE military_armies.dislocation_id = dislocations.id
+  AND dislocations.type_id = dislocation_types.id
+  AND dislocations.subject_id = subjects.id
+  AND military_armies.district_id = military_districts.id;
+
