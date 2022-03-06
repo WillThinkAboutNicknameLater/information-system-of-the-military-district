@@ -63,11 +63,6 @@ CREATE TABLE military_divisions (
     address text NOT NULL CHECK (LENGTH(address) > 0)
 );
 
-DROP TABLE IF EXISTS attributes_of_generals;
-CREATE TABLE attributes_of_generals (
-
-);
-
 -- Звания
 DROP TABLE IF EXISTS ranks;
 CREATE TABLE ranks (
@@ -76,11 +71,41 @@ CREATE TABLE ranks (
 );
 
 -- Военнослужащие
+DROP TABLE IF EXISTS military_personnel;
 CREATE TABLE military_personnel (
     id      serial PRIMARY KEY,
     name    text   NOT NULL CHECK (LENGTH(name) > 0),
     rank_id serial NOT NULL,
     FOREIGN KEY (rank_id) REFERENCES ranks (id)
+);
+
+-- Маршалы
+DROP TABLE IF EXISTS marshals;
+CREATE TABLE marshals (
+    id                    serial PRIMARY KEY,
+    military_personnel_id serial NOT NULL
+);
+
+-- Генералы армии
+DROP TABLE IF EXISTS army_generals;
+CREATE TABLE army_generals (
+    id                    serial PRIMARY KEY,
+    military_personnel_id serial NOT NULL
+);
+
+-- Генерал-полковники
+DROP TABLE IF EXISTS colonel_generals;
+CREATE TABLE colonel_generals (
+    id                    serial PRIMARY KEY,
+    military_personnel_id serial NOT NULL
+);
+
+-- Генерал-лейтенанты
+DROP TABLE IF EXISTS lieutenant_generals;
+CREATE TABLE lieutenant_generals (
+    id                    serial PRIMARY KEY,
+    military_personnel_id serial NOT NULL,
+    date_of_award         date   NOT NULL
 );
 
 -- Воинские специальности
@@ -329,7 +354,12 @@ VALUES (DEFAULT, 'Артиллерист'),
        (DEFAULT, 'Специалист по обеспечению');
 
 INSERT INTO military_personnel
-VALUES (DEFAULT, 'Сергей Александрович Кисель', 4);
+VALUES (DEFAULT, 'Кисель Сергей Александрович', 4),
+       (DEFAULT, 'Ершов Владислав Николаевич', 4);
+
+INSERT INTO lieutenant_generals
+VALUES (DEFAULT, 1, '20-feb-2020'),
+       (DEFAULT, 2, '18-feb-2021');
 
 SELECT military_armies.name,
        military_armies.date_of_formation,
