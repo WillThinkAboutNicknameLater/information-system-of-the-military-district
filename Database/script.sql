@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS military_armies;
 DROP TABLE IF EXISTS military_districts__subjects;
 DROP TABLE IF EXISTS dislocations;
 DROP TABLE IF EXISTS military_personnel;
+DROP TABLE IF EXISTS ranks;
 
 -- Субъекты РФ
 DROP TABLE IF EXISTS subjects;
@@ -63,11 +64,19 @@ CREATE TABLE military_divisions (
     address text NOT NULL CHECK (LENGTH(address) > 0)
 );
 
--- Звания
-DROP TABLE IF EXISTS ranks;
-CREATE TABLE ranks (
+-- Категории званий
+DROP TABLE IF EXISTS rank_categories;
+CREATE TABLE rank_categories (
     id   serial PRIMARY KEY,
     name text NOT NULL CHECK (LENGTH(name) > 0)
+);
+
+-- Звания
+CREATE TABLE ranks (
+    id                  serial PRIMARY KEY,
+    name                text   NOT NULL CHECK (LENGTH(name) > 0),
+    ranking_category_id serial NOT NULL,
+    FOREIGN KEY (ranking_category_id) REFERENCES rank_categories (id)
 );
 
 -- Военнослужащие
@@ -315,27 +324,35 @@ VALUES (DEFAULT, '29-я общевойсковая армия', '23-aug-2010', 1
        (DEFAULT, '6-я общевойсковая Краснознамённая армия', '9-aug-2010', 3, 1),
        (DEFAULT, '5-я общевойсковая Краснознамённая армия', '1-jul-2006', 4, 4);
 
+INSERT INTO rank_categories
+VALUES (DEFAULT, 'Высший офицерский состав'),
+       (DEFAULT, 'Старший офицерский состав'),
+       (DEFAULT, 'Младший офицерский состав'),
+       (DEFAULT, 'Прапорщики'),
+       (DEFAULT, 'Сержантский состав'),
+       (DEFAULT, 'Рядовой состав');
+
 INSERT INTO ranks
-VALUES (DEFAULT, 'Маршал'),
-       (DEFAULT, 'Генерал армии'),
-       (DEFAULT, 'Генерал-полковник'),
-       (DEFAULT, 'Генерал-лейтенант'),
-       (DEFAULT, 'Генерал-майор'),
-       (DEFAULT, 'Полковник'),
-       (DEFAULT, 'Подполковник'),
-       (DEFAULT, 'Майор'),
-       (DEFAULT, 'Капитан'),
-       (DEFAULT, 'Старший лейтенант'),
-       (DEFAULT, 'Лейтенант'),
-       (DEFAULT, 'Младший лейтенант'),
-       (DEFAULT, 'Старший прапорщик'),
-       (DEFAULT, 'Прапорщик'),
-       (DEFAULT, 'Старшина'),
-       (DEFAULT, 'Старший сержант'),
-       (DEFAULT, 'Сержант'),
-       (DEFAULT, 'Младший сержант'),
-       (DEFAULT, 'Ефрейтор'),
-       (DEFAULT, 'Рядовой');
+VALUES (DEFAULT, 'Маршал', 1),
+       (DEFAULT, 'Генерал армии', 1),
+       (DEFAULT, 'Генерал-полковник', 1),
+       (DEFAULT, 'Генерал-лейтенант', 1),
+       (DEFAULT, 'Генерал-майор', 1),
+       (DEFAULT, 'Полковник', 2),
+       (DEFAULT, 'Подполковник', 2),
+       (DEFAULT, 'Майор', 2),
+       (DEFAULT, 'Капитан', 3),
+       (DEFAULT, 'Старший лейтенант', 3),
+       (DEFAULT, 'Лейтенант', 3),
+       (DEFAULT, 'Младший лейтенант', 3),
+       (DEFAULT, 'Старший прапорщик', 4),
+       (DEFAULT, 'Прапорщик', 4),
+       (DEFAULT, 'Старшина', 5),
+       (DEFAULT, 'Старший сержант', 5),
+       (DEFAULT, 'Сержант', 5),
+       (DEFAULT, 'Младший сержант', 5),
+       (DEFAULT, 'Ефрейтор', 6),
+       (DEFAULT, 'Рядовой', 6);
 
 INSERT INTO military_specialties
 VALUES (DEFAULT, 'Артиллерист'),
@@ -361,7 +378,7 @@ INSERT INTO lieutenant_generals
 VALUES (DEFAULT, 1, '20-feb-2020'),
        (DEFAULT, 2, '18-feb-2021');
 
-SELECT military_armies.name,
+/*SELECT military_armies.name,
        military_armies.date_of_formation,
        dislocation_types.name  AS dislocation_type,
        dislocations.name       AS dislocation_name,
@@ -375,5 +392,13 @@ FROM military_armies,
 WHERE military_armies.dislocation_id = dislocations.id
   AND dislocations.type_id = dislocation_types.id
   AND dislocations.subject_id = subjects.id
-  AND military_armies.district_id = military_districts.id;
+  AND military_armies.district_id = military_districts.id;*/
 
+/*SELECT military_personnel.name, ranks.name, lieutenant_generals.date_of_award, rank_categories.name
+FROM military_personnel,
+     ranks,
+     lieutenant_generals,
+     rank_categories
+WHERE military_personnel.rank_id = ranks.id
+  AND military_personnel.id = lieutenant_generals.military_personnel_id
+  AND ranks.ranking_category_id = rank_categories.id;*/
