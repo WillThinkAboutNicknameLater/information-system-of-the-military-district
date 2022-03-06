@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS military_armies;
 DROP TABLE IF EXISTS military_districts__subjects;
 DROP TABLE IF EXISTS dislocations;
+DROP TABLE IF EXISTS military_personnel;
 
 -- Субъекты РФ
 DROP TABLE IF EXISTS subjects;
@@ -60,6 +61,26 @@ CREATE TABLE military_divisions (
     id      serial PRIMARY KEY,
     name    text NOT NULL CHECK (LENGTH(name) > 0),
     address text NOT NULL CHECK (LENGTH(address) > 0)
+);
+
+DROP TABLE IF EXISTS attributes_of_generals;
+CREATE TABLE attributes_of_generals (
+
+);
+
+-- Звания
+DROP TABLE IF EXISTS ranks;
+CREATE TABLE ranks (
+    id   serial PRIMARY KEY,
+    name text NOT NULL CHECK (LENGTH(name) > 0)
+);
+
+-- Военнослужащие
+CREATE TABLE military_personnel (
+    id      serial PRIMARY KEY,
+    name    text   NOT NULL CHECK (LENGTH(name) > 0),
+    rank_id serial NOT NULL,
+    FOREIGN KEY (rank_id) REFERENCES ranks (id)
 );
 
 -- Воинские специальности
@@ -158,8 +179,7 @@ VALUES (DEFAULT, 'Алтайский край'),
 
 INSERT INTO dislocation_types
 VALUES (DEFAULT, 'Город'),
-       (DEFAULT, 'Населённый пункт'),
-       (DEFAULT, 'Губа');
+       (DEFAULT, 'Населённый пункт');
 
 INSERT INTO military_districts
 VALUES (DEFAULT, 'Западный военный округ', 'Санкт-Петербург', '21-oct-2010'),
@@ -261,12 +281,36 @@ WHERE (military_districts.name = 'Западный военный округ' AN
 INSERT INTO dislocations
 VALUES (DEFAULT, 'Чита', 1, 12),
        (DEFAULT, 'Одинцово', 1, 32),
-       (DEFAULT, 'Агалатово', 2, 28);
+       (DEFAULT, 'Агалатово', 2, 28),
+       (DEFAULT, 'Уссурийск', 1, 43);
 
 INSERT INTO military_armies
 VALUES (DEFAULT, '29-я общевойсковая армия', '23-aug-2010', 1, 4),
        (DEFAULT, '1-я гвардейская танковая Краснознамённая армия', '13-nov-2014', 2, 1),
-       (DEFAULT, '6-я общевойсковая Краснознамённая армия', '9-aug-2010', 3, 1);
+       (DEFAULT, '6-я общевойсковая Краснознамённая армия', '9-aug-2010', 3, 1),
+       (DEFAULT, '5-я общевойсковая Краснознамённая армия', '1-jul-2006', 4, 4);
+
+INSERT INTO ranks
+VALUES (DEFAULT, 'Маршал'),
+       (DEFAULT, 'Генерал армии'),
+       (DEFAULT, 'Генерал-полковник'),
+       (DEFAULT, 'Генерал-лейтенант'),
+       (DEFAULT, 'Генерал-майор'),
+       (DEFAULT, 'Полковник'),
+       (DEFAULT, 'Подполковник'),
+       (DEFAULT, 'Майор'),
+       (DEFAULT, 'Капитан'),
+       (DEFAULT, 'Старший лейтенант'),
+       (DEFAULT, 'Лейтенант'),
+       (DEFAULT, 'Младший лейтенант'),
+       (DEFAULT, 'Старший прапорщик'),
+       (DEFAULT, 'Прапорщик'),
+       (DEFAULT, 'Старшина'),
+       (DEFAULT, 'Старший сержант'),
+       (DEFAULT, 'Сержант'),
+       (DEFAULT, 'Младший сержант'),
+       (DEFAULT, 'Ефрейтор'),
+       (DEFAULT, 'Рядовой');
 
 INSERT INTO military_specialties
 VALUES (DEFAULT, 'Артиллерист'),
@@ -283,6 +327,9 @@ VALUES (DEFAULT, 'Артиллерист'),
        (DEFAULT, 'Шифровальщик (Криптограф)'),
        (DEFAULT, 'Штурман'),
        (DEFAULT, 'Специалист по обеспечению');
+
+INSERT INTO military_personnel
+VALUES (DEFAULT, 'Сергей Александрович Кисель', 4);
 
 SELECT military_armies.name,
        military_armies.date_of_formation,
