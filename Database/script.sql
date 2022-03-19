@@ -1,229 +1,370 @@
-DROP TABLE IF EXISTS military_armies;
+DROP TABLE IF EXISTS military_formations;
+DROP TABLE IF EXISTS military_formation_categories;
 DROP TABLE IF EXISTS military_districts__subjects;
-DROP TABLE IF EXISTS dislocations;
-DROP TABLE IF EXISTS military_personnel;
-DROP TABLE IF EXISTS ranks;
-
--- Субъекты РФ
-DROP TABLE IF EXISTS subjects;
-CREATE TABLE subjects (
-    id   serial PRIMARY KEY,
-    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
-);
-
--- Тип дислокации (Город, населенный пункт и т.д.)
-DROP TABLE IF EXISTS dislocation_types;
-CREATE TABLE dislocation_types (
-    id   serial PRIMARY KEY,
-    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
-);
-
--- Дислокации
-CREATE TABLE dislocations (
-    id         serial PRIMARY KEY,
-    name       text   NOT NULL CHECK (LENGTH(name) > 0),
-    type_id    serial NOT NULL,
-    subject_id serial NOT NULL,
-    FOREIGN KEY (type_id) REFERENCES dislocation_types (id),
-    FOREIGN KEY (subject_id) REFERENCES subjects (id)
-);
-
--- Военные округа
 DROP TABLE IF EXISTS military_districts;
-CREATE TABLE military_districts (
-    id                serial PRIMARY KEY,
-    name              text NOT NULL UNIQUE CHECK (LENGTH(name) > 0),
-    headquarters      text NOT NULL UNIQUE CHECK (LENGTH(headquarters) > 0),
-    date_of_formation date NOT NULL
-);
-
--- Связи военных округов с субъектами РФ
-CREATE TABLE military_districts__subjects (
-    military_district_id serial NOT NULL,
-    subject_id           serial NOT NULL,
-    FOREIGN KEY (military_district_id) REFERENCES military_districts (id),
-    FOREIGN KEY (subject_id) REFERENCES subjects (id)
-);
-
--- Армии
-CREATE TABLE military_armies (
-    id                serial PRIMARY KEY,
-    name              text   NOT NULL CHECK (LENGTH(name) > 0),
-    date_of_formation date   NOT NULL,
-    dislocation_id    serial NOT NULL,
-    district_id       serial NOT NULL,
-    FOREIGN KEY (dislocation_id) REFERENCES dislocations (id),
-    FOREIGN KEY (district_id) REFERENCES military_districts (id)
-);
-
--- Дивизии
-DROP TABLE IF EXISTS military_divisions;
-CREATE TABLE military_divisions (
-    id      serial PRIMARY KEY,
-    name    text NOT NULL CHECK (LENGTH(name) > 0),
-    address text NOT NULL CHECK (LENGTH(address) > 0)
-);
-
--- Категории званий
-DROP TABLE IF EXISTS rank_categories;
-CREATE TABLE rank_categories (
-    id   serial PRIMARY KEY,
-    name text NOT NULL CHECK (LENGTH(name) > 0)
-);
-
--- Звания
-CREATE TABLE ranks (
-    id                  serial PRIMARY KEY,
-    name                text   NOT NULL CHECK (LENGTH(name) > 0),
-    ranking_category_id serial NOT NULL,
-    FOREIGN KEY (ranking_category_id) REFERENCES rank_categories (id)
-);
-
--- Военнослужащие
-DROP TABLE IF EXISTS military_personnel;
-CREATE TABLE military_personnel (
-    id      serial PRIMARY KEY,
-    name    text   NOT NULL CHECK (LENGTH(name) > 0),
-    rank_id serial NOT NULL,
-    FOREIGN KEY (rank_id) REFERENCES ranks (id)
-);
-
--- Маршалы
-DROP TABLE IF EXISTS marshals;
-CREATE TABLE marshals (
-    id                    serial PRIMARY KEY,
-    military_personnel_id serial NOT NULL
-);
-
--- Генералы армии
-DROP TABLE IF EXISTS army_generals;
-CREATE TABLE army_generals (
-    id                    serial PRIMARY KEY,
-    military_personnel_id serial NOT NULL
-);
-
--- Генерал-полковники
-DROP TABLE IF EXISTS colonel_generals;
-CREATE TABLE colonel_generals (
-    id                    serial PRIMARY KEY,
-    military_personnel_id serial NOT NULL
-);
-
--- Генерал-лейтенанты
-DROP TABLE IF EXISTS lieutenant_generals;
-CREATE TABLE lieutenant_generals (
-    id                    serial PRIMARY KEY,
-    military_personnel_id serial NOT NULL,
-    date_of_award         date   NOT NULL
-);
-
--- Воинские специальности
+DROP TABLE IF EXISTS dislocations;
+DROP TABLE IF EXISTS dislocation_categories;
+DROP TABLE IF EXISTS subjects;
+DROP TABLE IF EXISTS military_men__military_specialties;
+DROP TABLE IF EXISTS military_men;
 DROP TABLE IF EXISTS military_specialties;
-CREATE TABLE military_specialties (
-    id   serial PRIMARY KEY,
-    name text NOT NULL CHECK (LENGTH(name) > 0)
+DROP TABLE IF EXISTS ranks__rank_categories;
+DROP TABLE IF EXISTS ranks;
+DROP TABLE IF EXISTS rank_categories;
+DROP TABLE IF EXISTS staff_categories;
+
+/**
+  * --------------- *
+  * Создание таблиц *
+  * --------------- *
+ */
+
+/* Категории составов */
+CREATE TABLE staff_categories (
+    id   smallserial PRIMARY KEY,
+    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
 );
 
-INSERT INTO subjects
-VALUES (DEFAULT, 'Алтайский край'),
-       (DEFAULT, 'Амурская область'),
-       (DEFAULT, 'Архангельская область'),
-       (DEFAULT, 'Астраханская область'),
-       (DEFAULT, 'Белгородская область'),
-       (DEFAULT, 'Брянская область'),
-       (DEFAULT, 'Владимирская область'),
-       (DEFAULT, 'Волгоградская область'),
-       (DEFAULT, 'Вологодская область'),
-       (DEFAULT, 'Воронежская область'),
-       (DEFAULT, 'Еврейская автономная область'),
-       (DEFAULT, 'Забайкальский край'),
-       (DEFAULT, 'Ивановская область'),
-       (DEFAULT, 'Иркутская область'),
-       (DEFAULT, 'Кабардино-Балкарская Республика'),
-       (DEFAULT, 'Калининградская область'),
-       (DEFAULT, 'Калужская область'),
-       (DEFAULT, 'Камчатский край'),
-       (DEFAULT, 'Карачаево-Черкесская Республика'),
-       (DEFAULT, 'Кемеровская область'),
-       (DEFAULT, 'Кировская область'),
-       (DEFAULT, 'Костромская область'),
-       (DEFAULT, 'Краснодарский край'),
-       (DEFAULT, 'Красноярский край'),
-       (DEFAULT, 'Республика Крым'),
-       (DEFAULT, 'Курганская область'),
-       (DEFAULT, 'Курская область'),
-       (DEFAULT, 'Ленинградская область'),
-       (DEFAULT, 'Липецкая область'),
-       (DEFAULT, 'Магаданская область'),
-       (DEFAULT, 'Москва'),
-       (DEFAULT, 'Московская область'),
-       (DEFAULT, 'Мурманская область'),
-       (DEFAULT, 'Ненецкий автономный округ'),
-       (DEFAULT, 'Нижегородская область'),
-       (DEFAULT, 'Новгородская область'),
-       (DEFAULT, 'Новосибирская область'),
-       (DEFAULT, 'Омская область'),
-       (DEFAULT, 'Оренбургская область'),
-       (DEFAULT, 'Орловская область'),
-       (DEFAULT, 'Пензенская область'),
-       (DEFAULT, 'Пермский край'),
-       (DEFAULT, 'Приморский край'),
-       (DEFAULT, 'Псковская область'),
-       (DEFAULT, 'Республика Адыгея'),
-       (DEFAULT, 'Республика Алтай'),
-       (DEFAULT, 'Республика Башкортостан'),
-       (DEFAULT, 'Республика Бурятия'),
-       (DEFAULT, 'Республика Дагестан'),
-       (DEFAULT, 'Республика Ингушетия'),
-       (DEFAULT, 'Республика Калмыкия'),
-       (DEFAULT, 'Республика Карелия'),
-       (DEFAULT, 'Республика Коми'),
-       (DEFAULT, 'Республика Марий Эл'),
-       (DEFAULT, 'Республика Мордовия'),
-       (DEFAULT, 'Республика Саха (Якутия)'),
-       (DEFAULT, 'Республика Северная Осетия - Алания'),
-       (DEFAULT, 'Республика Татарстан'),
-       (DEFAULT, 'Республика Тыва'),
-       (DEFAULT, 'Республика Хакасия'),
-       (DEFAULT, 'Ростовская область'),
-       (DEFAULT, 'Рязанская область'),
-       (DEFAULT, 'Самарская область'),
-       (DEFAULT, 'Санкт-Петербург'),
-       (DEFAULT, 'Саратовская область'),
-       (DEFAULT, 'Сахалинская область'),
-       (DEFAULT, 'Свердловская область'),
-       (DEFAULT, 'Севастополь'),
-       (DEFAULT, 'Смоленская область'),
-       (DEFAULT, 'Ставропольский край'),
-       (DEFAULT, 'Тамбовская область'),
-       (DEFAULT, 'Тверская область'),
-       (DEFAULT, 'Томская область'),
-       (DEFAULT, 'Тульская область'),
-       (DEFAULT, 'Тюменская область'),
-       (DEFAULT, 'Удмуртская Республика'),
-       (DEFAULT, 'Ульяновская область'),
-       (DEFAULT, 'Хабаровский край'),
-       (DEFAULT, 'Ханты-Мансийский автономный округ - Югра'),
-       (DEFAULT, 'Челябинская область'),
-       (DEFAULT, 'Чеченская Республика'),
-       (DEFAULT, 'Чувашская Республика'),
-       (DEFAULT, 'Чукотский автономный округ'),
-       (DEFAULT, 'Ямало-Ненецкий автономный округ'),
-       (DEFAULT, 'Ярославская область');
+/* Категории званий */
+CREATE TABLE rank_categories (
+    id   smallserial PRIMARY KEY,
+    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
+);
 
-INSERT INTO dislocation_types
-VALUES (DEFAULT, 'Город'),
-       (DEFAULT, 'Населённый пункт');
+/* Звания */
+CREATE TABLE ranks (
+    id                smallserial PRIMARY KEY,
+    name              text NOT NULL UNIQUE CHECK (LENGTH(name) > 0),
+    staff_category_id smallserial REFERENCES staff_categories (id)
+);
 
-INSERT INTO military_districts
-VALUES (DEFAULT, 'Западный военный округ', 'Санкт-Петербург', '21-oct-2010'),
-       (DEFAULT, 'Южный военный округ', 'Ростов-на-Дону', '1-sep-2010'),
-       (DEFAULT, 'Центральный военный округ', 'Екатеринбург', '1-dec-2010'),
-       (DEFAULT, 'Восточный военный округ', 'Хабаровск', '21-oct-2010'),
-       (DEFAULT, 'Северный флот', 'Североморск', '1-dec-2014');
+/* Связь званий с категориями званий */
+CREATE TABLE ranks__rank_categories (
+    rank_id          smallserial REFERENCES ranks (id),
+    rank_category_id smallserial REFERENCES rank_categories (id),
+    PRIMARY KEY (rank_id, rank_category_id)
+);
 
+/* Воинские специальности */
+CREATE TABLE military_specialties (
+    id   smallserial PRIMARY KEY,
+    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
+);
+
+/* Военнослужащие */
+CREATE TABLE military_men (
+    id            serial PRIMARY KEY,
+    second_name   text   NOT NULL CHECK (LENGTH(second_name) > 0),
+    first_name    text   NOT NULL CHECK (LENGTH(first_name) > 0),
+    patronymic    text CHECK (LENGTH(patronymic) > 0),
+    date_of_birth date CHECK (date_of_birth <= NOW()),
+    date_of_award date CHECK (date_of_award <= NOW()),
+    rank_id       SERIAL NOT NULL REFERENCES ranks (id)
+);
+
+/* Связь военнослужащих с воинскими специальностями */
+CREATE TABLE military_men__military_specialties (
+    military_man_id       serial REFERENCES military_men (id),
+    military_specialty_id serial REFERENCES military_specialties (id),
+    PRIMARY KEY (military_man_id, military_specialty_id)
+);
+
+/* Субъекты РФ */
+CREATE TABLE subjects (
+    id   smallserial PRIMARY KEY,
+    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
+);
+
+/* Категории дислокаций (Город, посёлок и т.д.) */
+CREATE TABLE dislocation_categories (
+    id   smallserial PRIMARY KEY,
+    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
+);
+
+/* Дислокации */
+CREATE TABLE dislocations (
+    id                      serial PRIMARY KEY,
+    name                    text NOT NULL CHECK (LENGTH(name) > 0),
+    dislocation_category_id smallserial REFERENCES dislocation_categories (id),
+    subject_id              smallserial REFERENCES subjects (id)
+);
+
+/* Военные округа */
+CREATE TABLE military_districts (
+    id                          smallserial PRIMARY KEY,
+    name                        text NOT NULL UNIQUE CHECK (LENGTH(name) > 0),
+    date_of_formation           date NOT NULL CHECK (date_of_formation < NOW()),
+    headquarters_dislocation_id serial REFERENCES dislocations (id),
+    commander_id                serial REFERENCES military_men (id)
+);
+
+/* Связь военных округов с субъектами РФ */
+CREATE TABLE military_districts__subjects (
+    military_district_id serial REFERENCES military_districts (id),
+    subject_id           serial REFERENCES subjects (id),
+    PRIMARY KEY (military_district_id, subject_id)
+);
+
+/* Категории воинских формирований (Армия, бригада, воинская часть и т.д.) */
+CREATE TABLE military_formation_categories (
+    id   smallserial PRIMARY KEY,
+    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
+);
+
+/* Воинские формирования */
+CREATE TABLE military_formations (
+    id                             serial PRIMARY KEY,
+    name                           text NOT NULL UNIQUE CHECK (LENGTH(name) > 0),
+    military_formation_category_id smallserial REFERENCES military_formation_categories (id),
+    date_of_formation              date NOT NULL CHECK (date_of_formation < NOW()),
+    commander_id                   serial REFERENCES military_men (id),
+    dislocation_id                 serial REFERENCES dislocations (id),
+    parent_id                      serial REFERENCES military_formations (id)
+);
+
+/**
+  * ----------------- *
+  * Заполнение таблиц *
+  * ----------------- *
+ */
+
+/* Категории составов */
+INSERT INTO staff_categories VALUES (DEFAULT, 'Высший офицерский состав');
+INSERT INTO staff_categories VALUES (DEFAULT, 'Старший офицерский состав');
+INSERT INTO staff_categories VALUES (DEFAULT, 'Младший офицерский состав');
+INSERT INTO staff_categories VALUES (DEFAULT, 'Прапорщики и мичманы');
+INSERT INTO staff_categories VALUES (DEFAULT, 'Сержантский состав');
+INSERT INTO staff_categories VALUES (DEFAULT, 'Рядовой состав');
+
+/* Категории званий */
+INSERT INTO rank_categories VALUES (DEFAULT, 'Войсковое');
+INSERT INTO rank_categories VALUES (DEFAULT, 'Корабельное');
+
+/* Звания */
+INSERT INTO ranks VALUES (DEFAULT, 'Маршал РФ', 1);
+INSERT INTO ranks VALUES (DEFAULT, 'Генерал армии', 1);
+INSERT INTO ranks VALUES (DEFAULT, 'Генерал-полковник', 1);
+INSERT INTO ranks VALUES (DEFAULT, 'Генерал-лейтенант', 1);
+INSERT INTO ranks VALUES (DEFAULT, 'Генерал-майор', 1);
+INSERT INTO ranks VALUES (DEFAULT, 'Полковник', 2);
+INSERT INTO ranks VALUES (DEFAULT, 'Подполковник', 2);
+INSERT INTO ranks VALUES (DEFAULT, 'Майор', 2);
+INSERT INTO ranks VALUES (DEFAULT, 'Капитан', 3);
+INSERT INTO ranks VALUES (DEFAULT, 'Старший лейтенант', 3);
+INSERT INTO ranks VALUES (DEFAULT, 'Лейтенант', 3);
+INSERT INTO ranks VALUES (DEFAULT, 'Младший лейтенант', 3);
+INSERT INTO ranks VALUES (DEFAULT, 'Старший прапорщик', 4);
+INSERT INTO ranks VALUES (DEFAULT, 'Прапорщик', 4);
+INSERT INTO ranks VALUES (DEFAULT, 'Старшина', 5);
+INSERT INTO ranks VALUES (DEFAULT, 'Старший сержант', 5);
+INSERT INTO ranks VALUES (DEFAULT, 'Сержант', 5);
+INSERT INTO ranks VALUES (DEFAULT, 'Младший сержант', 5);
+INSERT INTO ranks VALUES (DEFAULT, 'Ефрейтор', 6);
+INSERT INTO ranks VALUES (DEFAULT, 'Рядовой', 6);
+INSERT INTO ranks VALUES (DEFAULT, 'Адмирал флота', 1);
+INSERT INTO ranks VALUES (DEFAULT, 'Адмирал', 1);
+INSERT INTO ranks VALUES (DEFAULT, 'Вице-адмирал', 1);
+INSERT INTO ranks VALUES (DEFAULT, 'Контр-адмирал', 1);
+INSERT INTO ranks VALUES (DEFAULT, 'Капитан 1 ранга', 2);
+INSERT INTO ranks VALUES (DEFAULT, 'Капитан 2 ранга', 2);
+INSERT INTO ranks VALUES (DEFAULT, 'Капитан 3 ранга', 2);
+INSERT INTO ranks VALUES (DEFAULT, 'Капитан-лейтенант', 3);
+INSERT INTO ranks VALUES (DEFAULT, 'Старший мичман', 4);
+INSERT INTO ranks VALUES (DEFAULT, 'Мичман', 4);
+INSERT INTO ranks VALUES (DEFAULT, 'Главный корабельный старшина', 5);
+INSERT INTO ranks VALUES (DEFAULT, 'Главный старшина', 5);
+INSERT INTO ranks VALUES (DEFAULT, 'Старшина 1 статьи', 5);
+INSERT INTO ranks VALUES (DEFAULT, 'Старшина 2 статьи', 5);
+INSERT INTO ranks VALUES (DEFAULT, 'Старший матрос', 6);
+INSERT INTO ranks VALUES (DEFAULT, 'Матрос', 6);
+
+/* Связь званий с категориями званий */
+INSERT INTO ranks__rank_categories VALUES (1, 1);
+INSERT INTO ranks__rank_categories VALUES (1, 2);
+INSERT INTO ranks__rank_categories VALUES (2, 1);
+INSERT INTO ranks__rank_categories VALUES (3, 1);
+INSERT INTO ranks__rank_categories VALUES (4, 1);
+INSERT INTO ranks__rank_categories VALUES (5, 1);
+INSERT INTO ranks__rank_categories VALUES (6, 1);
+INSERT INTO ranks__rank_categories VALUES (7, 1);
+INSERT INTO ranks__rank_categories VALUES (8, 1);
+INSERT INTO ranks__rank_categories VALUES (9, 1);
+INSERT INTO ranks__rank_categories VALUES (10, 1);
+INSERT INTO ranks__rank_categories VALUES (10, 2);
+INSERT INTO ranks__rank_categories VALUES (11, 1);
+INSERT INTO ranks__rank_categories VALUES (11, 2);
+INSERT INTO ranks__rank_categories VALUES (12, 1);
+INSERT INTO ranks__rank_categories VALUES (12, 2);
+INSERT INTO ranks__rank_categories VALUES (13, 1);
+INSERT INTO ranks__rank_categories VALUES (14, 1);
+INSERT INTO ranks__rank_categories VALUES (15, 1);
+INSERT INTO ranks__rank_categories VALUES (16, 1);
+INSERT INTO ranks__rank_categories VALUES (17, 1);
+INSERT INTO ranks__rank_categories VALUES (18, 1);
+INSERT INTO ranks__rank_categories VALUES (19, 1);
+INSERT INTO ranks__rank_categories VALUES (20, 1);
+INSERT INTO ranks__rank_categories VALUES (21, 2);
+INSERT INTO ranks__rank_categories VALUES (22, 2);
+INSERT INTO ranks__rank_categories VALUES (23, 2);
+INSERT INTO ranks__rank_categories VALUES (24, 2);
+INSERT INTO ranks__rank_categories VALUES (25, 2);
+INSERT INTO ranks__rank_categories VALUES (26, 2);
+INSERT INTO ranks__rank_categories VALUES (27, 2);
+INSERT INTO ranks__rank_categories VALUES (28, 2);
+INSERT INTO ranks__rank_categories VALUES (29, 2);
+INSERT INTO ranks__rank_categories VALUES (30, 2);
+INSERT INTO ranks__rank_categories VALUES (31, 2);
+INSERT INTO ranks__rank_categories VALUES (32, 2);
+INSERT INTO ranks__rank_categories VALUES (33, 2);
+INSERT INTO ranks__rank_categories VALUES (34, 2);
+INSERT INTO ranks__rank_categories VALUES (35, 2);
+INSERT INTO ranks__rank_categories VALUES (36, 2);
+
+/* Воинские специальности */
+INSERT INTO military_specialties VALUES (DEFAULT, 'Артиллерист');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Лётчик');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Переводчик');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Связист');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Десантник');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Зенитчик');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Пограничник');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Разведчик');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Ракетчик');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Сапёр');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Танкист');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Шифровальщик (Криптограф)');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Штурман');
+INSERT INTO military_specialties VALUES (DEFAULT, 'Специалист по обеспечению');
+
+/* Военнослужащие */
+INSERT INTO military_men VALUES (DEFAULT, 'Журавлёв', 'Александр', 'Александрович', '2-dec-1965', '22-feb-2017', 10);
+INSERT INTO military_men VALUES (DEFAULT, 'Дворников', 'Александр', 'Владимирович', '22-aug-1961', '23-jun-2020', 2);
+INSERT INTO military_men VALUES (DEFAULT, 'Лапин', 'Александр', 'Павлович', '1-jan-1964', '1-feb-2019', 3);
+INSERT INTO military_men VALUES (DEFAULT, 'Чайко', 'Александр', 'Юрьевич', '27-jul-1971', '11-jun-2021', 3);
+INSERT INTO military_men VALUES (DEFAULT, 'Моисеев', 'Александр', 'Алексеевич', '16-apr-1962', '10-dec-2020', 22);
+
+/* Связь военнослужащих с воинскими специальностями */
+INSERT INTO military_men__military_specialties VALUES (1, 1);
+INSERT INTO military_men__military_specialties VALUES (1, 9);
+INSERT INTO military_men__military_specialties VALUES (1, 11);
+INSERT INTO military_men__military_specialties VALUES (2, 8);
+INSERT INTO military_men__military_specialties VALUES (2, 1);
+INSERT INTO military_men__military_specialties VALUES (3, 3);
+INSERT INTO military_men__military_specialties VALUES (3, 13);
+INSERT INTO military_men__military_specialties VALUES (4, 8);
+INSERT INTO military_men__military_specialties VALUES (4, 11);
+INSERT INTO military_men__military_specialties VALUES (4, 14);
+
+/* Субъекты РФ */
+INSERT INTO subjects VALUES (DEFAULT, 'Алтайский край');
+INSERT INTO subjects VALUES (DEFAULT, 'Амурская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Архангельская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Астраханская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Белгородская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Брянская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Владимирская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Волгоградская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Вологодская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Воронежская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Еврейская автономная область');
+INSERT INTO subjects VALUES (DEFAULT, 'Забайкальский край');
+INSERT INTO subjects VALUES (DEFAULT, 'Ивановская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Иркутская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Кабардино-Балкарская Республика');
+INSERT INTO subjects VALUES (DEFAULT, 'Калининградская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Калужская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Камчатский край');
+INSERT INTO subjects VALUES (DEFAULT, 'Карачаево-Черкесская Республика');
+INSERT INTO subjects VALUES (DEFAULT, 'Кемеровская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Кировская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Костромская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Краснодарский край');
+INSERT INTO subjects VALUES (DEFAULT, 'Красноярский край');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Крым');
+INSERT INTO subjects VALUES (DEFAULT, 'Курганская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Курская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Ленинградская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Липецкая область');
+INSERT INTO subjects VALUES (DEFAULT, 'Магаданская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Москва');
+INSERT INTO subjects VALUES (DEFAULT, 'Московская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Мурманская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Ненецкий автономный округ');
+INSERT INTO subjects VALUES (DEFAULT, 'Нижегородская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Новгородская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Новосибирская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Омская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Оренбургская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Орловская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Пензенская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Пермский край');
+INSERT INTO subjects VALUES (DEFAULT, 'Приморский край');
+INSERT INTO subjects VALUES (DEFAULT, 'Псковская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Адыгея');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Алтай');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Башкортостан');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Бурятия');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Дагестан');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Ингушетия');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Калмыкия');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Карелия');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Коми');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Марий Эл');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Мордовия');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Саха (Якутия)');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Северная Осетия - Алания');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Татарстан');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Тыва');
+INSERT INTO subjects VALUES (DEFAULT, 'Республика Хакасия');
+INSERT INTO subjects VALUES (DEFAULT, 'Ростовская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Рязанская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Самарская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Санкт-Петербург');
+INSERT INTO subjects VALUES (DEFAULT, 'Саратовская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Сахалинская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Свердловская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Севастополь');
+INSERT INTO subjects VALUES (DEFAULT, 'Смоленская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Ставропольский край');
+INSERT INTO subjects VALUES (DEFAULT, 'Тамбовская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Тверская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Томская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Тульская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Тюменская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Удмуртская Республика');
+INSERT INTO subjects VALUES (DEFAULT, 'Ульяновская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Хабаровский край');
+INSERT INTO subjects VALUES (DEFAULT, 'Ханты-Мансийский автономный округ - Югра');
+INSERT INTO subjects VALUES (DEFAULT, 'Челябинская область');
+INSERT INTO subjects VALUES (DEFAULT, 'Чеченская Республика');
+INSERT INTO subjects VALUES (DEFAULT, 'Чувашская Республика');
+INSERT INTO subjects VALUES (DEFAULT, 'Чукотский автономный округ');
+INSERT INTO subjects VALUES (DEFAULT, 'Ямало-Ненецкий автономный округ');
+INSERT INTO subjects VALUES (DEFAULT, 'Ярославская область');
+
+/* Категории дислокаций (Город, посёлок и т.д.) */
+INSERT INTO dislocation_categories VALUES (DEFAULT, 'Город');
+INSERT INTO dislocation_categories VALUES (DEFAULT, 'Деревня');
+INSERT INTO dislocation_categories VALUES (DEFAULT, 'Посёлок');
+
+/* Дислокации */
+INSERT INTO dislocations VALUES (DEFAULT, 'Санкт-Петербург', 1, 64);
+INSERT INTO dislocations VALUES (DEFAULT, 'Ростов-на-Дону', 1, 61);
+INSERT INTO dislocations VALUES (DEFAULT, 'Екатеринбург', 1, 67);
+INSERT INTO dislocations VALUES (DEFAULT, 'Хабаровск', 1, 78);
+INSERT INTO dislocations VALUES (DEFAULT, 'Североморск', 1, 33);
+
+/* Военные округа */
+INSERT INTO military_districts VALUES (DEFAULT, 'Западный военный округ', '21-oct-2010', 1, 1);
+INSERT INTO military_districts VALUES (DEFAULT, 'Южный военный округ', '1-sep-2010', 2, 2);
+INSERT INTO military_districts VALUES (DEFAULT, 'Центральный военный округ', '1-dec-2010', 3, 3);
+INSERT INTO military_districts VALUES (DEFAULT, 'Восточный военный округ', '21-oct-2010', 4, 4);
+INSERT INTO military_districts VALUES (DEFAULT, 'Северный флот', '1-dec-2014', 5, 5);
+
+/* Связь военных округов с субъектами РФ */
 INSERT INTO military_districts__subjects
-SELECT military_districts.id, subjects.id
+SELECT military_districts.id,
+       subjects.id
 FROM military_districts,
      subjects
 WHERE (military_districts.name = 'Западный военный округ' AND (subjects.name = 'Республика Карелия' OR
@@ -312,93 +453,51 @@ WHERE (military_districts.name = 'Западный военный округ' AN
                                                       subjects.name = 'Мурманская область' OR
                                                       subjects.name = 'Ненецкий автономный округ'));
 
-INSERT INTO dislocations
-VALUES (DEFAULT, 'Чита', 1, 12),
-       (DEFAULT, 'Одинцово', 1, 32),
-       (DEFAULT, 'Агалатово', 2, 28),
-       (DEFAULT, 'Уссурийск', 1, 43);
 
-INSERT INTO military_armies
-VALUES (DEFAULT, '29-я общевойсковая армия', '23-aug-2010', 1, 4),
-       (DEFAULT, '1-я гвардейская танковая Краснознамённая армия', '13-nov-2014', 2, 1),
-       (DEFAULT, '6-я общевойсковая Краснознамённая армия', '9-aug-2010', 3, 1),
-       (DEFAULT, '5-я общевойсковая Краснознамённая армия', '1-jul-2006', 4, 4);
+/**
+  * ------- *
+  * Запросы *
+  * ------- *
+ */
 
-INSERT INTO rank_categories
-VALUES (DEFAULT, 'Высший офицерский состав'),
-       (DEFAULT, 'Старший офицерский состав'),
-       (DEFAULT, 'Младший офицерский состав'),
-       (DEFAULT, 'Прапорщики'),
-       (DEFAULT, 'Сержантский состав'),
-       (DEFAULT, 'Рядовой состав');
-
-INSERT INTO ranks
-VALUES (DEFAULT, 'Маршал', 1),
-       (DEFAULT, 'Генерал армии', 1),
-       (DEFAULT, 'Генерал-полковник', 1),
-       (DEFAULT, 'Генерал-лейтенант', 1),
-       (DEFAULT, 'Генерал-майор', 1),
-       (DEFAULT, 'Полковник', 2),
-       (DEFAULT, 'Подполковник', 2),
-       (DEFAULT, 'Майор', 2),
-       (DEFAULT, 'Капитан', 3),
-       (DEFAULT, 'Старший лейтенант', 3),
-       (DEFAULT, 'Лейтенант', 3),
-       (DEFAULT, 'Младший лейтенант', 3),
-       (DEFAULT, 'Старший прапорщик', 4),
-       (DEFAULT, 'Прапорщик', 4),
-       (DEFAULT, 'Старшина', 5),
-       (DEFAULT, 'Старший сержант', 5),
-       (DEFAULT, 'Сержант', 5),
-       (DEFAULT, 'Младший сержант', 5),
-       (DEFAULT, 'Ефрейтор', 6),
-       (DEFAULT, 'Рядовой', 6);
-
-INSERT INTO military_specialties
-VALUES (DEFAULT, 'Артиллерист'),
-       (DEFAULT, 'Лётчик'),
-       (DEFAULT, 'Переводчик'),
-       (DEFAULT, 'Связист'),
-       (DEFAULT, 'Десантник'),
-       (DEFAULT, 'Зенитчик'),
-       (DEFAULT, 'Пограничник'),
-       (DEFAULT, 'Разведчик'),
-       (DEFAULT, 'Ракетчик'),
-       (DEFAULT, 'Сапёр'),
-       (DEFAULT, 'Танкист'),
-       (DEFAULT, 'Шифровальщик (Криптограф)'),
-       (DEFAULT, 'Штурман'),
-       (DEFAULT, 'Специалист по обеспечению');
-
-INSERT INTO military_personnel
-VALUES (DEFAULT, 'Кисель Сергей Александрович', 4),
-       (DEFAULT, 'Ершов Владислав Николаевич', 4);
-
-INSERT INTO lieutenant_generals
-VALUES (DEFAULT, 1, '20-feb-2020'),
-       (DEFAULT, 2, '18-feb-2021');
-
-/*SELECT military_armies.name,
-       military_armies.date_of_formation,
-       dislocation_types.name  AS dislocation_type,
-       dislocations.name       AS dislocation_name,
-       subjects.name           AS subject_name,
-       military_districts.name AS military_district_name
-FROM military_armies,
-     dislocation_types,
-     dislocations,
+SELECT military_districts.name, subjects.name
+FROM military_districts,
      subjects,
-     military_districts
-WHERE military_armies.dislocation_id = dislocations.id
-  AND dislocations.type_id = dislocation_types.id
-  AND dislocations.subject_id = subjects.id
-  AND military_armies.district_id = military_districts.id;*/
+     military_districts__subjects
+WHERE military_districts__subjects.military_district_id = military_districts.id
+  AND military_districts__subjects.subject_id = subjects.id
+ORDER BY military_districts.id;
 
-/*SELECT military_personnel.name, ranks.name, lieutenant_generals.date_of_award, rank_categories.name
-FROM military_personnel,
+
+SELECT military_men.second_name || ' ' || military_men.first_name || ' ' || military_men.patronymic, military_specialties.name
+FROM military_men,
+     military_specialties,
+     military_men__military_specialties
+WHERE military_men.id = military_men__military_specialties.military_man_id
+  AND military_specialties.id = military_men__military_specialties.military_specialty_id;
+
+
+SELECT military_men.second_name || ' ' || military_men.first_name || ' ' || military_men.patronymic AS name,
+       military_men.date_of_award,
+       ranks.name                                                                                   AS rank_name,
+       rank_categories.name                                                                           AS rank_category,
+       staff_categories.name                                                                        AS staff_category
+FROM military_men,
      ranks,
-     lieutenant_generals,
-     rank_categories
-WHERE military_personnel.rank_id = ranks.id
-  AND military_personnel.id = lieutenant_generals.military_personnel_id
-  AND ranks.ranking_category_id = rank_categories.id;*/
+     rank_categories,
+     ranks__rank_categories,
+     staff_categories
+WHERE military_men.rank_id = ranks.id
+  AND ranks.id = ranks__rank_categories.rank_id
+  AND rank_categories.id = ranks__rank_categories.rank_category_id
+  AND ranks.staff_category_id = staff_categories.id;
+
+SELECT ranks.name AS rank, staff_categories.name AS staff_category, rank_categories.name AS rank_category
+FROM ranks,
+     staff_categories,
+     rank_categories,
+     ranks__rank_categories
+WHERE ranks.id = ranks__rank_categories.rank_id
+  AND rank_categories.id = ranks__rank_categories.rank_category_id
+  AND ranks.staff_category_id = staff_categories.id
+ORDER BY staff_categories.id, ranks.id, rank_categories.id;
