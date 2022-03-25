@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS military_buildings;
+DROP TABLE IF EXISTS armaments;
+DROP TABLE IF EXISTS armament_categories;
+DROP TABLE IF EXISTS combat_vehicles;
+DROP TABLE IF EXISTS combat_vehicles_categories;
 DROP TABLE IF EXISTS military_men__military_formations;
 DROP TABLE IF EXISTS military_formations;
 DROP TABLE IF EXISTS military_formation_types;
@@ -70,7 +75,7 @@ CREATE TABLE subjects (
     name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
 );
 
-/* Типы дислокаций (Город, посёлок и т.д.) */
+/* Типы дислокаций */
 CREATE TABLE dislocation_types (
     id   smallserial PRIMARY KEY,
     name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
@@ -101,7 +106,7 @@ CREATE TABLE military_districts__subjects (
     PRIMARY KEY (military_district_id, subject_id)
 );
 
-/* Типы воинских формирований (Армия, бригада, военная часть и т.д.) */
+/* Типы воинских формирований */
 CREATE TABLE military_formation_types (
     id   smallserial PRIMARY KEY,
     name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
@@ -123,6 +128,43 @@ CREATE TABLE military_men__military_formations (
     military_man_id       integer NOT NULL REFERENCES military_men (id),
     military_formation_id integer NOT NULL REFERENCES military_formations (id),
     PRIMARY KEY (military_man_id, military_formation_id)
+);
+
+/* Категории боевой техники */
+CREATE TABLE combat_vehicles_categories (
+    id   smallserial PRIMARY KEY,
+    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
+);
+
+/* Боевая техника */
+CREATE TABLE combat_vehicles (
+    id                         serial PRIMARY KEY,
+    name                       text     NOT NULL CHECK (LENGTH(name) > 0),
+    serial_number              text     NOT NULL CHECK (LENGTH(serial_number) > 0),
+    combat_vehicle_category_id smallint NOT NULL REFERENCES combat_vehicles_categories (id),
+    military_formation_id      integer  NOT NULL REFERENCES military_formations (id)
+);
+
+/* Категории вооружения */
+CREATE TABLE armament_categories (
+    id   smallserial PRIMARY KEY,
+    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
+);
+
+/* Вооружение */
+CREATE TABLE armaments (
+    id                    serial PRIMARY KEY,
+    name                  text     NOT NULL CHECK (LENGTH(name) > 0),
+    serial_number         text     NOT NULL CHECK (LENGTH(serial_number) > 0),
+    armament_category_id  smallint NOT NULL REFERENCES armament_categories (id),
+    military_formation_id integer  NOT NULL REFERENCES military_formations (id)
+);
+
+/* Сооружения */
+CREATE TABLE military_buildings (
+    id                    serial PRIMARY KEY,
+    name                  text    NOT NULL CHECK (LENGTH(name) > 0),
+    military_formation_id integer NOT NULL REFERENCES military_formations (id)
 );
 
 /**
@@ -495,8 +537,6 @@ VALUES (DEFAULT, '1-я гвардейская танковая армия', '13-
 /* Связь военнослужащих с воинскими формированиями */
 /*INSERT INTO military_men__military_formations
 VALUES ();*/
-
--- CREATE TABLE Commanders
 
 /**
   * ------- *
