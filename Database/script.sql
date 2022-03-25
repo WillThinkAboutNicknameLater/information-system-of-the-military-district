@@ -2,7 +2,8 @@ DROP TABLE IF EXISTS military_buildings;
 DROP TABLE IF EXISTS armaments;
 DROP TABLE IF EXISTS armament_categories;
 DROP TABLE IF EXISTS combat_vehicles;
-DROP TABLE IF EXISTS combat_vehicles_categories;
+DROP TABLE IF EXISTS combat_vehicle_categories;
+DROP TABLE IF EXISTS combat_vehicle_groups;
 DROP TABLE IF EXISTS military_men__military_formations;
 DROP TABLE IF EXISTS military_formations;
 DROP TABLE IF EXISTS military_formation_types;
@@ -130,10 +131,17 @@ CREATE TABLE military_men__military_formations (
     PRIMARY KEY (military_man_id, military_formation_id)
 );
 
-/* Категории боевой техники */
-CREATE TABLE combat_vehicles_categories (
+/* Группы боевой техники */
+CREATE TABLE combat_vehicle_groups (
     id   smallserial PRIMARY KEY,
     name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
+);
+
+/* Категории боевой техники */
+CREATE TABLE combat_vehicle_categories (
+    id                      smallserial PRIMARY KEY,
+    name                    text     NOT NULL UNIQUE CHECK (LENGTH(name) > 0),
+    combat_vehicle_group_id smallint NOT NULL REFERENCES combat_vehicle_groups (id)
 );
 
 /* Боевая техника */
@@ -141,7 +149,7 @@ CREATE TABLE combat_vehicles (
     id                         serial PRIMARY KEY,
     name                       text     NOT NULL CHECK (LENGTH(name) > 0),
     serial_number              text     NOT NULL CHECK (LENGTH(serial_number) > 0),
-    combat_vehicle_category_id smallint NOT NULL REFERENCES combat_vehicles_categories (id),
+    combat_vehicle_category_id smallint NOT NULL REFERENCES combat_vehicle_categories (id),
     military_formation_id      integer  NOT NULL REFERENCES military_formations (id)
 );
 
@@ -405,11 +413,12 @@ VALUES (DEFAULT, 'Санкт-Петербург', 1, 64),
        (DEFAULT, 'Клин', 1, 32);
 
 /* Военные округа */
-INSERT INTO military_districts VALUES (DEFAULT, 'Западный военный округ', '21-oct-2010', 1, 1);
-INSERT INTO military_districts VALUES (DEFAULT, 'Южный военный округ', '1-sep-2010', 2, 2);
-INSERT INTO military_districts VALUES (DEFAULT, 'Центральный военный округ', '1-dec-2010', 3, 3);
-INSERT INTO military_districts VALUES (DEFAULT, 'Восточный военный округ', '21-oct-2010', 4, 4);
-INSERT INTO military_districts VALUES (DEFAULT, 'Северный флот', '1-dec-2014', 5, 5);
+INSERT INTO military_districts
+VALUES (DEFAULT, 'Западный военный округ', '21-oct-2010', 1, 1),
+       (DEFAULT, 'Южный военный округ', '1-sep-2010', 2, 2),
+       (DEFAULT, 'Центральный военный округ', '1-dec-2010', 3, 3),
+       (DEFAULT, 'Восточный военный округ', '21-oct-2010', 4, 4),
+       (DEFAULT, 'Северный флот', '1-dec-2014', 5, 5);
 
 /* Связь военных округов с субъектами РФ */
 INSERT INTO military_districts__subjects
@@ -535,8 +544,86 @@ VALUES (DEFAULT, '1-я гвардейская танковая армия', '13-
        (DEFAULT, '34-й полк связи', '15-jul-2003', 5, 22, 22, 16);
 
 /* Связь военнослужащих с воинскими формированиями */
-/*INSERT INTO military_men__military_formations
-VALUES ();*/
+-- INSERT INTO military_men__military_formations
+-- VALUES ();
+
+INSERT INTO combat_vehicle_groups
+VALUES (DEFAULT, 'Бронетехника'),
+       (DEFAULT, 'Артиллерийские орудия и тактические ракетные комплексы'),
+       (DEFAULT, 'Противотанковые средства'),
+       (DEFAULT, 'Средства разведки, управления и РЭП'),
+       (DEFAULT, 'Военная техника Войск ПВО'),
+       (DEFAULT, 'Военная техника Войск РХБ защиты'),
+       (DEFAULT, 'Военная техника Войск связи'),
+       (DEFAULT, 'Военная техника Инженерных войск'),
+       (DEFAULT, 'Военная техника МТО'),
+       (DEFAULT, 'Автомобили');
+
+/* Категории боевой техники */
+INSERT INTO combat_vehicle_categories
+VALUES (DEFAULT, 'Танки', 1),
+       (DEFAULT, 'Боевые машины поддержки танков', 1),
+       (DEFAULT, 'Боевые машины пехоты', 1),
+       (DEFAULT, 'Бронетранспортёры', 1),
+       (DEFAULT, 'Бронеавтомобили', 1),
+       (DEFAULT, 'Боевые роботы', 1),
+       (DEFAULT, 'Тактические ракетные комплексы', 2),
+       (DEFAULT, 'Реактивные системы залпового огня', 2),
+       (DEFAULT, 'Самоходные артиллерийские установки', 2),
+       (DEFAULT, 'Буксируемая артиллерия', 2),
+       (DEFAULT, 'Миномёты', 2),
+       (DEFAULT, 'Боевые машины противотанковых ракетных комплексов', 3),
+       (DEFAULT, 'Переносные противотанковые ракетные комплексы', 3),
+       (DEFAULT, 'Противотанковая артиллерия', 3),
+       (DEFAULT, 'Боевые разведывательные машины', 4),
+       (DEFAULT, 'Радиоэлектронная разведка и подавление', 4),
+       (DEFAULT, 'Радиолокационные станции', 4),
+       (DEFAULT, 'Системы управления', 4),
+       (DEFAULT, 'Беспилотные летательные аппараты', 4),
+       (DEFAULT, 'ЗРК и ЗРПК', 5),
+       (DEFAULT, 'Переносные зенитные ракетные комплексы', 5),
+       (DEFAULT, 'Зенитная артиллерия', 5),
+       (DEFAULT, 'Командно-штабные и машины обработки данных', 6),
+       (DEFAULT, 'Машины РХБ разведки', 6),
+       (DEFAULT, 'Боевая техника', 6),
+       (DEFAULT, 'Средства дегазации и аэрозольной маскировки', 6),
+       (DEFAULT, 'Системы связи', 7),
+       (DEFAULT, 'Командно-штабные машины', 7),
+       (DEFAULT, 'Разведывательные машины, устройства поиска и обнаружения', 8),
+       (DEFAULT, 'Машины разграждения и разминирования', 8),
+       (DEFAULT, 'Машины заграждения и минирования', 8),
+       (DEFAULT, 'Мостоукладчики и переправочная техника', 8),
+       (DEFAULT, 'Пожарная техника', 8),
+       (DEFAULT, 'Ремонтные машины', 9),
+       (DEFAULT, 'Седельные тягачи', 9),
+       (DEFAULT, 'Артиллерийские тягачи', 10),
+       (DEFAULT, 'Грузовики', 10),
+       (DEFAULT, 'Легковые автомобили', 10);
+
+/* Боевая техника */
+-- INSERT INTO combat_vehicles
+-- VALUES ();
+
+/* Категории вооружения */
+INSERT INTO armament_categories
+VALUES (DEFAULT, 'Пулемёты'),
+       (DEFAULT, 'Снайперские винтовки'),
+       (DEFAULT, 'Автоматы'),
+       (DEFAULT, 'Пистолеты'),
+       (DEFAULT, 'Противотанковые гранатомёты и реактивные гранаты'),
+       (DEFAULT, 'Противотанковые мины'),
+       (DEFAULT, 'Реактивные штурмовые гранаты'),
+       (DEFAULT, 'Противопехотные гранатомёты'),
+       (DEFAULT, 'Противопехотные мины'),
+       (DEFAULT, 'Ручные гранаты и дымовые шашки');
+
+/* Вооружение */
+-- INSERT INTO armaments
+-- VALUES ();
+
+/* Сооружения */
+-- INSERT INTO military_buildings
+-- VALUES ();
 
 /**
   * ------- *
@@ -640,3 +727,8 @@ WHERE military_formations.dislocation_id = dislocations.id
 SELECT *
 FROM formation_hierarchy
 ORDER BY formation_hierarchy.id;*/
+
+/*SELECT combat_vehicle_categories.name AS category, combat_vehicle_groups.name AS group
+FROM combat_vehicle_categories,
+     combat_vehicle_groups
+WHERE combat_vehicle_categories.combat_vehicle_group_id = combat_vehicle_groups.id;*/
