@@ -148,7 +148,7 @@ CREATE TABLE combat_vehicle_categories (
 CREATE TABLE combat_vehicles (
     id                         serial PRIMARY KEY,
     name                       text     NOT NULL CHECK (LENGTH(name) > 0),
-    serial_number              text     NOT NULL CHECK (LENGTH(serial_number) > 0),
+    serial_number              text     NOT NULL UNIQUE CHECK (LENGTH(serial_number) > 0),
     combat_vehicle_category_id smallint NOT NULL REFERENCES combat_vehicle_categories (id),
     military_formation_id      integer  NOT NULL REFERENCES military_formations (id)
 );
@@ -163,7 +163,7 @@ CREATE TABLE armament_categories (
 CREATE TABLE armaments (
     id                    serial PRIMARY KEY,
     name                  text     NOT NULL CHECK (LENGTH(name) > 0),
-    serial_number         text     NOT NULL CHECK (LENGTH(serial_number) > 0),
+    serial_number         text     NOT NULL UNIQUE CHECK (LENGTH(serial_number) > 0),
     armament_category_id  smallint NOT NULL REFERENCES armament_categories (id),
     military_formation_id integer  NOT NULL REFERENCES military_formations (id)
 );
@@ -172,7 +172,8 @@ CREATE TABLE armaments (
 CREATE TABLE military_buildings (
     id                    serial PRIMARY KEY,
     name                  text    NOT NULL CHECK (LENGTH(name) > 0),
-    military_formation_id integer NOT NULL REFERENCES military_formations (id)
+    military_formation_id integer NOT NULL REFERENCES military_formations (id),
+    UNIQUE (name, military_formation_id)
 );
 
 /**
@@ -544,9 +545,26 @@ VALUES (DEFAULT, '1-я гвардейская танковая армия', '13-
        (DEFAULT, '34-й полк связи', '15-jul-2003', 5, 22, 22, 16);
 
 /* Связь военнослужащих с воинскими формированиями */
--- INSERT INTO military_men__military_formations
--- VALUES ();
+INSERT INTO military_men__military_formations
+VALUES (6, 1),
+       (7, 2),
+       (8, 3),
+       (9, 4),
+       (10, 5),
+       (11, 6),
+       (12, 7),
+       (13, 8),
+       (14, 9),
+       (15, 10),
+       (16, 11),
+       (17, 12),
+       (18, 13),
+       (19, 14),
+       (20, 15),
+       (21, 16),
+       (22, 17);
 
+/* Группы боевой техники */
 INSERT INTO combat_vehicle_groups
 VALUES (DEFAULT, 'Бронетехника'),
        (DEFAULT, 'Артиллерийские орудия и тактические ракетные комплексы'),
@@ -601,8 +619,23 @@ VALUES (DEFAULT, 'Танки', 1),
        (DEFAULT, 'Легковые автомобили', 10);
 
 /* Боевая техника */
--- INSERT INTO combat_vehicles
--- VALUES ();
+INSERT INTO combat_vehicles
+VALUES (DEFAULT, 'Т-80У', '1GDGG31VX31992759', 1, 2),
+       (DEFAULT, 'Т-80У', '1FMEU63E46UA80257', 1, 2),
+       (DEFAULT, 'Т-80У', 'JF2SHADC9DH425396', 1, 2),
+       (DEFAULT, 'Т-80БВМ', '1B7HC16XXXS140737', 1, 2),
+       (DEFAULT, 'Т-80БВМ', '2V4RW3DG5BR641870', 1, 2),
+       (DEFAULT, '2С19 «Мста-С»', 'WDBRF61J03E007794', 9, 2),
+       (DEFAULT, 'БМП-2', '1FMCU04193KA11507', 3, 2),
+       (DEFAULT, '9К51М «Торнадо-Г»', 'WBAXH5C52CDW02548', 8, 2),
+       (DEFAULT, '9К35 Стрела-10/-10МН', '1B3CB7HB0AD566418', 20, 2),
+       (DEFAULT, '9К35 Стрела-10/-10МН', '4T1BF3EK4BU763715', 20, 2),
+       (DEFAULT, 'Р-142Н «Деймос-Н»', '1G6DC67A980166588', 28, 2),
+       (DEFAULT, 'Р-142Н «Деймос-Н»', '2G4WS52J531287749', 28, 2),
+       (DEFAULT, 'Р-142Н «Деймос-Н»', '1GCEK19C98Z246930', 28, 2),
+       (DEFAULT, 'Р-142Н «Деймос-Н»', 'WBABR334XYEG98355', 28, 2),
+       (DEFAULT, 'Тигр', '2HKRM4H79EH641873', 5, 2),
+       (DEFAULT, 'Тигр', '1G8AJ55FX6Z122827', 5, 2);
 
 /* Категории вооружения */
 INSERT INTO armament_categories
@@ -618,12 +651,39 @@ VALUES (DEFAULT, 'Пулемёты'),
        (DEFAULT, 'Ручные гранаты и дымовые шашки');
 
 /* Вооружение */
--- INSERT INTO armaments
--- VALUES ();
+INSERT INTO armaments
+VALUES (DEFAULT, 'АСВК', '2D4GP44L26R7', 2, 2),
+       (DEFAULT, 'СВ-98', '3VWLZ7AJ1BM3', 2, 2),
+       (DEFAULT, 'СВ-98', '3C4PDDBG9ET1', 2, 2),
+       (DEFAULT, 'АК-74', 'JTHBF5C29A51', 3, 2),
+       (DEFAULT, 'АК-74', '1GKKRPKD5EJ1', 3, 2),
+       (DEFAULT, 'АК-74', 'JTJZB1BA8A20', 3, 2),
+       (DEFAULT, 'АК-74', '2T1BR12E2YC2', 3, 2),
+       (DEFAULT, 'Пистолет Макарова', 'VNKKTUD34EA0', 4, 2),
+       (DEFAULT, 'Пистолет Макарова', 'JT3GN87R7W00', 4, 2),
+       (DEFAULT, 'Пистолет Макарова', '1D8HN54P28B1', 4, 2),
+       (DEFAULT, 'Пистолет Макарова', '1N4CL2AP5BC1', 4, 2),
+       (DEFAULT, 'Пистолет Макарова', 'JTJHY7AX7A40', 4, 2),
+       (DEFAULT, 'РГД-5', '2HGFA1F59BH5', 10, 2),
+       (DEFAULT, 'Утёс', '5GTEN13E5881', 1, 2),
+       (DEFAULT, 'ПКМ', 'JN8AZ1MW2CW2', 1, 2),
+       (DEFAULT, 'ПКМ', '3D7UT2CLXBG5', 1, 2),
+       (DEFAULT, 'ГП-34', '3D4GG57V49T5', 8, 2),
+       (DEFAULT, 'ГП-34', '1G2WP1217WF2', 8, 2),
+       (DEFAULT, 'ГП-34', '2G1WB5EK7B12', 8, 2),
+       (DEFAULT, 'РШГ-1', '4T1GK12E7SU0', 7, 2),
+       (DEFAULT, 'РШГ-1', '1G11C5SA6DF3', 7, 2),
+       (DEFAULT, 'РШГ-1', '1N4AL3AP2DC1', 7, 2);
 
 /* Сооружения */
--- INSERT INTO military_buildings
--- VALUES ();
+INSERT INTO military_buildings
+VALUES (DEFAULT, 'Сооружение ©1', 2),
+       (DEFAULT, 'Сооружение ©2', 2),
+       (DEFAULT, 'Сооружение ©3', 2),
+       (DEFAULT, 'Сооружение ©4', 2),
+       (DEFAULT, 'Сооружение ©5', 2),
+       (DEFAULT, 'Сооружение ©6', 2),
+       (DEFAULT, 'Сооружение ©7', 2);
 
 /**
   * ------- *
@@ -732,3 +792,29 @@ ORDER BY formation_hierarchy.id;*/
 FROM combat_vehicle_categories,
      combat_vehicle_groups
 WHERE combat_vehicle_categories.combat_vehicle_group_id = combat_vehicle_groups.id;*/
+
+/*SELECT second_name, first_name, patronymic, military_formations.name
+FROM military_men,
+     military_formations,
+     military_men__military_formations
+WHERE military_men__military_formations.military_man_id = military_men.id
+  AND military_men__military_formations.military_formation_id = military_formations.id;*/
+
+/*SELECT military_formations.name AS military_formation, combat_vehicles.name AS combat_vehicle, combat_vehicles.serial_number, combat_vehicle_categories.name AS category
+FROM combat_vehicles,
+     combat_vehicle_categories,
+     military_formations
+WHERE combat_vehicles.combat_vehicle_category_id = combat_vehicle_categories.id
+  AND combat_vehicles.military_formation_id = military_formations.id;*/
+
+/*SELECT military_formations.name AS military_formation, armaments.name AS armament, armaments.serial_number, armament_categories.name AS category
+FROM military_formations,
+     armaments,
+     armament_categories
+WHERE armaments.armament_category_id = armament_categories.id
+  AND armaments.military_formation_id = military_formations.id;*/
+
+/*SELECT military_formations.name AS military_formation, military_buildings.name AS building
+FROM military_formations,
+     military_buildings
+WHERE military_buildings.military_formation_id = military_formations.id;*/
