@@ -20,9 +20,7 @@ DROP TABLE IF EXISTS rank_categories;
 DROP TABLE IF EXISTS staff_categories;
 
 /**
-  * --------------- *
   * Создание таблиц *
-  * --------------- *
  */
 
 /* Категории составов */
@@ -177,13 +175,11 @@ CREATE TABLE military_buildings (
 );
 
 /**
-  * ----------------- *
   * Заполнение таблиц *
-  * ----------------- *
  */
 
 /* Категории составов */
-INSERT INTO staff_categories
+INSERT INTO staff_categories (id, name)
 VALUES (DEFAULT, 'Высший офицерский состав'),
        (DEFAULT, 'Старший офицерский состав'),
        (DEFAULT, 'Младший офицерский состав'),
@@ -192,12 +188,12 @@ VALUES (DEFAULT, 'Высший офицерский состав'),
        (DEFAULT, 'Рядовой состав');
 
 /* Категории званий */
-INSERT INTO rank_categories
+INSERT INTO rank_categories (id, name)
 VALUES (DEFAULT, 'Войсковое'),
        (DEFAULT, 'Корабельное');
 
 /* Звания */
-INSERT INTO ranks
+INSERT INTO ranks (id, name, staff_category_id, rank_category_id)
 VALUES (DEFAULT, 'Маршал РФ', 1, 1),
        (DEFAULT, 'Генерал армии', 1, 1),
        (DEFAULT, 'Генерал-полковник', 1, 1),
@@ -239,7 +235,7 @@ VALUES (DEFAULT, 'Маршал РФ', 1, 1),
        (DEFAULT, 'Матрос', 6, 2);
 
 /* Воинские специальности */
-INSERT INTO military_specialties
+INSERT INTO military_specialties (id, name)
 VALUES (DEFAULT, 'Артиллерист'),
        (DEFAULT, 'Лётчик'),
        (DEFAULT, 'Переводчик'),
@@ -256,7 +252,7 @@ VALUES (DEFAULT, 'Артиллерист'),
        (DEFAULT, 'Специалист по обеспечению');
 
 /* Военнослужащие */
-INSERT INTO military_men
+INSERT INTO military_men (id, second_name, first_name, patronymic, date_of_birth, date_of_award, rank_id)
 VALUES (DEFAULT, 'Журавлёв', 'Александр', 'Александрович', '2-dec-1965', '22-feb-2017', 3),
        (DEFAULT, 'Дворников', 'Александр', 'Владимирович', '22-aug-1961', '23-jun-2020', 2),
        (DEFAULT, 'Лапин', 'Александр', 'Павлович', '1-jan-1964', '1-feb-2019', 3),
@@ -281,7 +277,7 @@ VALUES (DEFAULT, 'Журавлёв', 'Александр', 'Александро
        (DEFAULT, 'Попов', 'Владимир', 'Григорьевич', '8-sep-1971', '28-may-2018', 6);
 
 /* Связь военнослужащих с воинскими специальностями */
-INSERT INTO military_men__military_specialties
+INSERT INTO military_men__military_specialties (military_man_id, military_specialty_id)
 VALUES (1, 1),
        (1, 9),
        (1, 11),
@@ -294,7 +290,7 @@ VALUES (1, 1),
        (4, 14);
 
 /* Субъекты РФ */
-INSERT INTO subjects
+INSERT INTO subjects (id, name)
 VALUES (DEFAULT, 'Алтайский край'),
        (DEFAULT, 'Амурская область'),
        (DEFAULT, 'Архангельская область'),
@@ -382,14 +378,14 @@ VALUES (DEFAULT, 'Алтайский край'),
        (DEFAULT, 'Ярославская область');
 
 /* Типы дислокаций */
-INSERT INTO dislocation_types
+INSERT INTO dislocation_types (id, name)
 VALUES (DEFAULT, 'Город'),
        (DEFAULT, 'Посёлок'),
        (DEFAULT, 'Деревня'),
        (DEFAULT, 'Посёлок городского типа');
 
 /* Дислокации */
-INSERT INTO dislocations
+INSERT INTO dislocations (id, name, dislocation_type_id, subject_id)
 VALUES (DEFAULT, 'Санкт-Петербург', 1, 64),
        (DEFAULT, 'Ростов-на-Дону', 1, 61),
        (DEFAULT, 'Екатеринбург', 1, 67),
@@ -414,7 +410,7 @@ VALUES (DEFAULT, 'Санкт-Петербург', 1, 64),
        (DEFAULT, 'Клин', 1, 32);
 
 /* Военные округа */
-INSERT INTO military_districts
+INSERT INTO military_districts (id, name, date_of_formation, headquarters_dislocation_id, commander_id)
 VALUES (DEFAULT, 'Западный военный округ', '21-oct-2010', 1, 1),
        (DEFAULT, 'Южный военный округ', '1-sep-2010', 2, 2),
        (DEFAULT, 'Центральный военный округ', '1-dec-2010', 3, 3),
@@ -514,7 +510,7 @@ WHERE (military_districts.name = 'Западный военный округ' AN
                                                       subjects.name = 'Ненецкий автономный округ'));
 
 /* Типы воинских формирований */
-INSERT INTO military_formation_types
+INSERT INTO military_formation_types (id, name)
 VALUES (DEFAULT, 'Армия'),
        (DEFAULT, 'Дивизия'),
        (DEFAULT, 'Корпус'),
@@ -525,7 +521,7 @@ VALUES (DEFAULT, 'Армия'),
        (DEFAULT, 'Отделение');
 
 /* Воинские формирования */
-INSERT INTO military_formations
+INSERT INTO military_formations (id, name, date_of_formation, military_formation_type_id, commander_id, dislocation_id, parent_id)
 VALUES (DEFAULT, '1-я гвардейская танковая армия', '13-nov-2014', 1, 6, 6, NULL),
        (DEFAULT, '4-я гвардейская танковая дивизия', '1-may-2013', 2, 7, 7, 1),
        (DEFAULT, '49-я зенитная ракетная бригада', '14-nov-1967', 4, 8, 8, 1),
@@ -545,7 +541,7 @@ VALUES (DEFAULT, '1-я гвардейская танковая армия', '13-
        (DEFAULT, '34-й полк связи', '15-jul-2003', 5, 22, 22, 16);
 
 /* Связь военнослужащих с воинскими формированиями */
-INSERT INTO military_men__military_formations
+INSERT INTO military_men__military_formations (military_man_id, military_formation_id)
 VALUES (6, 1),
        (7, 2),
        (8, 3),
@@ -565,7 +561,7 @@ VALUES (6, 1),
        (22, 17);
 
 /* Группы боевой техники */
-INSERT INTO combat_vehicle_groups
+INSERT INTO combat_vehicle_groups (id, name)
 VALUES (DEFAULT, 'Бронетехника'),
        (DEFAULT, 'Артиллерийские орудия и тактические ракетные комплексы'),
        (DEFAULT, 'Противотанковые средства'),
@@ -578,7 +574,7 @@ VALUES (DEFAULT, 'Бронетехника'),
        (DEFAULT, 'Автомобили');
 
 /* Категории боевой техники */
-INSERT INTO combat_vehicle_categories
+INSERT INTO combat_vehicle_categories (id, name, combat_vehicle_group_id)
 VALUES (DEFAULT, 'Танки', 1),
        (DEFAULT, 'Боевые машины поддержки танков', 1),
        (DEFAULT, 'Боевые машины пехоты', 1),
@@ -619,7 +615,7 @@ VALUES (DEFAULT, 'Танки', 1),
        (DEFAULT, 'Легковые автомобили', 10);
 
 /* Боевая техника */
-INSERT INTO combat_vehicles
+INSERT INTO combat_vehicles (id, name, serial_number, combat_vehicle_category_id, military_formation_id)
 VALUES (DEFAULT, 'Т-80У', '1GDGG31VX31992759', 1, 2),
        (DEFAULT, 'Т-80У', '1FMEU63E46UA80257', 1, 2),
        (DEFAULT, 'Т-80У', 'JF2SHADC9DH425396', 1, 2),
@@ -638,7 +634,7 @@ VALUES (DEFAULT, 'Т-80У', '1GDGG31VX31992759', 1, 2),
        (DEFAULT, 'Тигр', '1G8AJ55FX6Z122827', 5, 2);
 
 /* Категории вооружения */
-INSERT INTO armament_categories
+INSERT INTO armament_categories (id, name)
 VALUES (DEFAULT, 'Пулемёты'),
        (DEFAULT, 'Снайперские винтовки'),
        (DEFAULT, 'Автоматы'),
@@ -651,7 +647,7 @@ VALUES (DEFAULT, 'Пулемёты'),
        (DEFAULT, 'Ручные гранаты и дымовые шашки');
 
 /* Вооружение */
-INSERT INTO armaments
+INSERT INTO armaments (id, name, serial_number, armament_category_id, military_formation_id)
 VALUES (DEFAULT, 'АСВК', '2D4GP44L26R7', 2, 2),
        (DEFAULT, 'СВ-98', '3VWLZ7AJ1BM3', 2, 2),
        (DEFAULT, 'СВ-98', '3C4PDDBG9ET1', 2, 2),
@@ -676,20 +672,80 @@ VALUES (DEFAULT, 'АСВК', '2D4GP44L26R7', 2, 2),
        (DEFAULT, 'РШГ-1', '1N4AL3AP2DC1', 7, 2);
 
 /* Сооружения */
-INSERT INTO military_buildings
-VALUES (DEFAULT, 'Сооружение ©1', 2),
-       (DEFAULT, 'Сооружение ©2', 2),
-       (DEFAULT, 'Сооружение ©3', 2),
-       (DEFAULT, 'Сооружение ©4', 2),
-       (DEFAULT, 'Сооружение ©5', 2),
-       (DEFAULT, 'Сооружение ©6', 2),
-       (DEFAULT, 'Сооружение ©7', 2);
+INSERT INTO military_buildings (id, name, military_formation_id)
+VALUES (DEFAULT, 'Казарма ©1', 2),
+       (DEFAULT, 'Казарма ©2', 2),
+       (DEFAULT, 'Столовая ©1', 2),
+       (DEFAULT, 'Столовая ©2', 2),
+       (DEFAULT, 'Склад ©1', 2),
+       (DEFAULT, 'Склад ©2', 2),
+       (DEFAULT, 'Склад ©3', 2);
 
 /**
-  * ------- *
-  * Запросы *
-  * ------- *
+  * Представления *
  */
+
+CREATE VIEW military_men_view AS
+SELECT military_men.second_name,
+       military_men.first_name,
+       military_men.patronymic,
+       military_men.date_of_award,
+       ranks.name            AS rank_name,
+       rank_categories.name  AS rank_category,
+       staff_categories.name AS staff_category
+FROM military_men,
+     ranks,
+     rank_categories,
+     staff_categories
+WHERE military_men.rank_id = ranks.id
+  AND ranks.rank_category_id = rank_categories.id
+  AND ranks.staff_category_id = staff_categories.id;
+
+/**
+  * Запросы *
+ */
+
+/* Получить перечень всех частей военного округа, указанной армии, дивизии, корпуса и их командиров */
+WITH military_formation AS (SELECT id
+                            FROM military_formations
+                            WHERE military_formations.name = '4-я дивизия ПВО'
+)
+
+SELECT military_formations.name                                                                     AS formation,
+       military_formations.date_of_formation,
+       military_men.second_name || ' ' || military_men.first_name || ' ' || military_men.patronymic AS commander,
+       ranks.name                                                                                   AS rank,
+       dislocations.name                                                                            AS dislocation,
+       dislocation_types.name                                                                       AS dislocation_type
+FROM military_formations,
+     military_men,
+     ranks,
+     dislocations,
+     dislocation_types,
+     military_formation
+WHERE military_formations.parent_id = military_formation.id
+  AND military_formations.military_formation_type_id = 5
+  AND military_formations.commander_id = military_men.id
+  AND military_men.rank_id = ranks.id
+  AND military_formations.dislocation_id = dislocations.id
+  AND dislocations.dislocation_type_id = dislocation_types.id;
+
+/* Получить данные по офицерскому составу в целом и по офицерскому составу указанного звания всех частей военного округа, 
+   отдельной армии, дивизии, корпуса, военной части */
+SELECT military_men.second_name || ' ' || military_men.first_name || ' ' || military_men.patronymic AS full_name,
+       military_men.date_of_birth,
+       military_men.date_of_award,
+       ranks.name                                                                                   AS rank,
+       rank_categories.name                                                                         AS category,
+       staff_categories.name                                                                        AS staff
+FROM military_men,
+     ranks,
+     rank_categories,
+     staff_categories
+WHERE military_men.rank_id = ranks.id
+  AND ranks.rank_category_id = rank_categories.id
+  AND ranks.staff_category_id = staff_categories.id
+  AND ranks.name = 'Генерал-лейтенант';
 
 /*SELECT military_districts.name, subjects.name
 FROM military_districts,
