@@ -1,3 +1,7 @@
+/**
+  * Создание таблиц *
+ */
+
 DROP TABLE IF EXISTS military_buildings;
 DROP TABLE IF EXISTS armaments;
 DROP TABLE IF EXISTS armament_categories;
@@ -18,10 +22,6 @@ DROP TABLE IF EXISTS military_specialties;
 DROP TABLE IF EXISTS ranks;
 DROP TABLE IF EXISTS rank_categories;
 DROP TABLE IF EXISTS staff_categories;
-
-/**
-  * Создание таблиц *
- */
 
 /* Категории составов */
 CREATE TABLE staff_categories (
