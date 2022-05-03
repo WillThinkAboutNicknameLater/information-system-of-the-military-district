@@ -19,7 +19,7 @@ public class RankController {
 
     private static final String GET_RANKS = "/ranks";
 
-    private static final String GET_RANKS_WITH_SEARCH_FILTER = "/ranks/search";
+    private static final String GET_RANKS_BY_SEARCH_FILTER = "/ranks/search";
 
     private static final String GET_RANK = "/ranks/{id}";
 
@@ -39,7 +39,7 @@ public class RankController {
         return new ResponseEntity<>(rankDtos, HttpStatus.OK);
     }
 
-    @GetMapping(GET_RANKS_WITH_SEARCH_FILTER)
+    @GetMapping(GET_RANKS_BY_SEARCH_FILTER)
     public ResponseEntity<Page<RankDto>> getAllRanksByFilter(@RequestBody(required = false) RankSearchFilter rankSearchFilter) throws EntityNotFoundException {
         Page<RankDto> rankDtos = rankService.getAllRanksByFilterAsDtos(rankSearchFilter);
         return new ResponseEntity<>(rankDtos, HttpStatus.OK);

@@ -20,7 +20,7 @@ public class MilitaryManController {
 
     private static final String GET_MILITARY_MEN = "/military-men";
 
-    private static final String GET_MILITARY_MEN_WITH_SEARCH_FILTER = "/military-men/search";
+    private static final String GET_MILITARY_MEN_BY_SEARCH_FILTER = "/military-men/search";
 
     private static final String GET_MILITARY_MAN = "/military-men/{id}";
 
@@ -42,7 +42,7 @@ public class MilitaryManController {
         return new ResponseEntity<>(militaryManDtos, HttpStatus.OK);
     }
 
-    @GetMapping(GET_MILITARY_MEN_WITH_SEARCH_FILTER)
+    @GetMapping(GET_MILITARY_MEN_BY_SEARCH_FILTER)
     public ResponseEntity<Page<MilitaryManDto>> getAllMilitaryMenByFilter(@RequestBody(required = false) MilitaryManSearchFilter militaryManSearchFilter) throws EntityNotFoundException {
         Page<MilitaryManDto> militaryManDtos = militaryManService.getAllMilitaryMenByFilterAsDtos(militaryManSearchFilter);
         return new ResponseEntity<>(militaryManDtos, HttpStatus.OK);

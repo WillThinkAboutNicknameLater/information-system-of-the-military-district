@@ -19,7 +19,7 @@ public class SubjectController {
 
     private static final String GET_SUBJECTS = "/subjects";
 
-    private static final String GET_SUBJECTS_WITH_SEARCH_FILTER = "/subjects/search";
+    private static final String GET_SUBJECTS_BY_SEARCH_FILTER = "/subjects/search";
 
     private static final String GET_SUBJECT = "/subjects/{id}";
 
@@ -39,7 +39,7 @@ public class SubjectController {
         return new ResponseEntity<>(subjectDtos, HttpStatus.OK);
     }
 
-    @GetMapping(GET_SUBJECTS_WITH_SEARCH_FILTER)
+    @GetMapping(GET_SUBJECTS_BY_SEARCH_FILTER)
     public ResponseEntity<Page<SubjectDto>> getAllStaffCategoriesByFilter(@RequestBody(required = false) SubjectSearchFilter subjectSearchFilter) throws EntityNotFoundException {
         Page<SubjectDto> subjectDtos = subjectService.getAllStaffCategoriesByFilterAsDtos(subjectSearchFilter);
         return new ResponseEntity<>(subjectDtos, HttpStatus.OK);

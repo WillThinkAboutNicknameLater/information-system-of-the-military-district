@@ -19,7 +19,7 @@ public class MilitarySpecialtyController {
 
     private static final String GET_MILITARY_SPECIALTIES = "/military-specialties";
 
-    private static final String GET_MILITARY_SPECIALTIES_WITH_SEARCH_FILTER = "/military-specialties/search";
+    private static final String GET_MILITARY_SPECIALTIES_BY_SEARCH_FILTER = "/military-specialties/search";
 
     private static final String GET_MILITARY_SPECIALTY = "/military-specialties/{id}";
 
@@ -39,7 +39,7 @@ public class MilitarySpecialtyController {
         return new ResponseEntity<>(militarySpecialtyDtos, HttpStatus.OK);
     }
 
-    @GetMapping(GET_MILITARY_SPECIALTIES_WITH_SEARCH_FILTER)
+    @GetMapping(GET_MILITARY_SPECIALTIES_BY_SEARCH_FILTER)
     public ResponseEntity<Page<MilitarySpecialtyDto>> getAllMilitarySpecialtiesByFilter(@RequestBody(required = false) MilitarySpecialtySearchFilter militarySpecialtySearchFilter) throws EntityNotFoundException {
         Page<MilitarySpecialtyDto> militarySpecialtyDtos = militarySpecialtyService.getAllMilitarySpecialtiesByFilterAsDtos(militarySpecialtySearchFilter);
         return new ResponseEntity<>(militarySpecialtyDtos, HttpStatus.OK);

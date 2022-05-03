@@ -19,7 +19,7 @@ public class StaffCategoryController {
 
     private static final String GET_STAFF_CATEGORIES = "/staff-categories";
 
-    private static final String GET_STAFF_CATEGORIES_WITH_SEARCH_FILTER = "/staff-categories/search";
+    private static final String GET_STAFF_CATEGORIES_BY_SEARCH_FILTER = "/staff-categories/search";
 
     private static final String GET_STAFF_CATEGORY = "/staff-categories/{id}";
 
@@ -39,7 +39,7 @@ public class StaffCategoryController {
         return new ResponseEntity<>(staffCategoryDtos, HttpStatus.OK);
     }
 
-    @GetMapping(GET_STAFF_CATEGORIES_WITH_SEARCH_FILTER)
+    @GetMapping(GET_STAFF_CATEGORIES_BY_SEARCH_FILTER)
     public ResponseEntity<Page<StaffCategoryDto>> getAllStaffCategoriesByFilter(@RequestBody(required = false) StaffCategorySearchFilter staffCategorySearchFilter) throws EntityNotFoundException {
         Page<StaffCategoryDto> staffCategoryDtos = staffCategoryService.getAllStaffCategoriesByFilterAsDtos(staffCategorySearchFilter);
         return new ResponseEntity<>(staffCategoryDtos, HttpStatus.OK);
