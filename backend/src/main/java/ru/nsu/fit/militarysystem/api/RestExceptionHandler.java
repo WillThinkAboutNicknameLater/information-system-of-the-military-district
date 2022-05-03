@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import ru.nsu.fit.militarysystem.api.error.ApiError;
 import ru.nsu.fit.militarysystem.api.error.ApiSubError;
 import ru.nsu.fit.militarysystem.api.error.ApiValidationError;
-import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistException;
 import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 
 import java.util.ArrayList;
@@ -93,12 +92,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage());
-        return buildResponseEntity(apiError);
-    }
-
-    @ExceptionHandler(EntityAlreadyExistException.class)
-    protected ResponseEntity<Object> handleEntityAlreadyExistException(EntityAlreadyExistException ex) {
-        ApiError apiError = new ApiError(HttpStatus.CONFLICT, ex.getLocalizedMessage());
         return buildResponseEntity(apiError);
     }
 

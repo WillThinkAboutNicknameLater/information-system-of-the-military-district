@@ -25,6 +25,8 @@ public class ApiError {
 
     private final String message;
 
+    // TODO: add detailed message
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ApiSubError> subErrors;
 

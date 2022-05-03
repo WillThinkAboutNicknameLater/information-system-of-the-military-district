@@ -1,30 +1,27 @@
 package ru.nsu.fit.militarysystem.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import ru.nsu.fit.militarysystem.dto.SubjectDto;
 import ru.nsu.fit.militarysystem.store.entity.Subject;
 
 import java.util.List;
 
-@Mapper
-public interface SubjectMapper {
-    SubjectMapper INSTANCE = Mappers.getMapper(SubjectMapper.class);
+@Mapper(componentModel = "spring")
+public abstract class SubjectMapper {
+    public abstract SubjectDto entityToDto(Subject subject);
 
-    SubjectDto subjectToSubjectDto(Subject subject);
+    public abstract Subject dtoToEntity(SubjectDto subjectDto);
 
-    Subject subjectDtoToSubject(SubjectDto subjectDto);
+    public abstract List<SubjectDto> entitiesToDtos(List<Subject> subjects);
 
-    List<SubjectDto> subjectsToSubjectDtos(List<Subject> subjects);
+    public abstract List<Subject> dtosToEntities(List<SubjectDto> subjectDtos);
 
-    List<Subject> subjectDtosToSubjects(List<SubjectDto> subjectDtos);
-
-    default Page<SubjectDto> subjectsToSubjectDtos(Page<Subject> subjects) {
-        return subjects.map(INSTANCE::subjectToSubjectDto);
+    public Page<SubjectDto> entitiesToDtos(Page<Subject> subjects) {
+        return subjects.map(this::entityToDto);
     }
 
-    default Page<Subject> subjectDtosToSubjects(Page<SubjectDto> subjectDtos) {
-        return subjectDtos.map(INSTANCE::subjectDtoToSubject);
+    public Page<Subject> dtosToEntities(Page<SubjectDto> subjectDtos) {
+        return subjectDtos.map(this::dtoToEntity);
     }
 }

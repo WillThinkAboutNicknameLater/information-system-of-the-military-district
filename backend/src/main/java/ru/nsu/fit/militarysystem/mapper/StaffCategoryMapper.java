@@ -1,30 +1,27 @@
 package ru.nsu.fit.militarysystem.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import ru.nsu.fit.militarysystem.dto.StaffCategoryDto;
 import ru.nsu.fit.militarysystem.store.entity.StaffCategory;
 
 import java.util.List;
 
-@Mapper
-public interface StaffCategoryMapper {
-    StaffCategoryMapper INSTANCE = Mappers.getMapper(StaffCategoryMapper.class);
+@Mapper(componentModel = "spring")
+public abstract class StaffCategoryMapper {
+    public abstract StaffCategoryDto entityToDto(StaffCategory staffCategory);
 
-    StaffCategoryDto staffCategoryToStaffCategoryDto(StaffCategory staffCategory);
+    public abstract StaffCategory dtoToEntity(StaffCategoryDto staffCategoryDto);
 
-    StaffCategory staffCategoryDtoToStaffCategory(StaffCategoryDto staffCategoryDto);
+    public abstract List<StaffCategoryDto> entitiesToDtos(List<StaffCategory> staffCategories);
 
-    List<StaffCategoryDto> staffCategoriesToStaffCategoryDtos(List<StaffCategory> staffCategories);
+    public abstract List<StaffCategory> dtosToEntities(List<StaffCategoryDto> staffCategoryDtos);
 
-    List<StaffCategory> staffCategoryDtosToStaffCategories(List<StaffCategoryDto> staffCategoryDtos);
-
-    default Page<StaffCategoryDto> staffCategoriesToStaffCategoryDtos(Page<StaffCategory> staffCategories) {
-        return staffCategories.map(INSTANCE::staffCategoryToStaffCategoryDto);
+    public Page<StaffCategoryDto> entitiesToDtos(Page<StaffCategory> staffCategories) {
+        return staffCategories.map(this::entityToDto);
     }
 
-    default Page<StaffCategory> staffCategoryDtosToStaffCategories(Page<StaffCategoryDto> staffCategoryDtos) {
-        return staffCategoryDtos.map(INSTANCE::staffCategoryDtoToStaffCategory);
+    public Page<StaffCategory> dtosToEntities(Page<StaffCategoryDto> staffCategoryDtos) {
+        return staffCategoryDtos.map(this::dtoToEntity);
     }
 }

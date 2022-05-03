@@ -1,30 +1,41 @@
 package ru.nsu.fit.militarysystem.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import ru.nsu.fit.militarysystem.dto.RankDto;
+import ru.nsu.fit.militarysystem.service.RankCategoryService;
+import ru.nsu.fit.militarysystem.service.StaffCategoryService;
 import ru.nsu.fit.militarysystem.store.entity.Rank;
 
 import java.util.List;
 
-@Mapper
-public interface RankMapper {
-    RankMapper INSTANCE = Mappers.getMapper(RankMapper.class);
+@Mapper(componentModel = "spring")
+public abstract class RankMapper {
+    @Autowired
+    protected StaffCategoryService staffCategoryService;
 
-    RankDto rankToRankDto(Rank rank);
+    @Autowired
+    protected RankCategoryService rankCategoryService;
 
-    Rank rankDtoToRank(RankDto rankDto);
+    @Mapping(source = "staffCategory.name", target = "staffCategory")
+    @Mapping(source = "rankCategory.name", target = "rankCategory")
+    public abstract RankDto entityToDto(Rank rank);
 
-    List<RankDto> ranksToRankDtos(List<Rank> ranks);
+    @Mapping(target = "staffCategory", expression = "java(staffCategoryService.getStaffCategoryByName(rankDto.getStaffCategory()))")
+    @Mapping(target = "rankCategory", expression = "java(rankCategoryService.getRankCategoryByName(rankDto.getRankCategory()))")
+    public abstract Rank dtoToEntity(RankDto rankDto);
 
-    List<Rank> rankDtosToRanks(List<RankDto> rankDtos);
+    public abstract List<RankDto> entitiesToDtos(List<Rank> ranks);
 
-    default Page<RankDto> ranksToRankDtos(Page<Rank> ranks) {
-        return ranks.map(INSTANCE::rankToRankDto);
+    public abstract List<Rank> dtosToEntities(List<RankDto> rankDtos);
+
+    public Page<RankDto> entitiesToDtos(Page<Rank> ranks) {
+        return ranks.map(this::entityToDto);
     }
 
-    default Page<Rank> rankDtosToRanks(Page<RankDto> rankDtos) {
-        return rankDtos.map(INSTANCE::rankDtoToRank);
+    public Page<Rank> dtosToEntities(Page<RankDto> rankDtos) {
+        return rankDtos.map(this::dtoToEntity);
     }
 }

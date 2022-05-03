@@ -21,7 +21,13 @@ public class RankCategoryController {
 
     private static final String GET_RANK_CATEGORIES_WITH_SEARCH_FILTER = "/rank-categories/search";
 
-    private static final String GET_RANK_CATEGORY = "/rank_categories/{id}";
+    private static final String GET_RANK_CATEGORY = "/rank-categories/{id}";
+
+    private static final String POST_RANK_CATEGORY = "/rank-categories";
+
+    private static final String PUT_RANK_CATEGORY = "/rank-categories/{id}";
+
+    private static final String DELETE_RANK_CATEGORY = "/rank-categories/{id}";
 
     public RankCategoryController(RankCategoryService rankCategoryService) {
         this.rankCategoryService = rankCategoryService;
@@ -29,19 +35,36 @@ public class RankCategoryController {
 
     @GetMapping(GET_RANK_CATEGORIES)
     public ResponseEntity<List<RankCategoryDto>> getAllRankCategories() {
-        List<RankCategoryDto> rankCategories = rankCategoryService.getAllRankCategories();
-        return new ResponseEntity<>(rankCategories, HttpStatus.OK);
+        List<RankCategoryDto> rankCategoryDtos = rankCategoryService.getAllRankCategoriesAsDtos();
+        return new ResponseEntity<>(rankCategoryDtos, HttpStatus.OK);
     }
 
     @GetMapping(GET_RANK_CATEGORIES_WITH_SEARCH_FILTER)
-    public ResponseEntity<Page<RankCategoryDto>> getAllRankCategoriesWithFilters(@RequestBody(required = false) RankCategorySearchFilter rankCategorySearchFilter) throws EntityNotFoundException {
-        Page<RankCategoryDto> rankCategories = rankCategoryService.getAllRankCategoriesWithFilters(rankCategorySearchFilter);
-        return new ResponseEntity<>(rankCategories, HttpStatus.OK);
+    public ResponseEntity<Page<RankCategoryDto>> getAllRankCategoriesByFilter(@RequestBody(required = false) RankCategorySearchFilter rankCategorySearchFilter) throws EntityNotFoundException {
+        Page<RankCategoryDto> rankCategoryDtos = rankCategoryService.getAllRankCategoriesByFilterAsDtos(rankCategorySearchFilter);
+        return new ResponseEntity<>(rankCategoryDtos, HttpStatus.OK);
     }
 
     @GetMapping(GET_RANK_CATEGORY)
     public ResponseEntity<RankCategoryDto> getRankCategoryById(@PathVariable("id") short id) throws EntityNotFoundException {
-        RankCategoryDto rankCategory = rankCategoryService.getRankCategoryById(id);
-        return new ResponseEntity<>(rankCategory, HttpStatus.OK);
+        RankCategoryDto rankCategoryDto = rankCategoryService.getRankCategoryByIdAsDto(id);
+        return new ResponseEntity<>(rankCategoryDto, HttpStatus.OK);
     }
+
+    @PostMapping(POST_RANK_CATEGORY)
+    public ResponseEntity<RankCategoryDto> createRankCategory(@RequestBody RankCategoryDto rankCategoryDto) {
+        return new ResponseEntity<>(rankCategoryService.createRankCategory(rankCategoryDto), HttpStatus.OK);
+    }
+
+    @PutMapping(PUT_RANK_CATEGORY)
+    public ResponseEntity<RankCategoryDto> updateRankCategoryById(@PathVariable("id") short id, @RequestBody RankCategoryDto rankCategoryDto) throws EntityNotFoundException {
+        return new ResponseEntity<>(rankCategoryService.updateRankCategoryById(id, rankCategoryDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping(DELETE_RANK_CATEGORY)
+    public ResponseEntity<RankCategoryDto> deleteRankCategoryById(@PathVariable("id") short id) throws EntityNotFoundException {
+        RankCategoryDto rankCategoryDto = rankCategoryService.deleteRankCategoryById(id);
+        return new ResponseEntity<>(rankCategoryDto, HttpStatus.OK);
+    }
+
 }

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Entity
 @Table(name = "ranks", indexes = {
         @Index(name = "ranks_name_staff_category_id_rank_category_id_key", columnList = "name, staff_category_id, rank_category_id", unique = true)

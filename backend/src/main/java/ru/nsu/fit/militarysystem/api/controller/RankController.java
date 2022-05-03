@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.fit.militarysystem.dto.RankDto;
 import ru.nsu.fit.militarysystem.service.RankService;
-import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistException;
 import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.filter.RankSearchFilter;
 
@@ -26,6 +25,8 @@ public class RankController {
 
     private static final String POST_RANK = "/ranks";
 
+    private static final String PUT_RANK = "/ranks/{id}";
+
     private static final String DELETE_RANK = "/ranks/{id}";
 
     public RankController(RankService rankService) {
@@ -34,31 +35,36 @@ public class RankController {
 
     @GetMapping(GET_RANKS)
     public ResponseEntity<List<RankDto>> getAllRanks() {
-        List<RankDto> ranks = rankService.getAllRanks();
-        return new ResponseEntity<>(ranks, HttpStatus.OK);
+        List<RankDto> rankDtos = rankService.getAllRanksAsDtos();
+        return new ResponseEntity<>(rankDtos, HttpStatus.OK);
     }
 
     @GetMapping(GET_RANKS_WITH_SEARCH_FILTER)
-    public ResponseEntity<Page<RankDto>> getAllRanksWithFilters(@RequestBody(required = false) RankSearchFilter rankSearchFilter) throws EntityNotFoundException {
-        Page<RankDto> ranks = rankService.getAllRanksWithFilters(rankSearchFilter);
-        return new ResponseEntity<>(ranks, HttpStatus.OK);
+    public ResponseEntity<Page<RankDto>> getAllRanksByFilter(@RequestBody(required = false) RankSearchFilter rankSearchFilter) throws EntityNotFoundException {
+        Page<RankDto> rankDtos = rankService.getAllRanksByFilterAsDtos(rankSearchFilter);
+        return new ResponseEntity<>(rankDtos, HttpStatus.OK);
     }
 
     @GetMapping(GET_RANK)
     public ResponseEntity<RankDto> getRankById(@PathVariable("id") short id) throws EntityNotFoundException {
-        RankDto rank = rankService.getRankById(id);
-        return new ResponseEntity<>(rank, HttpStatus.OK);
+        RankDto rankDto = rankService.getRankByIdAsDto(id);
+        return new ResponseEntity<>(rankDto, HttpStatus.OK);
     }
 
     @PostMapping(POST_RANK)
-    public ResponseEntity<RankDto> createRank(@RequestBody RankDto rank) throws EntityAlreadyExistException {
-        return new ResponseEntity<>(rankService.createRank(rank), HttpStatus.OK);
+    public ResponseEntity<RankDto> createRank(@RequestBody RankDto rankDto) {
+        return new ResponseEntity<>(rankService.createRank(rankDto), HttpStatus.OK);
+    }
+
+    @PutMapping(PUT_RANK)
+    public ResponseEntity<RankDto> updateRankById(@PathVariable("id") short id, @RequestBody RankDto rankDto) throws EntityNotFoundException {
+        return new ResponseEntity<>(rankService.updateRankById(id, rankDto), HttpStatus.OK);
     }
 
     @DeleteMapping(DELETE_RANK)
     public ResponseEntity<RankDto> deleteRankById(@PathVariable("id") short id) throws EntityNotFoundException {
-        RankDto rank = rankService.deleteRank(id);
-        return new ResponseEntity<>(rank, HttpStatus.OK);
+        RankDto rankDto = rankService.deleteRankById(id);
+        return new ResponseEntity<>(rankDto, HttpStatus.OK);
     }
 
 }

@@ -23,26 +23,48 @@ public class SubjectController {
 
     private static final String GET_SUBJECT = "/subjects/{id}";
 
+    private static final String POST_SUBJECT = "/subjects";
+
+    private static final String PUT_SUBJECT = "/subjects/{id}";
+
+    private static final String DELETE_SUBJECT = "/subjects/{id}";
+
     public SubjectController(SubjectService subjectService) {
         this.subjectService = subjectService;
     }
 
     @GetMapping(GET_SUBJECTS)
-    public ResponseEntity<List<SubjectDto>> getAllSubjects() {
-        List<SubjectDto> subjects = subjectService.getAllSubjects();
-        return new ResponseEntity<>(subjects, HttpStatus.OK);
+    public ResponseEntity<List<SubjectDto>> getAllStaffCategories() {
+        List<SubjectDto> subjectDtos = subjectService.getAllStaffCategoriesAsDtos();
+        return new ResponseEntity<>(subjectDtos, HttpStatus.OK);
     }
 
     @GetMapping(GET_SUBJECTS_WITH_SEARCH_FILTER)
-    public ResponseEntity<Page<SubjectDto>> getAllSubjectsWithFilters(@RequestBody(required = false) SubjectSearchFilter subjectSearchFilter) throws EntityNotFoundException {
-        Page<SubjectDto> subjects = subjectService.getAllSubjectsWithFilters(subjectSearchFilter);
-        return new ResponseEntity<>(subjects, HttpStatus.OK);
+    public ResponseEntity<Page<SubjectDto>> getAllStaffCategoriesByFilter(@RequestBody(required = false) SubjectSearchFilter subjectSearchFilter) throws EntityNotFoundException {
+        Page<SubjectDto> subjectDtos = subjectService.getAllStaffCategoriesByFilterAsDtos(subjectSearchFilter);
+        return new ResponseEntity<>(subjectDtos, HttpStatus.OK);
     }
 
     @GetMapping(GET_SUBJECT)
     public ResponseEntity<SubjectDto> getSubjectById(@PathVariable("id") short id) throws EntityNotFoundException {
-        SubjectDto subject = subjectService.getSubjectById(id);
-        return new ResponseEntity<>(subject, HttpStatus.OK);
+        SubjectDto subjectDto = subjectService.getSubjectByIdAsDto(id);
+        return new ResponseEntity<>(subjectDto, HttpStatus.OK);
+    }
+
+    @PostMapping(POST_SUBJECT)
+    public ResponseEntity<SubjectDto> createSubject(@RequestBody SubjectDto subjectDto) {
+        return new ResponseEntity<>(subjectService.createSubject(subjectDto), HttpStatus.OK);
+    }
+
+    @PutMapping(PUT_SUBJECT)
+    public ResponseEntity<SubjectDto> updateSubjectById(@PathVariable("id") short id, @RequestBody SubjectDto subjectDto) throws EntityNotFoundException {
+        return new ResponseEntity<>(subjectService.updateSubjectById(id, subjectDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping(DELETE_SUBJECT)
+    public ResponseEntity<SubjectDto> deleteSubjectById(@PathVariable("id") short id) throws EntityNotFoundException {
+        SubjectDto subjectDto = subjectService.deleteSubjectById(id);
+        return new ResponseEntity<>(subjectDto, HttpStatus.OK);
     }
 
 }

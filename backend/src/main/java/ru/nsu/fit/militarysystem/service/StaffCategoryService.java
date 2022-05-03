@@ -21,41 +21,72 @@ import java.util.Optional;
 public class StaffCategoryService {
     private final StaffCategoryRepository staffCategoryRepository;
 
-    public StaffCategoryService(StaffCategoryRepository staffCategoryRepository) {
+    private final StaffCategoryMapper staffCategoryMapper;
+
+    public StaffCategoryService(StaffCategoryRepository staffCategoryRepository, StaffCategoryMapper staffCategoryMapper) {
         this.staffCategoryRepository = staffCategoryRepository;
+        this.staffCategoryMapper = staffCategoryMapper;
     }
 
-    public List<StaffCategoryDto> getAllStaffCategories() {
+    private StaffCategory saveStaffCategory(StaffCategoryDto staffCategoryDto) {
+        StaffCategory newStaffCategory = staffCategoryMapper.dtoToEntity(staffCategoryDto);
+        return staffCategoryRepository.save(newStaffCategory);
+    }
+
+    public List<StaffCategoryDto> getAllStaffCategoriesAsDtos() {
         List<StaffCategory> staffCategories = new ArrayList<>(staffCategoryRepository.findAll());
-        return StaffCategoryMapper.INSTANCE.staffCategoriesToStaffCategoryDtos(staffCategories);
+        return staffCategoryMapper.entitiesToDtos(staffCategories);
     }
 
-    public Page<StaffCategoryDto> getAllStaffCategoriesWithFilters(StaffCategorySearchFilter staffCategorySearchFilter) throws EntityNotFoundException {
+    public Page<StaffCategoryDto> getAllStaffCategoriesByFilterAsDtos(StaffCategorySearchFilter staffCategorySearchFilter) throws EntityNotFoundException {
         if (staffCategorySearchFilter == null) {
             staffCategorySearchFilter = new StaffCategorySearchFilter();
         }
+
         PageCriteria pageCriteria = staffCategorySearchFilter.getPageCriteria();
         Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
         Page<StaffCategory> staffCategories = staffCategoryRepository.findAll(pageable);
         if (staffCategories.isEmpty()) {
             throw new EntityNotFoundException(StaffCategory.class, Map.of("pageCriteria", pageCriteria.toString()));
         }
-        return StaffCategoryMapper.INSTANCE.staffCategoriesToStaffCategoryDtos(staffCategories);
+        return staffCategoryMapper.entitiesToDtos(staffCategories);
     }
 
-    public StaffCategoryDto getStaffCategoryById(short id) throws EntityNotFoundException {
+    public StaffCategoryDto getStaffCategoryByIdAsDto(short id) throws EntityNotFoundException {
         Optional<StaffCategory> staffCategory = staffCategoryRepository.findById(id);
         if (staffCategory.isEmpty()) {
             throw new EntityNotFoundException(StaffCategory.class, Map.of("id", String.valueOf(id)));
         }
-        return StaffCategoryMapper.INSTANCE.staffCategoryToStaffCategoryDto(staffCategory.get());
+        return staffCategoryMapper.entityToDto(staffCategory.get());
     }
 
-    public StaffCategoryDto getStaffCategoryByName(String name) throws EntityNotFoundException {
+    public StaffCategory getStaffCategoryByName(String name) throws EntityNotFoundException {
         Optional<StaffCategory> staffCategory = staffCategoryRepository.findByName(name);
         if (staffCategory.isEmpty()) {
             throw new EntityNotFoundException(StaffCategory.class, Map.of("name", name));
         }
-        return StaffCategoryMapper.INSTANCE.staffCategoryToStaffCategoryDto(staffCategory.get());
+        return staffCategory.get();
+    }
+
+    public StaffCategoryDto createStaffCategory(StaffCategoryDto staffCategoryDto) {
+        return staffCategoryMapper.entityToDto(saveStaffCategory(staffCategoryDto));
+    }
+
+    public StaffCategoryDto updateStaffCategoryById(short id, StaffCategoryDto staffCategoryDto) throws EntityNotFoundException {
+        Optional<StaffCategory> staffCategory = staffCategoryRepository.findById(id);
+        if (staffCategory.isEmpty()) {
+            throw new EntityNotFoundException(StaffCategory.class, Map.of("id", String.valueOf(id)));
+        }
+        staffCategoryDto.setId(id);
+        return staffCategoryMapper.entityToDto(saveStaffCategory(staffCategoryDto));
+    }
+
+    public StaffCategoryDto deleteStaffCategoryById(short id) throws EntityNotFoundException {
+        Optional<StaffCategory> staffCategory = staffCategoryRepository.findById(id);
+        if (staffCategory.isEmpty()) {
+            throw new EntityNotFoundException(StaffCategory.class, Map.of("id", String.valueOf(id)));
+        }
+        staffCategoryRepository.deleteById(id);
+        return staffCategoryMapper.entityToDto(staffCategory.get());
     }
 }

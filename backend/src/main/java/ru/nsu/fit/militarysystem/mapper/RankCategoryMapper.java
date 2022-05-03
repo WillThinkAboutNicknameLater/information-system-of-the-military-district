@@ -1,30 +1,27 @@
 package ru.nsu.fit.militarysystem.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import ru.nsu.fit.militarysystem.dto.RankCategoryDto;
 import ru.nsu.fit.militarysystem.store.entity.RankCategory;
 
 import java.util.List;
 
-@Mapper
-public interface RankCategoryMapper {
-    RankCategoryMapper INSTANCE = Mappers.getMapper(RankCategoryMapper.class);
+@Mapper(componentModel = "spring")
+public abstract class RankCategoryMapper {
+    public abstract RankCategoryDto entityToDto(RankCategory rankCategory);
 
-    RankCategoryDto rankCategoryToRankCategoryDto(RankCategory rankCategory);
+    public abstract RankCategory dtoToEntity(RankCategoryDto rankCategoryDto);
 
-    RankCategory rankCategoryDtoToRankCategory(RankCategoryDto rankCategoryDto);
+    public abstract List<RankCategoryDto> entitiesToDtos(List<RankCategory> rankCategories);
 
-    List<RankCategoryDto> rankCategoriesToRankCategoryDtos(List<RankCategory> rankCategories);
+    public abstract List<RankCategory> dtosToEntities(List<RankCategoryDto> rankCategoryDtos);
 
-    List<RankCategory> rankCategoryDtosToRankCategories(List<RankCategoryDto> rankCategoryDtos);
-
-    default Page<RankCategoryDto> rankCategoriesToRankCategoryDtos(Page<RankCategory> rankCategories) {
-        return rankCategories.map(INSTANCE::rankCategoryToRankCategoryDto);
+    public Page<RankCategoryDto> entitiesToDtos(Page<RankCategory> rankCategories) {
+        return rankCategories.map(this::entityToDto);
     }
 
-    default Page<RankCategory> rankCategoryDtosToRankCategories(Page<RankCategoryDto> rankCategoryDtos) {
-        return rankCategoryDtos.map(INSTANCE::rankCategoryDtoToRankCategory);
+    public Page<RankCategory> dtosToEntities(Page<RankCategoryDto> rankCategoryDtos) {
+        return rankCategoryDtos.map(this::dtoToEntity);
     }
 }
