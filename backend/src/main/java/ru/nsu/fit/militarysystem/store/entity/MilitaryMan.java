@@ -17,7 +17,7 @@ import java.util.Set;
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Entity
 @Table(name = "military_men")
-public class MilitaryMan {
+public class MilitaryMan implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "dislocations", indexes = {
         @Index(name = "dislocations_name_dislocation_type_id_subject_id_key", columnList = "name, dislocation_type_id, subject_id", unique = true)
 })
-public class Dislocation {
+public class Dislocation implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

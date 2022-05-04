@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "staff_categories", indexes = {
         @Index(name = "staff_categories_name_key", columnList = "name", unique = true)
 })
-public class StaffCategory {
+public class StaffCategory implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Table(name = "military_districts", indexes = {
         @Index(name = "military_districts_name_key", columnList = "name", unique = true)
 })
-public class MilitaryDistrict {
+public class MilitaryDistrict implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MilitaryDistrictDto {
+public class MilitaryDistrictDto implements BaseDto {
     private Short id;
 
     private String name;

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MilitaryManDto {
+public class MilitaryManDto implements BaseDto {
     private Integer id;
 
     private String secondName;

@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "military_formation_types", indexes = {
         @Index(name = "military_formation_types_name_key", columnList = "name", unique = true)
 })
-public class MilitaryFormationType {
+public class MilitaryFormationType implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DislocationDto {
+public class DislocationDto implements BaseDto {
     private Integer id;
 
     private String name;

@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MilitarySpecialtyDto {
+public class MilitarySpecialtyDto implements BaseDto {
     private Short id;
 
     private String name;

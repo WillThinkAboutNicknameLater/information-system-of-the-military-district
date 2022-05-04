@@ -3,33 +3,20 @@ package ru.nsu.fit.militarysystem.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import ru.nsu.fit.militarysystem.dto.MilitaryManDto;
 import ru.nsu.fit.militarysystem.service.RankService;
 import ru.nsu.fit.militarysystem.store.entity.MilitaryMan;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
-public abstract class MilitaryManMapper {
+public abstract class MilitaryManMapper implements BaseMapper<MilitaryMan, MilitaryManDto> {
     @Autowired
     protected RankService rankService;
 
+    @Override
     @Mapping(source = "rank.name", target = "rankName")
-    public abstract MilitaryManDto entityToDto(MilitaryMan militaryMan);
+    public abstract MilitaryManDto entityToDto(MilitaryMan entity);
 
-    @Mapping(target = "rank", expression = "java(rankService.getRankByName(militaryManDto.getRankName()))")
-    public abstract MilitaryMan dtoToEntity(MilitaryManDto militaryManDto);
-
-    public abstract List<MilitaryManDto> entitiesToDtos(List<MilitaryMan> militaryMen);
-
-    public abstract List<MilitaryMan> dtosToEntities(List<MilitaryManDto> militaryManDtos);
-
-    public Page<MilitaryManDto> entitiesToDtos(Page<MilitaryMan> militaryMen) {
-        return militaryMen.map(this::entityToDto);
-    }
-
-    public Page<MilitaryMan> dtosToEntities(Page<MilitaryManDto> militaryManDtos) {
-        return militaryManDtos.map(this::dtoToEntity);
-    }
+    @Override
+    @Mapping(target = "rank", expression = "java(rankService.getRankByName(dto.getRankName()))")
+    public abstract MilitaryMan dtoToEntity(MilitaryManDto dto);
 }

@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "ranks", indexes = {
         @Index(name = "ranks_name_staff_category_id_rank_category_id_key", columnList = "name, staff_category_id, rank_category_id", unique = true)
 })
-public class Rank {
+public class Rank implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

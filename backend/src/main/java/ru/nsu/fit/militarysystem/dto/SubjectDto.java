@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SubjectDto {
+public class SubjectDto implements BaseDto {
     private Short id;
 
     private String name;
