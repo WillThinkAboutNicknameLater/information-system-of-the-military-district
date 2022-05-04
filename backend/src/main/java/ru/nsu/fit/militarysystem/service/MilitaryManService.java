@@ -47,7 +47,7 @@ public class MilitaryManService {
             militaryManSearchFilter = new MilitaryManSearchFilter();
         }
 
-        Page<MilitaryMan> militaryMen = militaryManCriteriaRepository.findAllWithFilters(militaryManSearchFilter);
+        Page<MilitaryMan> militaryMen = militaryManCriteriaRepository.findAllByFilter(militaryManSearchFilter);
         if (militaryMen.isEmpty()) {
             throw new EntityNotFoundException(MilitaryMan.class, Map.of("pageCriteria", militaryManSearchFilter.getPageCriteria().toString(), "militaryManCriteria", militaryManSearchFilter.getMilitaryManCriteria().toString()));
         }

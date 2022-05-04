@@ -44,7 +44,7 @@ public class RankService {
             rankSearchFilter = new RankSearchFilter();
         }
 
-        Page<Rank> ranks = rankCriteriaRepository.findAllWithFilters(rankSearchFilter);
+        Page<Rank> ranks = rankCriteriaRepository.findAllByFilter(rankSearchFilter);
         if (ranks.isEmpty()) {
             throw new EntityNotFoundException(Rank.class, Map.of("pageCriteria", rankSearchFilter.getPageCriteria().toString(), "rankCriteria", rankSearchFilter.getRankCriteria().toString()));
         }
