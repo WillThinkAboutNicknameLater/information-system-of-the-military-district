@@ -19,12 +19,12 @@ public abstract class DislocationMapper {
     @Autowired
     protected SubjectService subjectService;
 
-    @Mapping(source = "dislocationType.name", target = "dislocationType")
-    @Mapping(source = "subject.name", target = "subject")
+    @Mapping(source = "dislocationType.name", target = "dislocationTypeName")
+    @Mapping(source = "subject.name", target = "subjectName")
     public abstract DislocationDto entityToDto(Dislocation dislocation);
 
-    @Mapping(target = "dislocationType", expression = "java(dislocationTypeService.getDislocationTypeByName(dislocationDto.getDislocationType()))")
-    @Mapping(target = "subject", expression = "java(subjectService.getSubjectByName(dislocationDto.getSubject()))")
+    @Mapping(target = "dislocationType", expression = "java(dislocationTypeService.getDislocationTypeByName(dislocationDto.getDislocationTypeName()))")
+    @Mapping(target = "subject", expression = "java(subjectService.getSubjectByName(dislocationDto.getSubjectName()))")
     public abstract Dislocation dtoToEntity(DislocationDto dislocationDto);
 
     public abstract List<DislocationDto> entitiesToDtos(List<Dislocation> dislocations);

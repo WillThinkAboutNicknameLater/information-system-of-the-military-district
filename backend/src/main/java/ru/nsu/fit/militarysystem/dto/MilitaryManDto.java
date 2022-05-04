@@ -26,5 +26,5 @@ public class MilitaryManDto {
 
     private String identificationNumber;
 
-    private String rank;
+    private String rankName;
 }

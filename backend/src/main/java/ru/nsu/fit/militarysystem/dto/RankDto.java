@@ -11,7 +11,7 @@ public class RankDto {
 
     private String name;
 
-    private String staffCategory;
+    private String staffCategoryName;
 
-    private String rankCategory;
+    private String rankCategoryName;
 }

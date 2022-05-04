@@ -15,10 +15,10 @@ public abstract class MilitaryManMapper {
     @Autowired
     protected RankService rankService;
 
-    @Mapping(source = "rank.name", target = "rank")
+    @Mapping(source = "rank.name", target = "rankName")
     public abstract MilitaryManDto entityToDto(MilitaryMan militaryMan);
 
-    @Mapping(target = "rank", expression = "java(rankService.getRankByName(militaryManDto.getRank()))")
+    @Mapping(target = "rank", expression = "java(rankService.getRankByName(militaryManDto.getRankName()))")
     public abstract MilitaryMan dtoToEntity(MilitaryManDto militaryManDto);
 
     public abstract List<MilitaryManDto> entitiesToDtos(List<MilitaryMan> militaryMen);

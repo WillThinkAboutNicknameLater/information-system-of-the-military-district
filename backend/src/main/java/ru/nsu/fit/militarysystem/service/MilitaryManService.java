@@ -54,6 +54,14 @@ public class MilitaryManService {
         return militaryManMapper.entitiesToDtos(militaryMen);
     }
 
+    public MilitaryMan getMilitaryManByIdentificationNumber(String identificationNumber) throws EntityNotFoundException {
+        Optional<MilitaryMan> militaryMan = militaryManRepository.findByIdentificationNumber(identificationNumber);
+        if (militaryMan.isEmpty()) {
+            throw new EntityNotFoundException(MilitaryMan.class, Map.of("identificationNumber", String.valueOf(identificationNumber)));
+        }
+        return militaryMan.get();
+    }
+
     public MilitaryManDto getMilitaryManByIdAsDto(int id) throws EntityNotFoundException {
         Optional<MilitaryMan> militaryMan = militaryManRepository.findById(id);
         if (militaryMan.isEmpty()) {

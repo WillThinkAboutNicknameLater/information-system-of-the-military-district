@@ -19,12 +19,12 @@ public abstract class RankMapper {
     @Autowired
     protected RankCategoryService rankCategoryService;
 
-    @Mapping(source = "staffCategory.name", target = "staffCategory")
-    @Mapping(source = "rankCategory.name", target = "rankCategory")
+    @Mapping(source = "staffCategory.name", target = "staffCategoryName")
+    @Mapping(source = "rankCategory.name", target = "rankCategoryName")
     public abstract RankDto entityToDto(Rank rank);
 
-    @Mapping(target = "staffCategory", expression = "java(staffCategoryService.getStaffCategoryByName(rankDto.getStaffCategory()))")
-    @Mapping(target = "rankCategory", expression = "java(rankCategoryService.getRankCategoryByName(rankDto.getRankCategory()))")
+    @Mapping(target = "staffCategory", expression = "java(staffCategoryService.getStaffCategoryByName(rankDto.getStaffCategoryName()))")
+    @Mapping(target = "rankCategory", expression = "java(rankCategoryService.getRankCategoryByName(rankDto.getRankCategoryName()))")
     public abstract Rank dtoToEntity(RankDto rankDto);
 
     public abstract List<RankDto> entitiesToDtos(List<Rank> ranks);

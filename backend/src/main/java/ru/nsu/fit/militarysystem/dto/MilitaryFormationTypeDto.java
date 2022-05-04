@@ -1,5 +1,6 @@
 package ru.nsu.fit.militarysystem.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,12 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DislocationDto {
-    private Integer id;
+public class MilitaryFormationTypeDto {
+    private Short id;
 
     private String name;
-
-    private String dislocationTypeName;
-
-    private String subjectName;
 }

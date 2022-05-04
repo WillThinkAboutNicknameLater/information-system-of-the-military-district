@@ -52,12 +52,16 @@ public class DislocationService {
         return dislocationMapper.entitiesToDtos(dislocations);
     }
 
-    public DislocationDto getDislocationByIdAsDto(int id) throws EntityNotFoundException {
+    public Dislocation getDislocationById(int id) throws EntityNotFoundException {
         Optional<Dislocation> dislocation = dislocationRepository.findById(id);
         if (dislocation.isEmpty()) {
             throw new EntityNotFoundException(Dislocation.class, Map.of("id", String.valueOf(id)));
         }
-        return dislocationMapper.entityToDto(dislocation.get());
+        return dislocation.get();
+    }
+
+    public DislocationDto getDislocationByIdAsDto(int id) throws EntityNotFoundException {
+        return dislocationMapper.entityToDto(getDislocationById(id));
     }
 
     public DislocationDto createDislocation(DislocationDto dislocationDto) {

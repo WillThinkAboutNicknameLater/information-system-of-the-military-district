@@ -9,12 +9,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DislocationDto {
+public class SimplifiedMilitaryManDto {
     private Integer id;
 
-    private String name;
+    private String secondName;
 
-    private String dislocationTypeName;
+    private String firstName;
 
-    private String subjectName;
+    private String patronymic;
+
+    private String identificationNumber;
 }
