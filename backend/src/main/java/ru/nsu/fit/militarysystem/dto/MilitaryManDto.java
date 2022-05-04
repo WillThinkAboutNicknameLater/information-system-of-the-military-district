@@ -24,5 +24,7 @@ public class MilitaryManDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dateOfAward;
 
+    private String identificationNumber;
+
     private String rank;
 }

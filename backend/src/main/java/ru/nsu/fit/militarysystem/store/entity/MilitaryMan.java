@@ -44,6 +44,11 @@ public class MilitaryMan {
     @Column(name = "date_of_award", nullable = false)
     private LocalDate dateOfAward;
 
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "identification_number")
+    private String identificationNumber;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "rank_id", nullable = false)
     @ToString.Exclude
