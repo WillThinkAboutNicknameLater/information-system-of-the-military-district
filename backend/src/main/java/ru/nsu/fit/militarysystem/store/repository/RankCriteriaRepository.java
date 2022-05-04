@@ -25,7 +25,7 @@ public class RankCriteriaRepository {
         this.criteriaBuilder = entityManager.getCriteriaBuilder();
     }
 
-    public Page<Rank> findAllWithFilters(RankSearchFilter rankSearchFilter) {
+    public Page<Rank> findAllByFilter(RankSearchFilter rankSearchFilter) {
         PageCriteria pageCriteria = rankSearchFilter.getPageCriteria();
         RankCriteria rankCriteria = rankSearchFilter.getRankCriteria();
         CriteriaQuery<Rank> criteriaQuery = criteriaBuilder.createQuery(Rank.class);

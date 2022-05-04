@@ -25,7 +25,7 @@ public class MilitaryManCriteriaRepository {
         this.criteriaBuilder = entityManager.getCriteriaBuilder();
     }
 
-    public Page<MilitaryMan> findAllWithFilters(MilitaryManSearchFilter militaryManSearchFilter) {
+    public Page<MilitaryMan> findAllByFilter(MilitaryManSearchFilter militaryManSearchFilter) {
         PageCriteria pageCriteria = militaryManSearchFilter.getPageCriteria();
         MilitaryManCriteria militaryManCriteria = militaryManSearchFilter.getMilitaryManCriteria();
         CriteriaQuery<MilitaryMan> criteriaQuery = criteriaBuilder.createQuery(MilitaryMan.class);
