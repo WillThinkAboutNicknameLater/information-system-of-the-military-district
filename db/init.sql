@@ -52,13 +52,14 @@ CREATE TABLE military_specialties (
 
 /* Военнослужащие */
 CREATE TABLE military_men (
-    id            serial PRIMARY KEY,
-    second_name   text     NOT NULL CHECK (LENGTH(second_name) > 0),
-    first_name    text     NOT NULL CHECK (LENGTH(first_name) > 0),
-    patronymic    text CHECK (LENGTH(patronymic) > 0),
-    date_of_birth date     NOT NULL CHECK (date_of_birth <= NOW()),
-    date_of_award date     NOT NULL CHECK (date_of_award <= NOW()),
-    rank_id       smallint NOT NULL REFERENCES ranks (id)
+    id                    serial PRIMARY KEY,
+    second_name           text     NOT NULL CHECK (LENGTH(second_name) > 0),
+    first_name            text     NOT NULL CHECK (LENGTH(first_name) > 0),
+    patronymic            text CHECK (LENGTH(patronymic) > 0),
+    date_of_birth         date     NOT NULL CHECK (date_of_birth <= NOW()),
+    date_of_award         date     NOT NULL CHECK (date_of_award <= NOW()),
+    identification_number text     NOT NULL UNIQUE CHECK (LENGTH(identification_number) > 0),
+    rank_id               smallint NOT NULL REFERENCES ranks (id)
 );
 
 /* Связь военнослужащих с воинскими специальностями */
