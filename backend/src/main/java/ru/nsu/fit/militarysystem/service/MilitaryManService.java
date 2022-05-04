@@ -1,18 +1,16 @@
 package ru.nsu.fit.militarysystem.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.MilitaryManDto;
 import ru.nsu.fit.militarysystem.dto.MilitarySpecialtyDto;
 import ru.nsu.fit.militarysystem.mapper.MilitaryManMapper;
 import ru.nsu.fit.militarysystem.mapper.MilitarySpecialtyMapper;
 import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
 import ru.nsu.fit.militarysystem.filter.MilitaryManSearchFilter;
 import ru.nsu.fit.militarysystem.store.entity.MilitaryMan;
 import ru.nsu.fit.militarysystem.store.entity.MilitarySpecialty;
+import ru.nsu.fit.militarysystem.store.repository.MilitaryManCriteriaRepository;
 import ru.nsu.fit.militarysystem.store.repository.MilitaryManRepository;
 
 import java.util.*;
@@ -21,12 +19,15 @@ import java.util.*;
 public class MilitaryManService {
     private final MilitaryManRepository militaryManRepository;
 
+    private final MilitaryManCriteriaRepository militaryManCriteriaRepository;
+
     private final MilitaryManMapper militaryManMapper;
 
     private final MilitarySpecialtyMapper militarySpecialtyMapper;
 
-    public MilitaryManService(MilitaryManRepository militaryManRepository, MilitaryManMapper militaryManMapper, MilitarySpecialtyMapper militarySpecialtyMapper) {
+    public MilitaryManService(MilitaryManRepository militaryManRepository, MilitaryManCriteriaRepository militaryManCriteriaRepository, MilitaryManMapper militaryManMapper, MilitarySpecialtyMapper militarySpecialtyMapper) {
         this.militaryManRepository = militaryManRepository;
+        this.militaryManCriteriaRepository = militaryManCriteriaRepository;
         this.militaryManMapper = militaryManMapper;
         this.militarySpecialtyMapper = militarySpecialtyMapper;
     }
@@ -46,11 +47,9 @@ public class MilitaryManService {
             militaryManSearchFilter = new MilitaryManSearchFilter();
         }
 
-        PageCriteria pageCriteria = militaryManSearchFilter.getPageCriteria();
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
-        Page<MilitaryMan> militaryMen = militaryManRepository.findAll(pageable);
+        Page<MilitaryMan> militaryMen = militaryManCriteriaRepository.findAllWithFilters(militaryManSearchFilter);
         if (militaryMen.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryMan.class, Map.of("pageCriteria", pageCriteria.toString()));
+            throw new EntityNotFoundException(MilitaryMan.class, Map.of("pageCriteria", militaryManSearchFilter.getPageCriteria().toString(), "militaryManCriteria", militaryManSearchFilter.getMilitaryManCriteria().toString()));
         }
         return militaryManMapper.entitiesToDtos(militaryMen);
     }

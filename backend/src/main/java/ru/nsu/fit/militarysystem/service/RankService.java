@@ -1,15 +1,13 @@
 package ru.nsu.fit.militarysystem.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.RankDto;
 import ru.nsu.fit.militarysystem.mapper.RankMapper;
 import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
 import ru.nsu.fit.militarysystem.filter.RankSearchFilter;
 import ru.nsu.fit.militarysystem.store.entity.Rank;
+import ru.nsu.fit.militarysystem.store.repository.RankCriteriaRepository;
 import ru.nsu.fit.militarysystem.store.repository.RankRepository;
 
 import java.util.ArrayList;
@@ -21,10 +19,13 @@ import java.util.Optional;
 public class RankService {
     private final RankRepository rankRepository;
 
+    private final RankCriteriaRepository rankCriteriaRepository;
+
     private final RankMapper rankMapper;
 
-    public RankService(RankRepository rankRepository, RankMapper rankMapper) {
+    public RankService(RankRepository rankRepository, RankCriteriaRepository rankCriteriaRepository, RankMapper rankMapper) {
         this.rankRepository = rankRepository;
+        this.rankCriteriaRepository = rankCriteriaRepository;
         this.rankMapper = rankMapper;
     }
 
@@ -43,11 +44,9 @@ public class RankService {
             rankSearchFilter = new RankSearchFilter();
         }
 
-        PageCriteria pageCriteria = rankSearchFilter.getPageCriteria();
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
-        Page<Rank> ranks = rankRepository.findAll(pageable);
+        Page<Rank> ranks = rankCriteriaRepository.findAllWithFilters(rankSearchFilter);
         if (ranks.isEmpty()) {
-            throw new EntityNotFoundException(Rank.class, Map.of("pageCriteria", pageCriteria.toString()));
+            throw new EntityNotFoundException(Rank.class, Map.of("pageCriteria", rankSearchFilter.getPageCriteria().toString(), "rankCriteria", rankSearchFilter.getRankCriteria().toString()));
         }
         return rankMapper.entitiesToDtos(ranks);
     }
