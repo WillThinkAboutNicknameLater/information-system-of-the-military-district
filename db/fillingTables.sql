@@ -111,7 +111,49 @@ VALUES (1, 1),
        (3, 13),
        (4, 8),
        (4, 11),
-       (4, 14);
+       (4, 14),
+       (5, 7),
+       (5, 8),
+       (5, 10),
+       (6, 1),
+       (6, 3),
+       (7, 3),
+       (7, 12),
+       (7, 14),
+       (8, 2),
+       (8, 3),
+       (9, 4),
+       (9, 5),
+       (9, 6),
+       (10, 2),
+       (10, 6),
+       (10, 7),
+       (11, 10),
+       (12, 11),
+       (12, 12),
+       (13, 4),
+       (13, 14),
+       (14, 4),
+       (14, 12),
+       (14, 13),
+       (14, 14),
+       (15, 3),
+       (15, 13),
+       (16, 7),
+       (17, 5),
+       (17, 8),
+       (17, 9),
+       (18, 10),
+       (18, 13),
+       (19, 4),
+       (19, 6),
+       (20, 1),
+       (20, 2),
+       (20, 6),
+       (20, 3),
+       (21, 4),
+       (21, 5),
+       (22, 10);
 
 /* Субъекты РФ */
 INSERT INTO subjects (id, name)
@@ -205,32 +247,36 @@ VALUES (DEFAULT, 'Алтайский край'),
 INSERT INTO dislocation_types (id, name)
 VALUES (DEFAULT, 'Город'),
        (DEFAULT, 'Посёлок'),
-       (DEFAULT, 'Деревня');
+       (DEFAULT, 'Деревня'),
+       (DEFAULT, 'Село'),
+       (DEFAULT, 'Хутор'),
+       (DEFAULT, 'Станица'),
+       (DEFAULT, 'Послёлок городского типа');
 
 /* Дислокации */
-INSERT INTO dislocations (id, name, dislocation_type_id, subject_id)
-VALUES (DEFAULT, 'Санкт-Петербург', 1, 64),
-       (DEFAULT, 'Ростов-на-Дону', 1, 61),
-       (DEFAULT, 'Екатеринбург', 1, 67),
-       (DEFAULT, 'Хабаровск', 1, 78),
-       (DEFAULT, 'Североморск', 1, 33),
-       (DEFAULT, 'Одинцово', 1, 32),
-       (DEFAULT, 'Наро-Фоминск', 1, 32),
-       (DEFAULT, 'Красный Бор', 2, 69),
-       (DEFAULT, 'Агалатово', 2, 28),
-       (DEFAULT, 'Каменка', 2, 28),
-       (DEFAULT, 'Луга', 1, 28),
-       (DEFAULT, 'Воронеж', 1, 10),
-       (DEFAULT, 'Маршала Жукова', 2, 27),
-       (DEFAULT, 'Гусев', 1, 16),
-       (DEFAULT, 'Калининград', 1, 16),
-       (DEFAULT, 'Балашиха', 1, 32),
-       (DEFAULT, 'Долгопрудный', 1, 32),
-       (DEFAULT, 'Фуньково', 3, 32),
-       (DEFAULT, 'Дубровка', 3, 32),
-       (DEFAULT, 'Нестерово', 3, 32),
-       (DEFAULT, 'Софрино', 2, 32),
-       (DEFAULT, 'Клин', 1, 32);
+INSERT INTO dislocations (id, name, okato, dislocation_type_id, subject_id)
+VALUES (DEFAULT, 'Санкт-Петербург', '40000000000', 1, 64),
+       (DEFAULT, 'Ростов-на-Дону', '60401000000', 1, 61),
+       (DEFAULT, 'Екатеринбург', '65401000000', 1, 67),
+       (DEFAULT, 'Хабаровск', '08401000000', 1, 78),
+       (DEFAULT, 'Североморск', '47530000000', 1, 33),
+       (DEFAULT, 'Одинцово', '46455000000', 1, 32),
+       (DEFAULT, 'Наро-Фоминск', '46450000000', 1, 32),
+       (DEFAULT, 'Красный Бор', '66252000019', 3, 69),
+       (DEFAULT, 'Агалатово', '41212000002', 2, 28),
+       (DEFAULT, 'Каменка', '41215000092', 2, 28),
+       (DEFAULT, 'Луга', '41233501000', 1, 28),
+       (DEFAULT, 'Воронеж', '20401000000', 1, 10),
+       (DEFAULT, 'Маршала Жукова', '38220828009', 2, 27),
+       (DEFAULT, 'Гусев', '27212501000', 1, 16),
+       (DEFAULT, 'Калининград', '27401000000', 1, 16),
+       (DEFAULT, 'Балашиха', '46404000000', 1, 32),
+       (DEFAULT, 'Долгопрудный', '46416000000', 1, 32),
+       (DEFAULT, 'Фуньково', '46455000834', 3, 32),
+       (DEFAULT, 'Дубровки', '46415000193', 3, 32),
+       (DEFAULT, 'Нестерово', '46415000437', 3, 32),
+       (DEFAULT, 'Софрино', '46458566000', 2, 32),
+       (DEFAULT, 'Клин', '46437000000', 1, 32);
 
 /* Военные округа */
 INSERT INTO military_districts (id, name, date_of_formation, headquarters_dislocation_id, commander_id)
@@ -361,11 +407,14 @@ VALUES (DEFAULT, '1-я гвардейская танковая армия', '13-
        (DEFAULT, '210-й зенитный ракетный полк', '12-aug-1998', 5, 19, 19, 12),
        (DEFAULT, '25-й радиотехнический полк', '9-feb-2007', 5, 20, 20, 12),
        (DEFAULT, '9-я дивизия ПВО', '1-oct-1998', 2, 21, 21, 11),
-       (DEFAULT, '34-й полк связи', '15-jul-2003', 5, 22, 22, 16);
+       (DEFAULT, '34-й полк связи', '15-jul-2003', 5, 22, 22, 16),
+       (DEFAULT, '1-й полк связи', '15-jul-2003', 5, 22, 22, 16);
 
 /* Связь военнослужащих с воинскими формированиями */
 INSERT INTO military_men__military_formations (military_man_id, military_formation_id)
 VALUES (6, 1),
+       (6, 2),
+       (6, 3),
        (7, 2),
        (8, 3),
        (9, 4),
@@ -381,7 +430,10 @@ VALUES (6, 1),
        (19, 14),
        (20, 15),
        (21, 16),
-       (22, 17);
+       (22, 17),
+       (22, 1),
+       (22, 2),
+       (22, 3);
 
 /* Группы боевой техники */
 INSERT INTO combat_vehicle_groups (id, name)
@@ -439,18 +491,18 @@ VALUES (DEFAULT, 'Танки', 1),
 
 /* Боевая техника */
 INSERT INTO combat_vehicles (id, name, serial_number, combat_vehicle_category_id, military_formation_id)
-VALUES (DEFAULT, 'Т-80У', '1GDGG31VX31992759', 1, 2),
+VALUES (DEFAULT, 'Т-80У', '1GDGG31VX31992759', 1, 1),
        (DEFAULT, 'Т-80У', '1FMEU63E46UA80257', 1, 2),
        (DEFAULT, 'Т-80У', 'JF2SHADC9DH425396', 1, 2),
-       (DEFAULT, 'Т-80БВМ', '1B7HC16XXXS140737', 1, 2),
+       (DEFAULT, 'Т-80БВМ', '1B7HC16XXXS140737', 1, 1),
        (DEFAULT, 'Т-80БВМ', '2V4RW3DG5BR641870', 1, 2),
-       (DEFAULT, '2С19 «Мста-С»', 'WDBRF61J03E007794', 9, 2),
+       (DEFAULT, '2С19 «Мста-С»', 'WDBRF61J03E007794', 9, 1),
        (DEFAULT, 'БМП-2', '1FMCU04193KA11507', 3, 2),
        (DEFAULT, '9К51М «Торнадо-Г»', 'WBAXH5C52CDW02548', 8, 2),
-       (DEFAULT, '9К35 Стрела-10/-10МН', '1B3CB7HB0AD566418', 20, 2),
+       (DEFAULT, '9К35 Стрела-10/-10МН', '1B3CB7HB0AD566418', 20, 1),
        (DEFAULT, '9К35 Стрела-10/-10МН', '4T1BF3EK4BU763715', 20, 2),
-       (DEFAULT, 'Р-142Н «Деймос-Н»', '1G6DC67A980166588', 28, 2),
-       (DEFAULT, 'Р-142Н «Деймос-Н»', '2G4WS52J531287749', 28, 2),
+       (DEFAULT, 'Р-142Н «Деймос-Н»', '1G6DC67A980166588', 28, 1),
+       (DEFAULT, 'Р-142Н «Деймос-Н»', '2G4WS52J531287749', 28, 1),
        (DEFAULT, 'Р-142Н «Деймос-Н»', '1GCEK19C98Z246930', 28, 2),
        (DEFAULT, 'Р-142Н «Деймос-Н»', 'WBABR334XYEG98355', 28, 2),
        (DEFAULT, 'Тигр', '2HKRM4H79EH641873', 5, 2),
@@ -471,35 +523,41 @@ VALUES (DEFAULT, 'Пулемёты'),
 
 /* Вооружение */
 INSERT INTO armaments (id, name, serial_number, armament_category_id, military_formation_id)
-VALUES (DEFAULT, 'АСВК', '2D4GP44L26R7', 2, 2),
+VALUES (DEFAULT, 'АСВК', '2D4GP44L26R7', 2, 1),
        (DEFAULT, 'СВ-98', '3VWLZ7AJ1BM3', 2, 2),
        (DEFAULT, 'СВ-98', '3C4PDDBG9ET1', 2, 2),
-       (DEFAULT, 'АК-74', 'JTHBF5C29A51', 3, 2),
+       (DEFAULT, 'АК-74', 'JTHBF5C29A51', 3, 1),
        (DEFAULT, 'АК-74', '1GKKRPKD5EJ1', 3, 2),
        (DEFAULT, 'АК-74', 'JTJZB1BA8A20', 3, 2),
        (DEFAULT, 'АК-74', '2T1BR12E2YC2', 3, 2),
-       (DEFAULT, 'Пистолет Макарова', 'VNKKTUD34EA0', 4, 2),
-       (DEFAULT, 'Пистолет Макарова', 'JT3GN87R7W00', 4, 2),
+       (DEFAULT, 'Пистолет Макарова', 'VNKKTUD34EA0', 4, 1),
+       (DEFAULT, 'Пистолет Макарова', 'JT3GN87R7W00', 4, 1),
        (DEFAULT, 'Пистолет Макарова', '1D8HN54P28B1', 4, 2),
        (DEFAULT, 'Пистолет Макарова', '1N4CL2AP5BC1', 4, 2),
        (DEFAULT, 'Пистолет Макарова', 'JTJHY7AX7A40', 4, 2),
        (DEFAULT, 'РГД-5', '2HGFA1F59BH5', 10, 2),
-       (DEFAULT, 'Утёс', '5GTEN13E5881', 1, 2),
+       (DEFAULT, 'Утёс', '5GTEN13E5881', 1, 1),
        (DEFAULT, 'ПКМ', 'JN8AZ1MW2CW2', 1, 2),
        (DEFAULT, 'ПКМ', '3D7UT2CLXBG5', 1, 2),
-       (DEFAULT, 'ГП-34', '3D4GG57V49T5', 8, 2),
-       (DEFAULT, 'ГП-34', '1G2WP1217WF2', 8, 2),
+       (DEFAULT, 'ГП-34', '3D4GG57V49T5', 8, 1),
+       (DEFAULT, 'ГП-34', '1G2WP1217WF2', 8, 1),
        (DEFAULT, 'ГП-34', '2G1WB5EK7B12', 8, 2),
-       (DEFAULT, 'РШГ-1', '4T1GK12E7SU0', 7, 2),
+       (DEFAULT, 'РШГ-1', '4T1GK12E7SU0', 7, 1),
        (DEFAULT, 'РШГ-1', '1G11C5SA6DF3', 7, 2),
        (DEFAULT, 'РШГ-1', '1N4AL3AP2DC1', 7, 2);
 
+/* Категории сооружений */
+INSERT INTO military_building_categories (id, name)
+VALUES (DEFAULT, 'Казарма'),
+       (DEFAULT, 'Столовая'),
+       (DEFAULT, 'Склад');
+
 /* Сооружения */
-INSERT INTO military_buildings (id, name, military_formation_id)
-VALUES (DEFAULT, 'Казарма ©1', 2),
-       (DEFAULT, 'Казарма ©2', 2),
-       (DEFAULT, 'Столовая ©1', 2),
-       (DEFAULT, 'Столовая ©2', 2),
-       (DEFAULT, 'Склад ©1', 2),
-       (DEFAULT, 'Склад ©2', 2),
-       (DEFAULT, 'Склад ©3', 2);
+INSERT INTO military_buildings (id, name, military_building_category_id, military_formation_id)
+VALUES (DEFAULT, 'Казарма ©1', 1, 2),
+       (DEFAULT, 'Казарма ©2', 1, 2),
+       (DEFAULT, 'Столовая ©1', 2, 2),
+       (DEFAULT, 'Столовая ©2', 2, 2),
+       (DEFAULT, 'Склад ©1', 3, 2),
+       (DEFAULT, 'Склад ©2', 3, 2),
+       (DEFAULT, 'Склад ©3', 3, 2);
