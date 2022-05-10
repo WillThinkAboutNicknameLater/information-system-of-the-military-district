@@ -2,26 +2,27 @@
   * Создание таблиц *
  */
 
-DROP TABLE IF EXISTS military_buildings;
-DROP TABLE IF EXISTS armaments;
-DROP TABLE IF EXISTS armament_categories;
-DROP TABLE IF EXISTS combat_vehicles;
-DROP TABLE IF EXISTS combat_vehicle_categories;
-DROP TABLE IF EXISTS combat_vehicle_groups;
-DROP TABLE IF EXISTS military_men__military_formations;
-DROP TABLE IF EXISTS military_formations;
-DROP TABLE IF EXISTS military_formation_types;
-DROP TABLE IF EXISTS military_districts__subjects;
-DROP TABLE IF EXISTS military_districts;
-DROP TABLE IF EXISTS dislocations;
-DROP TABLE IF EXISTS dislocation_types;
-DROP TABLE IF EXISTS subjects;
-DROP TABLE IF EXISTS military_men__military_specialties;
-DROP TABLE IF EXISTS military_men;
-DROP TABLE IF EXISTS military_specialties;
-DROP TABLE IF EXISTS ranks;
-DROP TABLE IF EXISTS rank_categories;
-DROP TABLE IF EXISTS staff_categories;
+DROP TABLE IF EXISTS staff_categories CASCADE;
+DROP TABLE IF EXISTS rank_categories CASCADE;
+DROP TABLE IF EXISTS ranks CASCADE;
+DROP TABLE IF EXISTS military_specialties CASCADE;
+DROP TABLE IF EXISTS military_men CASCADE;
+DROP TABLE IF EXISTS military_men__military_specialties CASCADE;
+DROP TABLE IF EXISTS subjects CASCADE;
+DROP TABLE IF EXISTS dislocation_types CASCADE;
+DROP TABLE IF EXISTS dislocations CASCADE;
+DROP TABLE IF EXISTS military_districts CASCADE;
+DROP TABLE IF EXISTS military_districts__subjects CASCADE;
+DROP TABLE IF EXISTS military_formation_types CASCADE;
+DROP TABLE IF EXISTS military_formations CASCADE;
+DROP TABLE IF EXISTS military_men__military_formations CASCADE;
+DROP TABLE IF EXISTS combat_vehicle_groups CASCADE;
+DROP TABLE IF EXISTS combat_vehicle_categories CASCADE;
+DROP TABLE IF EXISTS combat_vehicles CASCADE;
+DROP TABLE IF EXISTS armament_categories CASCADE;
+DROP TABLE IF EXISTS armaments CASCADE;
+DROP TABLE IF EXISTS military_building_categories CASCADE;
+DROP TABLE IF EXISTS military_buildings CASCADE;
 
 /* Категории составов */
 CREATE TABLE staff_categories (
@@ -84,10 +85,10 @@ CREATE TABLE dislocation_types (
 /* Дислокации */
 CREATE TABLE dislocations (
     id                  serial PRIMARY KEY,
-    name                text     NOT NULL CHECK (LENGTH(name) > 0),
-    dislocation_type_id smallint NOT NULL REFERENCES dislocation_types (id),
-    subject_id          smallint NOT NULL REFERENCES subjects (id),
-    UNIQUE (name, dislocation_type_id, subject_id)
+    name                text        NOT NULL CHECK (LENGTH(name) > 0),
+    okato               text UNIQUE NOT NULL CHECK (LENGTH(okato) > 0),
+    dislocation_type_id smallint    NOT NULL REFERENCES dislocation_types (id),
+    subject_id          smallint    NOT NULL REFERENCES subjects (id)
 );
 
 /* Военные округа */
@@ -167,10 +168,17 @@ CREATE TABLE armaments (
     military_formation_id integer  NOT NULL REFERENCES military_formations (id)
 );
 
+/* Категории сооружений */
+CREATE TABLE military_building_categories (
+    id   smallserial PRIMARY KEY,
+    name text NOT NULL UNIQUE CHECK (LENGTH(name) > 0)
+);
+
 /* Сооружения */
 CREATE TABLE military_buildings (
-    id                    serial PRIMARY KEY,
-    name                  text    NOT NULL CHECK (LENGTH(name) > 0),
-    military_formation_id integer NOT NULL REFERENCES military_formations (id),
-    UNIQUE (name, military_formation_id)
+    id                            serial PRIMARY KEY,
+    name                          text     NOT NULL CHECK (LENGTH(name) > 0),
+    military_building_category_id smallint NOT NULL REFERENCES military_building_categories (id),
+    military_formation_id         integer  NOT NULL REFERENCES military_formations (id),
+    UNIQUE (name, military_building_category_id, military_formation_id)
 );
