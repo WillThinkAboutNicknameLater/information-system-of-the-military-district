@@ -1,6 +1,30 @@
 /**
   * Функции *
  */
+ 
+DROP FUNCTION IF EXISTS find_all_subordinates_by_military_formation_id CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_men_by_military_formation_id CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_men_by_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_formations_by_military_man_id CASCADE;
+DROP FUNCTION IF EXISTS find_all_subordinates_by_military_man_id CASCADE;
+DROP FUNCTION IF EXISTS find_all_dislocations_by_military_formation_id CASCADE;
+DROP FUNCTION IF EXISTS find_all_dislocations_by_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_combat_vehicles_by_military_formation_id CASCADE;
+DROP FUNCTION IF EXISTS find_all_combat_vehicles_by_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_buildings_by_military_formation_id CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_buildings_by_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_formations_by_combat_vehicle_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_armaments_by_military_formation_id CASCADE;
+DROP FUNCTION IF EXISTS find_all_armaments_by_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_specialties_by_filter(integer, bigint, bigint) CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_specialties_by_filter(bigint, bigint) CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_formations_by_armament_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_formations_by_max_number_of_subordinated CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_formations_by_min_number_of_subordinated CASCADE;
+DROP FUNCTION IF EXISTS find_all_ranks_by_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_combat_vehicle_categories_by_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_formations_by_filter CASCADE;
+DROP FUNCTION IF EXISTS find_all_military_specialties_by_military_man_id CASCADE;
 
 /* 1. Получить все подчиненные формирования */
 CREATE OR REPLACE FUNCTION find_all_subordinates_by_military_formation_id(military_formation_id integer)
@@ -88,10 +112,9 @@ DECLARE
 BEGIN
     RETURN QUERY
         SELECT mf.*
-        FROM military_men AS mm
-                 LEFT JOIN military_men__military_formations AS mmmf ON mm.id = mmmf.military_man_id
-                 INNER JOIN military_formations AS mf ON mf.id = mmmf.military_formation_id
-        WHERE mm.id = $1
+        FROM military_formations AS mf
+                 INNER JOIN military_men__military_formations AS mmmf ON mf.id = mmmf.military_formation_id
+        WHERE mmmf.military_man_id = $1
         ORDER BY mf.id;
 END;
 $$ LANGUAGE PLPGSQL;
@@ -172,8 +195,7 @@ BEGIN
     RETURN QUERY
         SELECT combat_vehicles.*
         FROM combat_vehicles
-                 INNER JOIN military_formations AS mf ON combat_vehicles.military_formation_id = mf.id
-        WHERE mf.id = $1
+        WHERE combat_vehicles.military_formation_id = $1
         GROUP BY combat_vehicles.id
         ORDER BY combat_vehicles.id;
 END;
@@ -215,8 +237,7 @@ BEGIN
     RETURN QUERY
         SELECT military_buildings.*
         FROM military_buildings
-                 INNER JOIN military_formations AS mf ON military_buildings.military_formation_id = mf.id
-        WHERE mf.id = $1
+        WHERE military_buildings.military_formation_id = $1
         GROUP BY military_buildings.id
         ORDER BY military_buildings.id;
 END;
@@ -282,8 +303,7 @@ BEGIN
     RETURN QUERY
         SELECT armaments.*
         FROM armaments
-                 INNER JOIN military_formations AS mf ON armaments.military_formation_id = mf.id
-        WHERE mf.id = $1
+        WHERE armaments.military_formation_id = $1
         GROUP BY armaments.id
         ORDER BY armaments.id;
 END;
@@ -468,5 +488,43 @@ BEGIN
         WHERE LOWER(cvc.name) LIKE name_template
           AND ((CARDINALITY(combat_vehicle_group_ids) != 0 AND cvc.combat_vehicle_group_id = ANY (combat_vehicle_group_ids)) OR CARDINALITY(combat_vehicle_group_ids) = 0)
         ORDER BY cvc.id;
+END;
+$$ LANGUAGE PLPGSQL;
+
+/* Получить все формирования по фильтру */
+CREATE OR REPLACE FUNCTION find_all_military_formations_by_filter(
+    search_name text,
+    military_formation_type_ids smallint[]
+)
+    RETURNS SETOF military_formations
+AS
+$$
+DECLARE
+    name_template text := '%' || LOWER(search_name) || '%';
+BEGIN
+    RETURN QUERY
+        SELECT mf.*
+        FROM military_formations AS mf
+        WHERE LOWER(mf.name) LIKE name_template
+          AND ((CARDINALITY(military_formation_type_ids) != 0 AND mf.military_formation_type_id = ANY (military_formation_type_ids)) OR CARDINALITY(military_formation_type_ids) = 0)
+        ORDER BY mf.id;
+END;
+$$ LANGUAGE PLPGSQL;
+
+/* Получить все специальности военнослужащего */
+CREATE OR REPLACE FUNCTION find_all_military_specialties_by_military_man_id(
+    military_man_id integer
+)
+    RETURNS SETOF military_specialties
+AS
+$$
+DECLARE
+BEGIN
+    RETURN QUERY
+        SELECT ms.*
+        FROM military_specialties AS ms
+                 INNER JOIN military_men__military_specialties AS mmms ON ms.id = mmms.military_specialty_id
+        WHERE mmms.military_man_id = $1
+        ORDER BY ms.id;
 END;
 $$ LANGUAGE PLPGSQL;
