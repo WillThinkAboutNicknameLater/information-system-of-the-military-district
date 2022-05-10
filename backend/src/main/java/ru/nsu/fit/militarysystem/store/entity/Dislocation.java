@@ -6,15 +6,16 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Entity
 @Table(name = "dislocations", indexes = {
-        @Index(name = "dislocations_name_dislocation_type_id_subject_id_key", columnList = "name, dislocation_type_id, subject_id", unique = true)
+        @Index(name = "dislocations_name_dislocation_type_id_subject_id_key",
+               columnList = "name, dislocation_type_id, subject_id",
+               unique = true)
 })
 public class Dislocation implements BaseEntity {
     @Id
@@ -27,13 +28,16 @@ public class Dislocation implements BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "okato", nullable = false)
+    private String okato;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dislocation_type_id", nullable = false)
-    @ToString.Exclude
     private DislocationType dislocationType;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "subject_id", nullable = false)
-    @ToString.Exclude
     private Subject subject;
 }

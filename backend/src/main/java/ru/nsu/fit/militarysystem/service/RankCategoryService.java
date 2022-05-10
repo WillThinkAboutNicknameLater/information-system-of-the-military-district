@@ -5,17 +5,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.RankCategoryDto;
-import ru.nsu.fit.militarysystem.mapper.RankCategoryMapper;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
 import ru.nsu.fit.militarysystem.filter.RankCategorySearchFilter;
+import ru.nsu.fit.militarysystem.mapper.RankCategoryMapper;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.store.entity.RankCategory;
 import ru.nsu.fit.militarysystem.store.repository.RankCategoryRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class RankCategoryService {
@@ -38,17 +35,18 @@ public class RankCategoryService {
         return rankCategoryMapper.entitiesToDtos(rankCategories);
     }
 
-    public Page<RankCategoryDto> getAllRankCategoriesByFilterAsDtos(RankCategorySearchFilter rankCategorySearchFilter) throws EntityNotFoundException {
-        if (rankCategorySearchFilter == null) {
-            rankCategorySearchFilter = new RankCategorySearchFilter();
+    public Page<RankCategoryDto> getAllRankCategoriesByFilterAsDtos(RankCategorySearchFilter rankCategorySearchFilter)
+            throws EntityNotFoundException {
+        Pageable pageable = PageRequest.of(rankCategorySearchFilter.getPageNumber(), rankCategorySearchFilter.getPageSize(),
+                                           rankCategorySearchFilter.getSortDirection(),
+                                           rankCategorySearchFilter.getSortBy().toArray(new String[]{}));
+        String searchName = rankCategorySearchFilter.getSearchName();
+        Page<RankCategory> rankCategories = rankCategoryRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
+
+        if (rankCategories.isEmpty()) {
+            throw new EntityNotFoundException(RankCategory[].class, Map.of("rankCategorySearchFilter", rankCategorySearchFilter.toString()));
         }
 
-        PageCriteria pageCriteria = rankCategorySearchFilter.getPageCriteria();
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
-        Page<RankCategory> rankCategories = rankCategoryRepository.findAll(pageable);
-        if (rankCategories.isEmpty()) {
-            throw new EntityNotFoundException(RankCategory.class, Map.of("pageCriteria", pageCriteria.toString()));
-        }
         return rankCategoryMapper.entitiesToDtos(rankCategories);
     }
 
@@ -68,7 +66,15 @@ public class RankCategoryService {
         return rankCategory.get();
     }
 
-    public RankCategoryDto createRankCategory(RankCategoryDto rankCategoryDto) {
+    public RankCategoryDto createRankCategory(RankCategoryDto rankCategoryDto) throws EntityAlreadyExistsException {
+        Short id = rankCategoryDto.getId();
+        if (Objects.isNull(id)) {
+            return rankCategoryMapper.entityToDto(saveRankCategory(rankCategoryDto));
+        }
+        Optional<RankCategory> rankCategory = rankCategoryRepository.findById(id);
+        if (rankCategory.isPresent()) {
+            throw new EntityAlreadyExistsException(RankCategory.class, Map.of("id", String.valueOf(id)));
+        }
         return rankCategoryMapper.entityToDto(saveRankCategory(rankCategoryDto));
     }
 

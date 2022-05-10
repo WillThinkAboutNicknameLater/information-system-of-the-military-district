@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class DislocationDto implements BaseDto {
@@ -17,4 +17,6 @@ public class DislocationDto implements BaseDto {
     private String dislocationTypeName;
 
     private String subjectName;
+
+    private String okato;
 }

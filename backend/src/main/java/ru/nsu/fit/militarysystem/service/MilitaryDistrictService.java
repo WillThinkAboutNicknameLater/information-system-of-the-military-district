@@ -5,17 +5,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.MilitaryDistrictDto;
-import ru.nsu.fit.militarysystem.mapper.MilitaryDistrictMapper;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
 import ru.nsu.fit.militarysystem.filter.MilitaryDistrictSearchFilter;
+import ru.nsu.fit.militarysystem.mapper.MilitaryDistrictMapper;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.store.entity.MilitaryDistrict;
 import ru.nsu.fit.militarysystem.store.repository.MilitaryDistrictRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MilitaryDistrictService {
@@ -38,17 +35,20 @@ public class MilitaryDistrictService {
         return militaryDistrictMapper.entitiesToDtos(militaryDistricts);
     }
 
-    public Page<MilitaryDistrictDto> getAllMilitaryDistrictsByFilterAsDtos(MilitaryDistrictSearchFilter militaryDistrictSearchFilter) throws EntityNotFoundException {
-        if (militaryDistrictSearchFilter == null) {
-            militaryDistrictSearchFilter = new MilitaryDistrictSearchFilter();
+    public Page<MilitaryDistrictDto> getAllMilitaryDistrictsByFilterAsDtos(MilitaryDistrictSearchFilter militaryDistrictSearchFilter)
+            throws EntityNotFoundException {
+        Pageable pageable = PageRequest.of(militaryDistrictSearchFilter.getPageNumber(),
+                                           militaryDistrictSearchFilter.getPageSize(),
+                                           militaryDistrictSearchFilter.getSortDirection(),
+                                           militaryDistrictSearchFilter.getSortBy().toArray(new String[]{}));
+        String searchName = militaryDistrictSearchFilter.getSearchName();
+        Page<MilitaryDistrict> militaryDistricts = militaryDistrictRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
+
+        if (militaryDistricts.isEmpty()) {
+            throw new EntityNotFoundException(MilitaryDistrict[].class,
+                                              Map.of("militaryDistrictSearchFilter", militaryDistrictSearchFilter.toString()));
         }
 
-        PageCriteria pageCriteria = militaryDistrictSearchFilter.getPageCriteria();
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
-        Page<MilitaryDistrict> militaryDistricts = militaryDistrictRepository.findAll(pageable);
-        if (militaryDistricts.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryDistrict.class, Map.of("pageCriteria", pageCriteria.toString()));
-        }
         return militaryDistrictMapper.entitiesToDtos(militaryDistricts);
     }
 
@@ -60,15 +60,15 @@ public class MilitaryDistrictService {
         return militaryDistrictMapper.entityToDto(militaryDistrict.get());
     }
 
-    public MilitaryDistrict getMilitaryDistrictByName(String name) throws EntityNotFoundException {
-        Optional<MilitaryDistrict> militaryDistrict = militaryDistrictRepository.findByName(name);
-        if (militaryDistrict.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryDistrict.class, Map.of("name", name));
+    public MilitaryDistrictDto createMilitaryDistrict(MilitaryDistrictDto militaryDistrictDto) throws EntityAlreadyExistsException {
+        Short id = militaryDistrictDto.getId();
+        if (Objects.isNull(id)) {
+            return militaryDistrictMapper.entityToDto(saveMilitaryDistrict(militaryDistrictDto));
         }
-        return militaryDistrict.get();
-    }
-
-    public MilitaryDistrictDto createMilitaryDistrict(MilitaryDistrictDto militaryDistrictDto) {
+        Optional<MilitaryDistrict> militaryDistrict = militaryDistrictRepository.findById(id);
+        if (militaryDistrict.isPresent()) {
+            throw new EntityAlreadyExistsException(MilitaryDistrict.class, Map.of("id", String.valueOf(id)));
+        }
         return militaryDistrictMapper.entityToDto(saveMilitaryDistrict(militaryDistrictDto));
     }
 

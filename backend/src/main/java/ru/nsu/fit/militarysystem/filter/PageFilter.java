@@ -1,16 +1,26 @@
 package ru.nsu.fit.militarysystem.filter;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.*;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
+import org.springframework.data.domain.Sort;
 
+import java.util.Set;
+
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
-public abstract class PageFilter {
-    protected PageCriteria pageCriteria;
+public class PageFilter {
+    @JsonAlias("page-number")
+    protected Integer pageNumber = 0;
 
-    PageFilter() {
-        this.pageCriteria = new PageCriteria();
-    }
+    @JsonAlias("page-size")
+    protected Integer pageSize = 10;
+
+    @JsonAlias("sort-direction")
+    protected Sort.Direction sortDirection = Sort.Direction.ASC;
+
+    @JsonAlias("sort-by")
+    protected Set<String> sortBy = Set.of("id");
 }

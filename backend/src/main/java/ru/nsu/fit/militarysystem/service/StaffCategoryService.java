@@ -5,17 +5,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.StaffCategoryDto;
-import ru.nsu.fit.militarysystem.mapper.StaffCategoryMapper;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
 import ru.nsu.fit.militarysystem.filter.StaffCategorySearchFilter;
+import ru.nsu.fit.militarysystem.mapper.StaffCategoryMapper;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.store.entity.StaffCategory;
 import ru.nsu.fit.militarysystem.store.repository.StaffCategoryRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class StaffCategoryService {
@@ -38,17 +35,18 @@ public class StaffCategoryService {
         return staffCategoryMapper.entitiesToDtos(staffCategories);
     }
 
-    public Page<StaffCategoryDto> getAllStaffCategoriesByFilterAsDtos(StaffCategorySearchFilter staffCategorySearchFilter) throws EntityNotFoundException {
-        if (staffCategorySearchFilter == null) {
-            staffCategorySearchFilter = new StaffCategorySearchFilter();
+    public Page<StaffCategoryDto> getAllStaffCategoriesByFilterAsDtos(StaffCategorySearchFilter staffCategorySearchFilter)
+            throws EntityNotFoundException {
+        Pageable pageable = PageRequest.of(staffCategorySearchFilter.getPageNumber(), staffCategorySearchFilter.getPageSize(),
+                                           staffCategorySearchFilter.getSortDirection(),
+                                           staffCategorySearchFilter.getSortBy().toArray(new String[]{}));
+        String searchName = staffCategorySearchFilter.getSearchName();
+        Page<StaffCategory> staffCategories = staffCategoryRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
+
+        if (staffCategories.isEmpty()) {
+            throw new EntityNotFoundException(StaffCategory[].class, Map.of("staffCategorySearchFilter", staffCategorySearchFilter.toString()));
         }
 
-        PageCriteria pageCriteria = staffCategorySearchFilter.getPageCriteria();
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
-        Page<StaffCategory> staffCategories = staffCategoryRepository.findAll(pageable);
-        if (staffCategories.isEmpty()) {
-            throw new EntityNotFoundException(StaffCategory.class, Map.of("pageCriteria", pageCriteria.toString()));
-        }
         return staffCategoryMapper.entitiesToDtos(staffCategories);
     }
 
@@ -68,7 +66,15 @@ public class StaffCategoryService {
         return staffCategory.get();
     }
 
-    public StaffCategoryDto createStaffCategory(StaffCategoryDto staffCategoryDto) {
+    public StaffCategoryDto createStaffCategory(StaffCategoryDto staffCategoryDto) throws EntityAlreadyExistsException {
+        Short id = staffCategoryDto.getId();
+        if (Objects.isNull(id)) {
+            return staffCategoryMapper.entityToDto(saveStaffCategory(staffCategoryDto));
+        }
+        Optional<StaffCategory> staffCategory = staffCategoryRepository.findById(id);
+        if (staffCategory.isPresent()) {
+            throw new EntityAlreadyExistsException(StaffCategory.class, Map.of("id", String.valueOf(id)));
+        }
         return staffCategoryMapper.entityToDto(saveStaffCategory(staffCategoryDto));
     }
 

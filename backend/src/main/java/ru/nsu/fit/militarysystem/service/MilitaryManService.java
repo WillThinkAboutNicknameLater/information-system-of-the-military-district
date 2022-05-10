@@ -1,17 +1,23 @@
 package ru.nsu.fit.militarysystem.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.nsu.fit.militarysystem.dto.MilitaryFormationDto;
 import ru.nsu.fit.militarysystem.dto.MilitaryManDto;
 import ru.nsu.fit.militarysystem.dto.MilitarySpecialtyDto;
+import ru.nsu.fit.militarysystem.filter.MilitaryManSearchFilter;
+import ru.nsu.fit.militarysystem.mapper.MilitaryFormationMapper;
 import ru.nsu.fit.militarysystem.mapper.MilitaryManMapper;
 import ru.nsu.fit.militarysystem.mapper.MilitarySpecialtyMapper;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
 import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.MilitaryManSearchFilter;
+import ru.nsu.fit.militarysystem.store.entity.MilitaryFormation;
 import ru.nsu.fit.militarysystem.store.entity.MilitaryMan;
 import ru.nsu.fit.militarysystem.store.entity.MilitarySpecialty;
-import ru.nsu.fit.militarysystem.store.repository.MilitaryManCriteriaRepository;
 import ru.nsu.fit.militarysystem.store.repository.MilitaryManRepository;
+import ru.nsu.fit.militarysystem.util.IterableToPostgresqlArrayConverter;
 
 import java.util.*;
 
@@ -19,17 +25,20 @@ import java.util.*;
 public class MilitaryManService {
     private final MilitaryManRepository militaryManRepository;
 
-    private final MilitaryManCriteriaRepository militaryManCriteriaRepository;
-
     private final MilitaryManMapper militaryManMapper;
 
     private final MilitarySpecialtyMapper militarySpecialtyMapper;
 
-    public MilitaryManService(MilitaryManRepository militaryManRepository, MilitaryManCriteriaRepository militaryManCriteriaRepository, MilitaryManMapper militaryManMapper, MilitarySpecialtyMapper militarySpecialtyMapper) {
+    private final MilitaryFormationMapper militaryFormationMapper;
+
+    public MilitaryManService(MilitaryManRepository militaryManRepository,
+                              MilitaryManMapper militaryManMapper,
+                              MilitarySpecialtyMapper militarySpecialtyMapper,
+                              MilitaryFormationMapper militaryFormationMapper) {
         this.militaryManRepository = militaryManRepository;
-        this.militaryManCriteriaRepository = militaryManCriteriaRepository;
         this.militaryManMapper = militaryManMapper;
         this.militarySpecialtyMapper = militarySpecialtyMapper;
+        this.militaryFormationMapper = militaryFormationMapper;
     }
 
     private MilitaryMan saveMilitaryMan(MilitaryManDto militaryManDto) {
@@ -42,24 +51,27 @@ public class MilitaryManService {
         return militaryManMapper.entitiesToDtos(militaryMen);
     }
 
-    public Page<MilitaryManDto> getAllMilitaryMenByFilterAsDtos(MilitaryManSearchFilter militaryManSearchFilter) throws EntityNotFoundException {
-        if (militaryManSearchFilter == null) {
-            militaryManSearchFilter = new MilitaryManSearchFilter();
-        }
+    public Page<MilitaryManDto> getAllMilitaryMenByFilterAsDtos(MilitaryManSearchFilter militaryManSearchFilter)
+            throws EntityNotFoundException {
+        Pageable pageable = PageRequest.of(militaryManSearchFilter.getPageNumber(),
+                                           militaryManSearchFilter.getPageSize(),
+                                           militaryManSearchFilter.getSortDirection(),
+                                           militaryManSearchFilter.getSortBy().toArray(new String[]{}));
+        String searchName = militaryManSearchFilter.getSearchName();
+        String rankIds = IterableToPostgresqlArrayConverter.convert(militaryManSearchFilter.getRankIds());
+        String rankCategoryIds = IterableToPostgresqlArrayConverter.convert(militaryManSearchFilter.getRankCategoryIds());
+        String staffCategoryIds = IterableToPostgresqlArrayConverter.convert(militaryManSearchFilter.getStaffCategoryIds());
+        String militarySpecialtyIds = IterableToPostgresqlArrayConverter.convert(militaryManSearchFilter.getMilitarySpecialtyIds());
+        String militaryFormationIds = IterableToPostgresqlArrayConverter.convert(militaryManSearchFilter.getMilitaryFormationIds());
+        Page<MilitaryMan> militaryMen =
+                militaryManRepository.findAllByFilter(searchName, rankIds, rankCategoryIds, staffCategoryIds, militarySpecialtyIds,
+                                                      militaryFormationIds, pageable);
 
-        Page<MilitaryMan> militaryMen = militaryManCriteriaRepository.findAllByFilter(militaryManSearchFilter);
         if (militaryMen.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryMan.class, Map.of("pageCriteria", militaryManSearchFilter.getPageCriteria().toString(), "militaryManCriteria", militaryManSearchFilter.getMilitaryManCriteria().toString()));
+            throw new EntityNotFoundException(MilitaryMan[].class, Map.of("militaryManSearchFilter", militaryManSearchFilter.toString()));
         }
-        return militaryManMapper.entitiesToDtos(militaryMen);
-    }
 
-    public MilitaryMan getMilitaryManByIdentificationNumber(String identificationNumber) throws EntityNotFoundException {
-        Optional<MilitaryMan> militaryMan = militaryManRepository.findByIdentificationNumber(identificationNumber);
-        if (militaryMan.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryMan.class, Map.of("identificationNumber", String.valueOf(identificationNumber)));
-        }
-        return militaryMan.get();
+        return militaryManMapper.entitiesToDtos(militaryMen);
     }
 
     public MilitaryManDto getMilitaryManByIdAsDto(int id) throws EntityNotFoundException {
@@ -70,7 +82,32 @@ public class MilitaryManService {
         return militaryManMapper.entityToDto(militaryMan.get());
     }
 
-    public List<MilitarySpecialtyDto> getMilitaryManSpecialtiesByIdAsDtos(int id) throws EntityNotFoundException {
+    public MilitaryMan getMilitaryManByIdentificationNumber(String identificationNumber)
+            throws EntityNotFoundException {
+        Optional<MilitaryMan> militaryMan = militaryManRepository.findByIdentificationNumber(identificationNumber);
+        if (militaryMan.isEmpty()) {
+            throw new EntityNotFoundException(MilitaryMan.class, Map.of("identificationNumber", String.valueOf(identificationNumber)));
+        }
+        return militaryMan.get();
+    }
+
+    public List<MilitaryManDto> getMilitaryManByMilitaryFormationIdAsDtos(int militaryFormationId) throws EntityNotFoundException {
+        List<MilitaryMan> militaryMen = militaryManRepository.findAllByMilitaryFormationId(militaryFormationId);
+        if (militaryMen.isEmpty()) {
+            throw new EntityNotFoundException(MilitaryMan[].class, Map.of("militaryFormationId", String.valueOf(militaryFormationId)));
+        }
+        return militaryManMapper.entitiesToDtos(militaryMen);
+    }
+
+    public List<MilitaryManDto> getSubordinatesByIdAsDtos(int id) throws EntityNotFoundException {
+        List<MilitaryMan> subordinates = militaryManRepository.findAllSubordinatesById(id);
+        if (subordinates.isEmpty()) {
+            throw new EntityNotFoundException(MilitaryMan[].class, Map.of("militaryManId", String.valueOf(id)));
+        }
+        return militaryManMapper.entitiesToDtos(subordinates);
+    }
+
+    public List<MilitarySpecialtyDto> getMilitarySpecialtiesByIdAsDtos(int id) throws EntityNotFoundException {
         Optional<MilitaryMan> militaryMan = militaryManRepository.findById(id);
         if (militaryMan.isEmpty()) {
             throw new EntityNotFoundException(MilitaryMan.class, Map.of("id", String.valueOf(id)));
@@ -79,12 +116,34 @@ public class MilitaryManService {
         List<MilitarySpecialty> militarySpecialties = new ArrayList<>(militaryMan.get().getMilitarySpecialties());
         militarySpecialties.sort(Comparator.comparing(MilitarySpecialty::getId));
         if (militarySpecialties.isEmpty()) {
-            throw new EntityNotFoundException(MilitarySpecialty.class, Map.of("military man id", String.valueOf(id)));
+            throw new EntityNotFoundException(MilitarySpecialty[].class, Map.of("militaryManId", String.valueOf(id)));
         }
         return militarySpecialtyMapper.entitiesToDtos(militarySpecialties);
     }
 
-    public MilitaryManDto createMilitaryMan(MilitaryManDto militaryManDto) {
+    public List<MilitaryFormationDto> getMilitaryFormationsByIdAsDtos(int id) throws EntityNotFoundException {
+        Optional<MilitaryMan> militaryMan = militaryManRepository.findById(id);
+        if (militaryMan.isEmpty()) {
+            throw new EntityNotFoundException(MilitaryMan.class, Map.of("id", String.valueOf(id)));
+        }
+
+        List<MilitaryFormation> militaryFormations = new ArrayList<>(militaryMan.get().getMilitaryFormations());
+        militaryFormations.sort(Comparator.comparing(MilitaryFormation::getId));
+        if (militaryFormations.isEmpty()) {
+            throw new EntityNotFoundException(MilitaryFormation[].class, Map.of("militaryManId", String.valueOf(id)));
+        }
+        return militaryFormationMapper.entitiesToDtos(militaryFormations);
+    }
+
+    public MilitaryManDto createMilitaryMan(MilitaryManDto militaryManDto) throws EntityAlreadyExistsException {
+        Integer id = militaryManDto.getId();
+        if (Objects.isNull(id)) {
+            return militaryManMapper.entityToDto(saveMilitaryMan(militaryManDto));
+        }
+        Optional<MilitaryMan> militaryMan = militaryManRepository.findById(id);
+        if (militaryMan.isPresent()) {
+            throw new EntityAlreadyExistsException(MilitaryMan.class, Map.of("id", String.valueOf(id)));
+        }
         return militaryManMapper.entityToDto(saveMilitaryMan(militaryManDto));
     }
 
@@ -106,4 +165,3 @@ public class MilitaryManService {
         return militaryManMapper.entityToDto(militaryMan.get());
     }
 }
-

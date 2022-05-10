@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.fit.militarysystem.dto.RankCategoryDto;
-import ru.nsu.fit.militarysystem.service.RankCategoryService;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.filter.RankCategorySearchFilter;
+import ru.nsu.fit.militarysystem.service.RankCategoryService;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
+import ru.nsu.fit.militarysystem.util.RequestObjectParam;
 
 import java.util.List;
 
@@ -40,7 +42,8 @@ public class RankCategoryController {
     }
 
     @GetMapping(GET_RANK_CATEGORIES_BY_SEARCH_FILTER)
-    public ResponseEntity<Page<RankCategoryDto>> getAllRankCategoriesByFilter(@RequestBody(required = false) RankCategorySearchFilter rankCategorySearchFilter) throws EntityNotFoundException {
+    public ResponseEntity<Page<RankCategoryDto>> getAllRankCategoriesByFilter(@RequestObjectParam RankCategorySearchFilter rankCategorySearchFilter)
+            throws EntityNotFoundException {
         Page<RankCategoryDto> rankCategoryDtos = rankCategoryService.getAllRankCategoriesByFilterAsDtos(rankCategorySearchFilter);
         return new ResponseEntity<>(rankCategoryDtos, HttpStatus.OK);
     }
@@ -52,12 +55,13 @@ public class RankCategoryController {
     }
 
     @PostMapping(POST_RANK_CATEGORY)
-    public ResponseEntity<RankCategoryDto> createRankCategory(@RequestBody RankCategoryDto rankCategoryDto) {
-        return new ResponseEntity<>(rankCategoryService.createRankCategory(rankCategoryDto), HttpStatus.OK);
+    public ResponseEntity<RankCategoryDto> createRankCategory(@RequestBody RankCategoryDto rankCategoryDto) throws EntityAlreadyExistsException {
+        return new ResponseEntity<>(rankCategoryService.createRankCategory(rankCategoryDto), HttpStatus.CREATED);
     }
 
     @PutMapping(PUT_RANK_CATEGORY)
-    public ResponseEntity<RankCategoryDto> updateRankCategoryById(@PathVariable("id") short id, @RequestBody RankCategoryDto rankCategoryDto) throws EntityNotFoundException {
+    public ResponseEntity<RankCategoryDto> updateRankCategoryById(@PathVariable("id") short id, @RequestBody RankCategoryDto rankCategoryDto)
+            throws EntityNotFoundException {
         return new ResponseEntity<>(rankCategoryService.updateRankCategoryById(id, rankCategoryDto), HttpStatus.OK);
     }
 

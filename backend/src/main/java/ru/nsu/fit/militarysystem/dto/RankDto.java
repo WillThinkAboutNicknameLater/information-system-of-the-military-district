@@ -2,8 +2,8 @@ package ru.nsu.fit.militarysystem.dto;
 
 import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class RankDto implements BaseDto {
@@ -11,7 +11,7 @@ public class RankDto implements BaseDto {
 
     private String name;
 
-    private String staffCategoryName;
-
     private String rankCategoryName;
+
+    private String staffCategoryName;
 }

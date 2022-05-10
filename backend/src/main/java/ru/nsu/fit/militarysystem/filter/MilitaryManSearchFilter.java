@@ -1,24 +1,32 @@
 package ru.nsu.fit.militarysystem.filter;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import ru.nsu.fit.militarysystem.filter.criteria.MilitaryManCriteria;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
 public class MilitaryManSearchFilter extends PageFilter {
-    private MilitaryManCriteria militaryManCriteria;
+    @JsonAlias("name")
+    private String searchName = "";
 
-    public MilitaryManSearchFilter() {
-        super();
-        this.militaryManCriteria = new MilitaryManCriteria();
-    }
+    @JsonAlias("rank-id")
+    private Set<Short> rankIds = new HashSet<>();
 
-    public MilitaryManSearchFilter(PageCriteria pageCriteria, MilitaryManCriteria militaryManCriteria) {
-        super(pageCriteria);
-        this.militaryManCriteria = militaryManCriteria;
-    }
+    @JsonAlias("rank-category-id")
+    private Set<Short> rankCategoryIds = new HashSet<>();
+
+    @JsonAlias("staff-category-id")
+    private Set<Short> staffCategoryIds = new HashSet<>();
+
+    @JsonAlias("specialty-id")
+    private Set<Short> militarySpecialtyIds = new HashSet<>();
+
+    @JsonAlias("formation-id")
+    private Set<Integer> militaryFormationIds = new HashSet<>();
 }

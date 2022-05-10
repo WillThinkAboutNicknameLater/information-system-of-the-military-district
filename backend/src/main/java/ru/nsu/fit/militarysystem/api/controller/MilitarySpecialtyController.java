@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.fit.militarysystem.dto.MilitarySpecialtyDto;
-import ru.nsu.fit.militarysystem.service.MilitarySpecialtyService;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.filter.MilitarySpecialtySearchFilter;
+import ru.nsu.fit.militarysystem.service.MilitarySpecialtyService;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
+import ru.nsu.fit.militarysystem.util.RequestObjectParam;
 
 import java.util.List;
 
@@ -40,24 +42,30 @@ public class MilitarySpecialtyController {
     }
 
     @GetMapping(GET_MILITARY_SPECIALTIES_BY_SEARCH_FILTER)
-    public ResponseEntity<Page<MilitarySpecialtyDto>> getAllMilitarySpecialtiesByFilter(@RequestBody(required = false) MilitarySpecialtySearchFilter militarySpecialtySearchFilter) throws EntityNotFoundException {
-        Page<MilitarySpecialtyDto> militarySpecialtyDtos = militarySpecialtyService.getAllMilitarySpecialtiesByFilterAsDtos(militarySpecialtySearchFilter);
+    public ResponseEntity<Page<MilitarySpecialtyDto>> getAllMilitarySpecialtiesByFilter(@RequestObjectParam MilitarySpecialtySearchFilter militarySpecialtySearchFilter)
+            throws EntityNotFoundException {
+        Page<MilitarySpecialtyDto> militarySpecialtyDtos =
+                militarySpecialtyService.getAllMilitarySpecialtiesByFilterAsDtos(militarySpecialtySearchFilter);
         return new ResponseEntity<>(militarySpecialtyDtos, HttpStatus.OK);
     }
 
     @GetMapping(GET_MILITARY_SPECIALTY)
-    public ResponseEntity<MilitarySpecialtyDto> getMilitarySpecialtyById(@PathVariable("id") short id) throws EntityNotFoundException {
+    public ResponseEntity<MilitarySpecialtyDto> getMilitarySpecialtyById(@PathVariable("id") short id)
+            throws EntityNotFoundException {
         MilitarySpecialtyDto militarySpecialtyDto = militarySpecialtyService.getMilitarySpecialtyByIdAsDto(id);
         return new ResponseEntity<>(militarySpecialtyDto, HttpStatus.OK);
     }
 
     @PostMapping(POST_MILITARY_SPECIALTY)
-    public ResponseEntity<MilitarySpecialtyDto> createMilitarySpecialty(@RequestBody MilitarySpecialtyDto militarySpecialtyDto) {
-        return new ResponseEntity<>(militarySpecialtyService.createMilitarySpecialty(militarySpecialtyDto), HttpStatus.OK);
+    public ResponseEntity<MilitarySpecialtyDto> createMilitarySpecialty(@RequestBody MilitarySpecialtyDto militarySpecialtyDto)
+            throws EntityAlreadyExistsException {
+        return new ResponseEntity<>(militarySpecialtyService.createMilitarySpecialty(militarySpecialtyDto), HttpStatus.CREATED);
     }
 
     @PutMapping(PUT_MILITARY_SPECIALTY)
-    public ResponseEntity<MilitarySpecialtyDto> updateMilitarySpecialtyById(@PathVariable("id") short id, @RequestBody MilitarySpecialtyDto militarySpecialtyDto) throws EntityNotFoundException {
+    public ResponseEntity<MilitarySpecialtyDto> updateMilitarySpecialtyById(@PathVariable("id") short id,
+                                                                            @RequestBody MilitarySpecialtyDto militarySpecialtyDto)
+            throws EntityNotFoundException {
         return new ResponseEntity<>(militarySpecialtyService.updateMilitarySpecialtyById(id, militarySpecialtyDto), HttpStatus.OK);
     }
 

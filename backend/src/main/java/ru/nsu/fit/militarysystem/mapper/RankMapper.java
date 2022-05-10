@@ -11,18 +11,18 @@ import ru.nsu.fit.militarysystem.store.entity.Rank;
 @Mapper(componentModel = "spring")
 public abstract class RankMapper implements BaseMapper<Rank, RankDto> {
     @Autowired
-    protected StaffCategoryService staffCategoryService;
-
-    @Autowired
     protected RankCategoryService rankCategoryService;
 
+    @Autowired
+    protected StaffCategoryService staffCategoryService;
+
     @Override
-    @Mapping(source = "staffCategory.name", target = "staffCategoryName")
     @Mapping(source = "rankCategory.name", target = "rankCategoryName")
+    @Mapping(source = "staffCategory.name", target = "staffCategoryName")
     public abstract RankDto entityToDto(Rank entity);
 
     @Override
-    @Mapping(target = "staffCategory", expression = "java(staffCategoryService.getStaffCategoryByName(dto.getStaffCategoryName()))")
     @Mapping(target = "rankCategory", expression = "java(rankCategoryService.getRankCategoryByName(dto.getRankCategoryName()))")
+    @Mapping(target = "staffCategory", expression = "java(staffCategoryService.getStaffCategoryByName(dto.getStaffCategoryName()))")
     public abstract Rank dtoToEntity(RankDto dto);
 }

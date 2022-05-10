@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.fit.militarysystem.dto.StaffCategoryDto;
-import ru.nsu.fit.militarysystem.service.StaffCategoryService;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.filter.StaffCategorySearchFilter;
+import ru.nsu.fit.militarysystem.service.StaffCategoryService;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
+import ru.nsu.fit.militarysystem.util.RequestObjectParam;
 
 import java.util.List;
 
@@ -40,7 +42,8 @@ public class StaffCategoryController {
     }
 
     @GetMapping(GET_STAFF_CATEGORIES_BY_SEARCH_FILTER)
-    public ResponseEntity<Page<StaffCategoryDto>> getAllStaffCategoriesByFilter(@RequestBody(required = false) StaffCategorySearchFilter staffCategorySearchFilter) throws EntityNotFoundException {
+    public ResponseEntity<Page<StaffCategoryDto>> getAllStaffCategoriesByFilter(@RequestObjectParam StaffCategorySearchFilter staffCategorySearchFilter)
+            throws EntityNotFoundException {
         Page<StaffCategoryDto> staffCategoryDtos = staffCategoryService.getAllStaffCategoriesByFilterAsDtos(staffCategorySearchFilter);
         return new ResponseEntity<>(staffCategoryDtos, HttpStatus.OK);
     }
@@ -52,12 +55,13 @@ public class StaffCategoryController {
     }
 
     @PostMapping(POST_STAFF_CATEGORY)
-    public ResponseEntity<StaffCategoryDto> createStaffCategory(@RequestBody StaffCategoryDto staffCategoryDto) {
-        return new ResponseEntity<>(staffCategoryService.createStaffCategory(staffCategoryDto), HttpStatus.OK);
+    public ResponseEntity<StaffCategoryDto> createStaffCategory(@RequestBody StaffCategoryDto staffCategoryDto) throws EntityAlreadyExistsException {
+        return new ResponseEntity<>(staffCategoryService.createStaffCategory(staffCategoryDto), HttpStatus.CREATED);
     }
 
     @PutMapping(PUT_STAFF_CATEGORY)
-    public ResponseEntity<StaffCategoryDto> updateStaffCategoryById(@PathVariable("id") short id, @RequestBody StaffCategoryDto staffCategoryDto) throws EntityNotFoundException {
+    public ResponseEntity<StaffCategoryDto> updateStaffCategoryById(@PathVariable("id") short id, @RequestBody StaffCategoryDto staffCategoryDto)
+            throws EntityNotFoundException {
         return new ResponseEntity<>(staffCategoryService.updateStaffCategoryById(id, staffCategoryDto), HttpStatus.OK);
     }
 

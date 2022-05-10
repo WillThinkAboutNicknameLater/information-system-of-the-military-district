@@ -5,17 +5,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.DislocationTypeDto;
-import ru.nsu.fit.militarysystem.mapper.DislocationTypeMapper;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
 import ru.nsu.fit.militarysystem.filter.DislocationTypeSearchFilter;
+import ru.nsu.fit.militarysystem.mapper.DislocationTypeMapper;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.store.entity.DislocationType;
 import ru.nsu.fit.militarysystem.store.repository.DislocationTypeRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class DislocationTypeService {
@@ -38,17 +35,18 @@ public class DislocationTypeService {
         return dislocationTypeMapper.entitiesToDtos(dislocationTypes);
     }
 
-    public Page<DislocationTypeDto> getAllDislocationTypesByFilterAsDtos(DislocationTypeSearchFilter dislocationTypeSearchFilter) throws EntityNotFoundException {
-        if (dislocationTypeSearchFilter == null) {
-            dislocationTypeSearchFilter = new DislocationTypeSearchFilter();
+    public Page<DislocationTypeDto> getAllDislocationTypesByFilterAsDtos(DislocationTypeSearchFilter dislocationTypeSearchFilter)
+            throws EntityNotFoundException {
+        Pageable pageable = PageRequest.of(dislocationTypeSearchFilter.getPageNumber(), dislocationTypeSearchFilter.getPageSize(),
+                                           dislocationTypeSearchFilter.getSortDirection(),
+                                           dislocationTypeSearchFilter.getSortBy().toArray(new String[]{}));
+        String searchName = dislocationTypeSearchFilter.getSearchName();
+        Page<DislocationType> dislocationTypes = dislocationTypeRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
+
+        if (dislocationTypes.isEmpty()) {
+            throw new EntityNotFoundException(DislocationType[].class, Map.of("dislocationTypeSearchFilter", dislocationTypeSearchFilter.toString()));
         }
 
-        PageCriteria pageCriteria = dislocationTypeSearchFilter.getPageCriteria();
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
-        Page<DislocationType> dislocationTypes = dislocationTypeRepository.findAll(pageable);
-        if (dislocationTypes.isEmpty()) {
-            throw new EntityNotFoundException(DislocationType.class, Map.of("pageCriteria", pageCriteria.toString()));
-        }
         return dislocationTypeMapper.entitiesToDtos(dislocationTypes);
     }
 
@@ -68,7 +66,15 @@ public class DislocationTypeService {
         return dislocationType.get();
     }
 
-    public DislocationTypeDto createDislocationType(DislocationTypeDto dislocationTypeDto) {
+    public DislocationTypeDto createDislocationType(DislocationTypeDto dislocationTypeDto) throws EntityAlreadyExistsException {
+        Short id = dislocationTypeDto.getId();
+        if (Objects.isNull(id)) {
+            return dislocationTypeMapper.entityToDto(saveDislocationType(dislocationTypeDto));
+        }
+        Optional<DislocationType> dislocationType = dislocationTypeRepository.findById(id);
+        if (dislocationType.isPresent()) {
+            throw new EntityAlreadyExistsException(DislocationType.class, Map.of("id", String.valueOf(id)));
+        }
         return dislocationTypeMapper.entityToDto(saveDislocationType(dislocationTypeDto));
     }
 

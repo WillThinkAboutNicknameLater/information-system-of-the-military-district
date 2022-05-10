@@ -5,17 +5,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.SubjectDto;
-import ru.nsu.fit.militarysystem.mapper.SubjectMapper;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
 import ru.nsu.fit.militarysystem.filter.SubjectSearchFilter;
+import ru.nsu.fit.militarysystem.mapper.SubjectMapper;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.store.entity.Subject;
 import ru.nsu.fit.militarysystem.store.repository.SubjectRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class SubjectService {
@@ -33,22 +30,22 @@ public class SubjectService {
         return subjectRepository.save(newSubject);
     }
 
-    public List<SubjectDto> getAllStaffCategoriesAsDtos() {
+    public List<SubjectDto> getAllSubjectsAsDtos() {
         List<Subject> subjects = new ArrayList<>(subjectRepository.findAll());
         return subjectMapper.entitiesToDtos(subjects);
     }
 
-    public Page<SubjectDto> getAllStaffCategoriesByFilterAsDtos(SubjectSearchFilter subjectSearchFilter) throws EntityNotFoundException {
-        if (subjectSearchFilter == null) {
-            subjectSearchFilter = new SubjectSearchFilter();
+    public Page<SubjectDto> getAllSubjectsByFilterAsDtos(SubjectSearchFilter subjectSearchFilter) throws EntityNotFoundException {
+        Pageable pageable = PageRequest.of(subjectSearchFilter.getPageNumber(), subjectSearchFilter.getPageSize(),
+                                           subjectSearchFilter.getSortDirection(),
+                                           subjectSearchFilter.getSortBy().toArray(new String[]{}));
+        String searchName = subjectSearchFilter.getSearchName();
+        Page<Subject> subjects = subjectRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
+
+        if (subjects.isEmpty()) {
+            throw new EntityNotFoundException(Subject[].class, Map.of("subjectSearchFilter", subjectSearchFilter.toString()));
         }
 
-        PageCriteria pageCriteria = subjectSearchFilter.getPageCriteria();
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
-        Page<Subject> subjects = subjectRepository.findAll(pageable);
-        if (subjects.isEmpty()) {
-            throw new EntityNotFoundException(Subject.class, Map.of("pageCriteria", pageCriteria.toString()));
-        }
         return subjectMapper.entitiesToDtos(subjects);
     }
 
@@ -68,7 +65,15 @@ public class SubjectService {
         return subject.get();
     }
 
-    public SubjectDto createSubject(SubjectDto subjectDto) {
+    public SubjectDto createSubject(SubjectDto subjectDto) throws EntityAlreadyExistsException {
+        Short id = subjectDto.getId();
+        if (Objects.isNull(id)) {
+            return subjectMapper.entityToDto(saveSubject(subjectDto));
+        }
+        Optional<Subject> subject = subjectRepository.findById(id);
+        if (subject.isPresent()) {
+            throw new EntityAlreadyExistsException(Subject.class, Map.of("id", String.valueOf(id)));
+        }
         return subjectMapper.entityToDto(saveSubject(subjectDto));
     }
 

@@ -13,7 +13,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.CUSTOM, property = "error", visible = true)
+@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT,
+              use = JsonTypeInfo.Id.CUSTOM,
+              property = "error",
+              visible = true)
 @JsonTypeIdResolver(UncapitalizedCaseClassNameResolver.class)
 @AllArgsConstructor
 @Getter

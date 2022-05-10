@@ -7,11 +7,10 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Entity
 @Table(name = "military_districts", indexes = {
@@ -33,11 +32,9 @@ public class MilitaryDistrict implements BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "headquarters_dislocation_id", nullable = false)
-    @ToString.Exclude
     private Dislocation headquartersDislocation;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "commander_id", nullable = false)
-    @ToString.Exclude
     private MilitaryMan commander;
 }

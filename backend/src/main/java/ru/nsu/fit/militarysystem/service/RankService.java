@@ -1,31 +1,28 @@
 package ru.nsu.fit.militarysystem.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.RankDto;
-import ru.nsu.fit.militarysystem.mapper.RankMapper;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.filter.RankSearchFilter;
+import ru.nsu.fit.militarysystem.mapper.RankMapper;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.store.entity.Rank;
-import ru.nsu.fit.militarysystem.store.repository.RankCriteriaRepository;
 import ru.nsu.fit.militarysystem.store.repository.RankRepository;
+import ru.nsu.fit.militarysystem.util.IterableToPostgresqlArrayConverter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class RankService {
     private final RankRepository rankRepository;
 
-    private final RankCriteriaRepository rankCriteriaRepository;
-
     private final RankMapper rankMapper;
 
-    public RankService(RankRepository rankRepository, RankCriteriaRepository rankCriteriaRepository, RankMapper rankMapper) {
+    public RankService(RankRepository rankRepository, RankMapper rankMapper) {
         this.rankRepository = rankRepository;
-        this.rankCriteriaRepository = rankCriteriaRepository;
         this.rankMapper = rankMapper;
     }
 
@@ -40,14 +37,18 @@ public class RankService {
     }
 
     public Page<RankDto> getAllRanksByFilterAsDtos(RankSearchFilter rankSearchFilter) throws EntityNotFoundException {
-        if (rankSearchFilter == null) {
-            rankSearchFilter = new RankSearchFilter();
+        Pageable pageable = PageRequest.of(rankSearchFilter.getPageNumber(), rankSearchFilter.getPageSize(),
+                                           rankSearchFilter.getSortDirection(),
+                                           rankSearchFilter.getSortBy().toArray(new String[]{}));
+        String searchName = rankSearchFilter.getSearchName();
+        String rankCategoryIds = IterableToPostgresqlArrayConverter.convert(rankSearchFilter.getRankCategoryIds());
+        String staffCategoryIds = IterableToPostgresqlArrayConverter.convert(rankSearchFilter.getStaffCategoryIds());
+        Page<Rank> ranks = rankRepository.findAllByFilter(searchName, rankCategoryIds, staffCategoryIds, pageable);
+
+        if (ranks.isEmpty()) {
+            throw new EntityNotFoundException(Rank[].class, Map.of("rankSearchFilter", rankSearchFilter.toString()));
         }
 
-        Page<Rank> ranks = rankCriteriaRepository.findAllByFilter(rankSearchFilter);
-        if (ranks.isEmpty()) {
-            throw new EntityNotFoundException(Rank.class, Map.of("pageCriteria", rankSearchFilter.getPageCriteria().toString(), "rankCriteria", rankSearchFilter.getRankCriteria().toString()));
-        }
         return rankMapper.entitiesToDtos(ranks);
     }
 
@@ -67,7 +68,15 @@ public class RankService {
         return rank.get();
     }
 
-    public RankDto createRank(RankDto rankDto) {
+    public RankDto createRank(RankDto rankDto) throws EntityAlreadyExistsException {
+        Short id = rankDto.getId();
+        if (Objects.isNull(id)) {
+            return rankMapper.entityToDto(saveRank(rankDto));
+        }
+        Optional<Rank> rank = rankRepository.findById(id);
+        if (rank.isPresent()) {
+            throw new EntityAlreadyExistsException(Rank.class, Map.of("id", String.valueOf(id)));
+        }
         return rankMapper.entityToDto(saveRank(rankDto));
     }
 

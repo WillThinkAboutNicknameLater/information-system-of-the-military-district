@@ -5,17 +5,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.MilitarySpecialtyDto;
-import ru.nsu.fit.militarysystem.mapper.MilitarySpecialtyMapper;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
 import ru.nsu.fit.militarysystem.filter.MilitarySpecialtySearchFilter;
+import ru.nsu.fit.militarysystem.mapper.MilitarySpecialtyMapper;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.store.entity.MilitarySpecialty;
 import ru.nsu.fit.militarysystem.store.repository.MilitarySpecialtyRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MilitarySpecialtyService {
@@ -38,17 +35,20 @@ public class MilitarySpecialtyService {
         return militarySpecialtyMapper.entitiesToDtos(militarySpecialties);
     }
 
-    public Page<MilitarySpecialtyDto> getAllMilitarySpecialtiesByFilterAsDtos(MilitarySpecialtySearchFilter militarySpecialtySearchFilter) throws EntityNotFoundException {
-        if (militarySpecialtySearchFilter == null) {
-            militarySpecialtySearchFilter = new MilitarySpecialtySearchFilter();
+    public Page<MilitarySpecialtyDto> getAllMilitarySpecialtiesByFilterAsDtos(MilitarySpecialtySearchFilter militarySpecialtySearchFilter)
+            throws EntityNotFoundException {
+        Pageable pageable = PageRequest.of(militarySpecialtySearchFilter.getPageNumber(),
+                                           militarySpecialtySearchFilter.getPageSize(),
+                                           militarySpecialtySearchFilter.getSortDirection(),
+                                           militarySpecialtySearchFilter.getSortBy().toArray(new String[]{}));
+        String searchName = militarySpecialtySearchFilter.getSearchName();
+        Page<MilitarySpecialty> militarySpecialties = militarySpecialtyRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
+
+        if (militarySpecialties.isEmpty()) {
+            throw new EntityNotFoundException(MilitarySpecialty[].class,
+                                              Map.of("militarySpecialtySearchFilter", militarySpecialtySearchFilter.toString()));
         }
 
-        PageCriteria pageCriteria = militarySpecialtySearchFilter.getPageCriteria();
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
-        Page<MilitarySpecialty> militarySpecialties = militarySpecialtyRepository.findAll(pageable);
-        if (militarySpecialties.isEmpty()) {
-            throw new EntityNotFoundException(MilitarySpecialty.class, Map.of("pageCriteria", pageCriteria.toString()));
-        }
         return militarySpecialtyMapper.entitiesToDtos(militarySpecialties);
     }
 
@@ -60,15 +60,15 @@ public class MilitarySpecialtyService {
         return militarySpecialtyMapper.entityToDto(militarySpecialty.get());
     }
 
-    public MilitarySpecialty getMilitarySpecialtyByName(String name) throws EntityNotFoundException {
-        Optional<MilitarySpecialty> militarySpecialty = militarySpecialtyRepository.findByName(name);
-        if (militarySpecialty.isEmpty()) {
-            throw new EntityNotFoundException(MilitarySpecialty.class, Map.of("name", name));
+    public MilitarySpecialtyDto createMilitarySpecialty(MilitarySpecialtyDto militarySpecialtyDto) throws EntityAlreadyExistsException {
+        Short id = militarySpecialtyDto.getId();
+        if (Objects.isNull(id)) {
+            return militarySpecialtyMapper.entityToDto(saveMilitarySpecialty(militarySpecialtyDto));
         }
-        return militarySpecialty.get();
-    }
-
-    public MilitarySpecialtyDto createMilitarySpecialty(MilitarySpecialtyDto militarySpecialtyDto) {
+        Optional<MilitarySpecialty> militarySpecialty = militarySpecialtyRepository.findById(id);
+        if (militarySpecialty.isPresent()) {
+            throw new EntityAlreadyExistsException(MilitarySpecialty.class, Map.of("id", String.valueOf(id)));
+        }
         return militarySpecialtyMapper.entityToDto(saveMilitarySpecialty(militarySpecialtyDto));
     }
 

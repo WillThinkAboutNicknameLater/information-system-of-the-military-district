@@ -11,18 +11,15 @@ import ru.nsu.fit.militarysystem.store.entity.MilitaryDistrict;
 @Mapper(componentModel = "spring")
 public abstract class MilitaryDistrictMapper implements BaseMapper<MilitaryDistrict, MilitaryDistrictDto> {
     @Autowired
-    protected DislocationService dislocationService;
-
-    @Autowired
     protected MilitaryManService militaryManService;
 
-    @Override
-    @Mapping(source = "headquartersDislocation.id", target = "headquartersDislocationId")
-    @Mapping(source = "headquartersDislocation.name", target = "headquartersDislocationName")
-    public abstract MilitaryDistrictDto entityToDto(MilitaryDistrict entity);
+    @Autowired
+    protected DislocationService dislocationService;
 
     @Override
-    @Mapping(target = "headquartersDislocation", expression = "java(dislocationService.getDislocationById(dto.getHeadquartersDislocationId()))")
-    @Mapping(target = "commander", expression = "java(militaryManService.getMilitaryManByIdentificationNumber(dto.getCommander().getIdentificationNumber()))")
+    @Mapping(target = "commander",
+             expression = "java(militaryManService.getMilitaryManByIdentificationNumber(dto.getCommander().getIdentificationNumber()))")
+    @Mapping(target = "headquartersDislocation",
+             expression = "java(dislocationService.getDislocationByOkato(dto.getHeadquartersDislocation().getOkato()))")
     public abstract MilitaryDistrict dtoToEntity(MilitaryDistrictDto dto);
 }

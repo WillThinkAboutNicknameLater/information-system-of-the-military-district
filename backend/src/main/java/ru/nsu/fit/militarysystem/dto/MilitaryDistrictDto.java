@@ -8,8 +8,8 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class MilitaryDistrictDto implements BaseDto {
@@ -20,9 +20,7 @@ public class MilitaryDistrictDto implements BaseDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dateOfFormation;
 
-    private Short headquartersDislocationId;
-
-    private String headquartersDislocationName;
-
     private SimplifiedMilitaryManDto commander;
+
+    private SimplifiedDislocationDto headquartersDislocation;
 }

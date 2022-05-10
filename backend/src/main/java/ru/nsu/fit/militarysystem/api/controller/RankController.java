@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.fit.militarysystem.dto.RankDto;
-import ru.nsu.fit.militarysystem.service.RankService;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.filter.RankSearchFilter;
+import ru.nsu.fit.militarysystem.service.RankService;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
+import ru.nsu.fit.militarysystem.util.RequestObjectParam;
 
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class RankController {
     }
 
     @GetMapping(GET_RANKS_BY_SEARCH_FILTER)
-    public ResponseEntity<Page<RankDto>> getAllRanksByFilter(@RequestBody(required = false) RankSearchFilter rankSearchFilter) throws EntityNotFoundException {
+    public ResponseEntity<Page<RankDto>> getAllRanksByFilter(@RequestObjectParam RankSearchFilter rankSearchFilter) throws EntityNotFoundException {
         Page<RankDto> rankDtos = rankService.getAllRanksByFilterAsDtos(rankSearchFilter);
         return new ResponseEntity<>(rankDtos, HttpStatus.OK);
     }
@@ -52,8 +54,8 @@ public class RankController {
     }
 
     @PostMapping(POST_RANK)
-    public ResponseEntity<RankDto> createRank(@RequestBody RankDto rankDto) {
-        return new ResponseEntity<>(rankService.createRank(rankDto), HttpStatus.OK);
+    public ResponseEntity<RankDto> createRank(@RequestBody RankDto rankDto) throws EntityAlreadyExistsException {
+        return new ResponseEntity<>(rankService.createRank(rankDto), HttpStatus.CREATED);
     }
 
     @PutMapping(PUT_RANK)

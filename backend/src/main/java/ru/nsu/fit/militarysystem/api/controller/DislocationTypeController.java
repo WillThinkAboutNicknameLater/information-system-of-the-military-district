@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.fit.militarysystem.dto.DislocationTypeDto;
-import ru.nsu.fit.militarysystem.service.DislocationTypeService;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.filter.DislocationTypeSearchFilter;
+import ru.nsu.fit.militarysystem.service.DislocationTypeService;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
+import ru.nsu.fit.militarysystem.util.RequestObjectParam;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
 public class DislocationTypeController {
     private final DislocationTypeService dislocationTypeService;
 
-    private static final String GET_DISLOCATION_TYPES= "/dislocation-types";
+    private static final String GET_DISLOCATION_TYPES = "/dislocation-types";
 
     private static final String GET_DISLOCATION_TYPES_BY_SEARCH_FILTER = "/dislocation-types/search";
 
@@ -40,7 +42,8 @@ public class DislocationTypeController {
     }
 
     @GetMapping(GET_DISLOCATION_TYPES_BY_SEARCH_FILTER)
-    public ResponseEntity<Page<DislocationTypeDto>> getAllDislocationTypesByFilter(@RequestBody(required = false) DislocationTypeSearchFilter dislocationTypeSearchFilter) throws EntityNotFoundException {
+    public ResponseEntity<Page<DislocationTypeDto>> getAllDislocationTypesByFilter(@RequestObjectParam DislocationTypeSearchFilter dislocationTypeSearchFilter)
+            throws EntityNotFoundException {
         Page<DislocationTypeDto> dislocationTypeDtos = dislocationTypeService.getAllDislocationTypesByFilterAsDtos(dislocationTypeSearchFilter);
         return new ResponseEntity<>(dislocationTypeDtos, HttpStatus.OK);
     }
@@ -52,12 +55,15 @@ public class DislocationTypeController {
     }
 
     @PostMapping(POST_DISLOCATION_TYPE)
-    public ResponseEntity<DislocationTypeDto> createDislocationType(@RequestBody DislocationTypeDto dislocationTypeDto) {
-        return new ResponseEntity<>(dislocationTypeService.createDislocationType(dislocationTypeDto), HttpStatus.OK);
+    public ResponseEntity<DislocationTypeDto> createDislocationType(@RequestBody DislocationTypeDto dislocationTypeDto)
+            throws EntityAlreadyExistsException {
+        return new ResponseEntity<>(dislocationTypeService.createDislocationType(dislocationTypeDto), HttpStatus.CREATED);
     }
 
     @PutMapping(PUT_DISLOCATION_TYPE)
-    public ResponseEntity<DislocationTypeDto> updateDislocationTypeById(@PathVariable("id") short id, @RequestBody DislocationTypeDto dislocationTypeDto) throws EntityNotFoundException {
+    public ResponseEntity<DislocationTypeDto> updateDislocationTypeById(@PathVariable("id") short id,
+                                                                        @RequestBody DislocationTypeDto dislocationTypeDto)
+            throws EntityNotFoundException {
         return new ResponseEntity<>(dislocationTypeService.updateDislocationTypeById(id, dislocationTypeDto), HttpStatus.OK);
     }
 

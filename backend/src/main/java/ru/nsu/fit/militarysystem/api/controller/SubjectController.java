@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.fit.militarysystem.dto.SubjectDto;
-import ru.nsu.fit.militarysystem.service.SubjectService;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.filter.SubjectSearchFilter;
+import ru.nsu.fit.militarysystem.service.SubjectService;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
+import ru.nsu.fit.militarysystem.util.RequestObjectParam;
 
 import java.util.List;
 
@@ -34,14 +36,15 @@ public class SubjectController {
     }
 
     @GetMapping(GET_SUBJECTS)
-    public ResponseEntity<List<SubjectDto>> getAllStaffCategories() {
-        List<SubjectDto> subjectDtos = subjectService.getAllStaffCategoriesAsDtos();
+    public ResponseEntity<List<SubjectDto>> getAllSubjects() {
+        List<SubjectDto> subjectDtos = subjectService.getAllSubjectsAsDtos();
         return new ResponseEntity<>(subjectDtos, HttpStatus.OK);
     }
 
     @GetMapping(GET_SUBJECTS_BY_SEARCH_FILTER)
-    public ResponseEntity<Page<SubjectDto>> getAllStaffCategoriesByFilter(@RequestBody(required = false) SubjectSearchFilter subjectSearchFilter) throws EntityNotFoundException {
-        Page<SubjectDto> subjectDtos = subjectService.getAllStaffCategoriesByFilterAsDtos(subjectSearchFilter);
+    public ResponseEntity<Page<SubjectDto>> getAllSubjectsByFilter(@RequestObjectParam SubjectSearchFilter subjectSearchFilter)
+            throws EntityNotFoundException {
+        Page<SubjectDto> subjectDtos = subjectService.getAllSubjectsByFilterAsDtos(subjectSearchFilter);
         return new ResponseEntity<>(subjectDtos, HttpStatus.OK);
     }
 
@@ -52,12 +55,13 @@ public class SubjectController {
     }
 
     @PostMapping(POST_SUBJECT)
-    public ResponseEntity<SubjectDto> createSubject(@RequestBody SubjectDto subjectDto) {
-        return new ResponseEntity<>(subjectService.createSubject(subjectDto), HttpStatus.OK);
+    public ResponseEntity<SubjectDto> createSubject(@RequestBody SubjectDto subjectDto) throws EntityAlreadyExistsException {
+        return new ResponseEntity<>(subjectService.createSubject(subjectDto), HttpStatus.CREATED);
     }
 
     @PutMapping(PUT_SUBJECT)
-    public ResponseEntity<SubjectDto> updateSubjectById(@PathVariable("id") short id, @RequestBody SubjectDto subjectDto) throws EntityNotFoundException {
+    public ResponseEntity<SubjectDto> updateSubjectById(@PathVariable("id") short id, @RequestBody SubjectDto subjectDto)
+            throws EntityNotFoundException {
         return new ResponseEntity<>(subjectService.updateSubjectById(id, subjectDto), HttpStatus.OK);
     }
 

@@ -5,17 +5,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.militarysystem.dto.DislocationDto;
-import ru.nsu.fit.militarysystem.mapper.DislocationMapper;
-import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
-import ru.nsu.fit.militarysystem.filter.criteria.PageCriteria;
 import ru.nsu.fit.militarysystem.filter.DislocationSearchFilter;
+import ru.nsu.fit.militarysystem.mapper.DislocationMapper;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
+import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 import ru.nsu.fit.militarysystem.store.entity.Dislocation;
 import ru.nsu.fit.militarysystem.store.repository.DislocationRepository;
+import ru.nsu.fit.militarysystem.util.IterableToPostgresqlArrayConverter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class DislocationService {
@@ -38,33 +36,57 @@ public class DislocationService {
         return dislocationMapper.entitiesToDtos(dislocations);
     }
 
-    public Page<DislocationDto> getAllDislocationsByFilterAsDtos(DislocationSearchFilter dislocationSearchFilter) throws EntityNotFoundException {
-        if (dislocationSearchFilter == null) {
-            dislocationSearchFilter = new DislocationSearchFilter();
+    public Page<DislocationDto> getAllDislocationsByFilterAsDtos(DislocationSearchFilter dislocationSearchFilter)
+            throws EntityNotFoundException {
+        Pageable pageable = PageRequest.of(dislocationSearchFilter.getPageNumber(),
+                                           dislocationSearchFilter.getPageSize(),
+                                           dislocationSearchFilter.getSortDirection(),
+                                           dislocationSearchFilter.getSortBy().toArray(new String[]{}));
+        String searchName = dislocationSearchFilter.getSearchName();
+        String dislocationTypeIds = IterableToPostgresqlArrayConverter.convert(dislocationSearchFilter.getDislocationTypeIds());
+        String subjectIds = IterableToPostgresqlArrayConverter.convert(dislocationSearchFilter.getSubjectIds());
+        Page<Dislocation> dislocations = dislocationRepository.findAllByFilter(searchName, dislocationTypeIds, subjectIds, pageable);
+
+        if (dislocations.isEmpty()) {
+            throw new EntityNotFoundException(Dislocation[].class, Map.of("dislocationSearchFilter", dislocationSearchFilter.toString()));
         }
 
-        PageCriteria pageCriteria = dislocationSearchFilter.getPageCriteria();
-        Pageable pageable = PageRequest.of(pageCriteria.getPageNumber(), pageCriteria.getPageSize(), pageCriteria.getSortDirection(), pageCriteria.getSortBy().toArray(new String[]{}));
-        Page<Dislocation> dislocations = dislocationRepository.findAll(pageable);
-        if (dislocations.isEmpty()) {
-            throw new EntityNotFoundException(Dislocation.class, Map.of("pageCriteria", pageCriteria.toString()));
-        }
         return dislocationMapper.entitiesToDtos(dislocations);
     }
 
-    public Dislocation getDislocationById(int id) throws EntityNotFoundException {
+    public DislocationDto getDislocationByIdAsDto(int id) throws EntityNotFoundException {
         Optional<Dislocation> dislocation = dislocationRepository.findById(id);
         if (dislocation.isEmpty()) {
             throw new EntityNotFoundException(Dislocation.class, Map.of("id", String.valueOf(id)));
         }
+        return dislocationMapper.entityToDto(dislocation.get());
+    }
+
+    public Dislocation getDislocationByOkato(String okato) throws EntityNotFoundException {
+        Optional<Dislocation> dislocation = dislocationRepository.findByOkato(okato);
+        if (dislocation.isEmpty()) {
+            throw new EntityNotFoundException(Dislocation.class, Map.of("okato", String.valueOf(okato)));
+        }
         return dislocation.get();
     }
 
-    public DislocationDto getDislocationByIdAsDto(int id) throws EntityNotFoundException {
-        return dislocationMapper.entityToDto(getDislocationById(id));
+    public List<DislocationDto> getDislocationsByMilitaryFormationIdAsDtos(int militaryFormationId) throws EntityNotFoundException {
+        List<Dislocation> dislocations = dislocationRepository.findAllByMilitaryFormationId(militaryFormationId);
+        if (dislocations.isEmpty()) {
+            throw new EntityNotFoundException(Dislocation[].class, Map.of("militaryFormationId", String.valueOf(militaryFormationId)));
+        }
+        return dislocationMapper.entitiesToDtos(dislocations);
     }
 
-    public DislocationDto createDislocation(DislocationDto dislocationDto) {
+    public DislocationDto createDislocation(DislocationDto dislocationDto) throws EntityAlreadyExistsException {
+        Integer id = dislocationDto.getId();
+        if (Objects.isNull(id)) {
+            return dislocationMapper.entityToDto(saveDislocation(dislocationDto));
+        }
+        Optional<Dislocation> dislocation = dislocationRepository.findById(id);
+        if (dislocation.isPresent()) {
+            throw new EntityAlreadyExistsException(Dislocation.class, Map.of("id", String.valueOf(id)));
+        }
         return dislocationMapper.entityToDto(saveDislocation(dislocationDto));
     }
 

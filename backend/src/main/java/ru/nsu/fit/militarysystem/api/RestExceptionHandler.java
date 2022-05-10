@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import ru.nsu.fit.militarysystem.api.error.ApiError;
 import ru.nsu.fit.militarysystem.api.error.ApiSubError;
 import ru.nsu.fit.militarysystem.api.error.ApiValidationError;
+import ru.nsu.fit.militarysystem.service.exception.EntityAlreadyExistsException;
 import ru.nsu.fit.militarysystem.service.exception.EntityNotFoundException;
 
 import java.util.ArrayList;
@@ -32,7 +33,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     @NonNull
-    protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, @NonNull HttpHeaders headers, @NonNull HttpStatus status, @NonNull WebRequest request) {
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
+                                                                          @NonNull HttpHeaders headers,
+                                                                          @NonNull HttpStatus status,
+                                                                          @NonNull WebRequest request) {
         String message = "The '" + ex.getParameterName() + "' parameter is missing";
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, message);
         return buildResponseEntity(apiError);
@@ -40,7 +44,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     @NonNull
-    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex, @NonNull HttpHeaders headers, @NonNull HttpStatus status, @NonNull WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
+                                                                     @NonNull HttpHeaders headers,
+                                                                     @NonNull HttpStatus status,
+                                                                     @NonNull WebRequest request) {
         String message = ex.getContentType() + " media type is not supported";
         ApiError apiError = new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE, message);
         return buildResponseEntity(apiError);
@@ -48,7 +55,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     @NonNull
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, @NonNull HttpHeaders headers, @NonNull HttpStatus status, @NonNull WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  @NonNull HttpHeaders headers,
+                                                                  @NonNull HttpStatus status,
+                                                                  @NonNull WebRequest request) {
         List<ApiSubError> errors = new ArrayList<>();
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.add(new ApiValidationError(error.getObjectName(), error.getField(), error.getDefaultMessage()));
@@ -62,14 +72,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     @NonNull
-    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, @NonNull HttpHeaders headers, @NonNull HttpStatus status, @NonNull WebRequest request) {
+    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex,
+                                                                   @NonNull HttpHeaders headers,
+                                                                   @NonNull HttpStatus status,
+                                                                   @NonNull WebRequest request) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage());
         return buildResponseEntity(apiError);
     }
 
     @Override
     @NonNull
-    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, @NonNull HttpHeaders headers, @NonNull HttpStatus status, @NonNull WebRequest request) {
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
+                                                                         @NonNull HttpHeaders headers,
+                                                                         @NonNull HttpStatus status,
+                                                                         @NonNull WebRequest request) {
         String message = ex.getMethod() + " method is not supported for this request";
         ApiError apiError = new ApiError(HttpStatus.METHOD_NOT_ALLOWED, message);
         return buildResponseEntity(apiError);
@@ -77,7 +93,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     @NonNull
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, @NonNull HttpHeaders headers, @NonNull HttpStatus status, @NonNull WebRequest request) {
+    protected ResponseEntity<Object> handleExceptionInternal(Exception ex,
+                                                             Object body,
+                                                             @NonNull HttpHeaders headers,
+                                                             @NonNull HttpStatus status,
+                                                             @NonNull WebRequest request) {
         ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage());
         return buildResponseEntity(apiError);
     }
@@ -92,6 +112,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    protected ResponseEntity<Object> handleEntityAlreadyExistsException(EntityAlreadyExistsException ex) {
+        ApiError apiError = new ApiError(HttpStatus.CONFLICT, ex.getLocalizedMessage());
         return buildResponseEntity(apiError);
     }
 

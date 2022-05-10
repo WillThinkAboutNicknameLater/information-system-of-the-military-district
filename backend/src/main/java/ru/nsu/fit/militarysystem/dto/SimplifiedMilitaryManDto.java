@@ -5,18 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class SimplifiedMilitaryManDto implements BaseDto {
-    private Integer id;
+    private String identificationNumber;
 
     private String secondName;
 
     private String firstName;
 
     private String patronymic;
-
-    private String identificationNumber;
 }
