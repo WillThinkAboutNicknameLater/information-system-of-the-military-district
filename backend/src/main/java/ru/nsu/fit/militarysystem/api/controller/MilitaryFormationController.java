@@ -106,7 +106,7 @@ public class MilitaryFormationController {
     @PostMapping(POST_MILITARY_FORMATION)
     public ResponseEntity<MilitaryFormationDto> createMilitaryFormation(@RequestBody MilitaryFormationDto militaryFormationDto)
             throws EntityAlreadyExistsException {
-        return new ResponseEntity<>(militaryFormationService.createMilitaryFormation(militaryFormationDto), HttpStatus.OK);
+        return new ResponseEntity<>(militaryFormationService.createMilitaryFormation(militaryFormationDto), HttpStatus.CREATED);
     }
 
     @PutMapping(PUT_MILITARY_FORMATION)
