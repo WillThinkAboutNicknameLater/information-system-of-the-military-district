@@ -26,15 +26,16 @@ public class ApiError {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private final LocalDateTime timestamp = LocalDateTime.now();
 
-    private final String message;
+    private final String title;
 
-    // TODO: add detailed message
+    private final String message;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ApiSubError> subErrors;
 
-    public ApiError(HttpStatus httpStatus, String message) {
+    public ApiError(HttpStatus httpStatus, String title, String message) {
         this.httpStatus = httpStatus;
+        this.title = title;
         this.message = message;
     }
 

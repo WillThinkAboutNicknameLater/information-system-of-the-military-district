@@ -10,6 +10,6 @@ public class EntityAlreadyExistsException extends RuntimeException {
     }
 
     private static String generateMessage(String entity, Map<String, String> parameters) {
-        return StringUtils.capitalize(entity) + " already exists with parameters " + parameters;
+        return "Сущность " + StringUtils.capitalize(entity) + " уже существует с данными параметрами " + parameters + ".";
     }
 }

@@ -37,8 +37,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                                                                           @NonNull HttpHeaders headers,
                                                                           @NonNull HttpStatus status,
                                                                           @NonNull WebRequest request) {
-        String message = "The '" + ex.getParameterName() + "' parameter is missing";
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, message);
+        String title = "Серверная ошибка";
+        String message = "Пропущен параметр сервлета'" + ex.getParameterName() + "'.";
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, title, message);
         return buildResponseEntity(apiError);
     }
 
@@ -48,8 +49,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                                                                      @NonNull HttpHeaders headers,
                                                                      @NonNull HttpStatus status,
                                                                      @NonNull WebRequest request) {
-        String message = ex.getContentType() + " media type is not supported";
-        ApiError apiError = new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE, message);
+        String title = "Серверная ошибка";
+        String message = "Данный MediaType '" + ex.getContentType() + "' не поддерживается.";
+        ApiError apiError = new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE, title, message);
         return buildResponseEntity(apiError);
     }
 
@@ -66,7 +68,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
             errors.add(new ApiValidationError(error.getObjectName(), null, error.getDefaultMessage()));
         }
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, "Validation error", errors);
+        String title = "Серверная ошибка";
+        String message = "Данные аргументы недействительны.";
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, title, message, errors);
         return buildResponseEntity(apiError);
     }
 
@@ -76,7 +80,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                                                                    @NonNull HttpHeaders headers,
                                                                    @NonNull HttpStatus status,
                                                                    @NonNull WebRequest request) {
-        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage());
+        String title = "Серверная ошибка";
+        String message = "Данный запрос не имеет обработчика.";
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, title, message);
         return buildResponseEntity(apiError);
     }
 
@@ -86,8 +92,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                                                                          @NonNull HttpHeaders headers,
                                                                          @NonNull HttpStatus status,
                                                                          @NonNull WebRequest request) {
-        String message = ex.getMethod() + " method is not supported for this request";
-        ApiError apiError = new ApiError(HttpStatus.METHOD_NOT_ALLOWED, message);
+        String title = "Серверная ошибка";
+        String message = "Данный RequestMethod '" + ex.getMethod() + "' не поддерживается.";
+        ApiError apiError = new ApiError(HttpStatus.METHOD_NOT_ALLOWED, title, message);
         return buildResponseEntity(apiError);
     }
 
@@ -98,47 +105,58 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                                                              @NonNull HttpHeaders headers,
                                                              @NonNull HttpStatus status,
                                                              @NonNull WebRequest request) {
-        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage());
+        String title = "Серверная ошибка";
+        String message = ex.getLocalizedMessage();
+        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, title, message);
         return buildResponseEntity(apiError);
     }
 
     @ExceptionHandler(JDBCConnectionException.class)
     protected ResponseEntity<Object> handleJDBCConnectionException() {
-        String message = "Failed to connect to the database";
-        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, message);
+        String title = "Ошибка в базе данных";
+        String message = "Не удалось подключиться к базе данных.";
+        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, title, message);
         return buildResponseEntity(apiError);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
-        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage());
+        String title = "Ошибка в базе данных";
+        String message = ex.getLocalizedMessage();
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, title, message);
         return buildResponseEntity(apiError);
     }
 
     @ExceptionHandler(EntityAlreadyExistsException.class)
     protected ResponseEntity<Object> handleEntityAlreadyExistsException(EntityAlreadyExistsException ex) {
-        ApiError apiError = new ApiError(HttpStatus.CONFLICT, ex.getLocalizedMessage());
+        String title = "Ошибка в базе данных";
+        String message = ex.getLocalizedMessage();
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, title, message);
         return buildResponseEntity(apiError);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     protected ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        String title = "Ошибка в базе данных";
         if (ex.getCause() instanceof ConstraintViolationException) {
-            ApiError apiError = new ApiError(HttpStatus.CONFLICT, ex.getLocalizedMessage());
+            String message = "Для данной сущности нарушены ограничения.";
+            ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, title, message);
             return buildResponseEntity(apiError);
         }
-        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage());
+        String message = ex.getLocalizedMessage();
+        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, title, message);
         return buildResponseEntity(apiError);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
-        String message = "The '" + ex.getName() + "' parameter of value '" + ex.getValue() + "' could not be converted";
+        String title = "Серверная ошибка";
+        String message = "Параметр '" + ex.getName() + "' со значением '" + ex.getValue() + "' не может быть конвертирован";
         Class<?> requiredType = ex.getRequiredType();
         if (requiredType != null) {
-            message += " to type '" + requiredType.getSimpleName() + "'";
+            message += " в тип '" + requiredType.getSimpleName() + "'";
         }
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, message);
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, title, message + ".");
         return buildResponseEntity(apiError);
     }
 
