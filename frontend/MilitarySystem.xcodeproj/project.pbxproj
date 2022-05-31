@@ -1,0 +1,1454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		620624452841526E00DC9CA5 /* FieldStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620624442841526E00DC9CA5 /* FieldStringConvertible.swift */; };
+		620624472841F53F00DC9CA5 /* NewEntityCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620624462841F53F00DC9CA5 /* NewEntityCardView.swift */; };
+		62158AF0283E17C800657365 /* MilitaryFormationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62158AEF283E17C800657365 /* MilitaryFormationListView.swift */; };
+		62158AF2283E17F500657365 /* MilitaryFormationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62158AF1283E17F500657365 /* MilitaryFormationView.swift */; };
+		62158AF6283E1CA800657365 /* DislocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62158AF5283E1CA800657365 /* DislocationView.swift */; };
+		62158AF8283E1D0F00657365 /* DislocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62158AF7283E1D0F00657365 /* DislocationListView.swift */; };
+		62158AFA283E228600657365 /* FindAllEntitiesByFilterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62158AF9283E228600657365 /* FindAllEntitiesByFilterRequest.swift */; };
+		62158AFC283E305B00657365 /* EntityPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62158AFB283E305B00657365 /* EntityPage.swift */; };
+		62158AFE283E333900657365 /* EntityPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62158AFD283E333900657365 /* EntityPageView.swift */; };
+		62158B00283E35CC00657365 /* PageSelectorToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62158AFF283E35CC00657365 /* PageSelectorToolbar.swift */; };
+		6217AB422842BB3600E7E3D2 /* SearchToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217AB412842BB3600E7E3D2 /* SearchToolbar.swift */; };
+		6221CD30282F665D002F88C3 /* ArmamentCategoryPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD2F282F665D002F88C3 /* ArmamentCategoryPageViewModel.swift */; };
+		6221CD33282F7C7C002F88C3 /* ArmamentCategoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD32282F7C7C002F88C3 /* ArmamentCategoryTableView.swift */; };
+		6221CD37282F7F75002F88C3 /* ArmamentCategoryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD36282F7F75002F88C3 /* ArmamentCategoryFilter.swift */; };
+		6221CD39282F7FC1002F88C3 /* ArmamentFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD38282F7FC1002F88C3 /* ArmamentFilter.swift */; };
+		6221CD3B282F814D002F88C3 /* CombatVehicleCategoryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD3A282F814D002F88C3 /* CombatVehicleCategoryFilter.swift */; };
+		6221CD3D282F81AB002F88C3 /* CombatVehicleGroupFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD3C282F81AA002F88C3 /* CombatVehicleGroupFilter.swift */; };
+		6221CD3F282F82FB002F88C3 /* CombatVehicleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD3E282F82FB002F88C3 /* CombatVehicleFilter.swift */; };
+		6221CD41282F8385002F88C3 /* DislocationFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD40282F8385002F88C3 /* DislocationFilter.swift */; };
+		6221CD43282F8514002F88C3 /* DislocationTypeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD42282F8514002F88C3 /* DislocationTypeFilter.swift */; };
+		6221CD45282F856A002F88C3 /* MilitaryBuildingCategoryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD44282F856A002F88C3 /* MilitaryBuildingCategoryFilter.swift */; };
+		6221CD47282F8596002F88C3 /* MilitaryBuildingFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD46282F8596002F88C3 /* MilitaryBuildingFilter.swift */; };
+		6221CD49282F85CE002F88C3 /* MilitaryDistrictFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD48282F85CE002F88C3 /* MilitaryDistrictFilter.swift */; };
+		6221CD4B282F8615002F88C3 /* MilitaryFormationFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD4A282F8615002F88C3 /* MilitaryFormationFilter.swift */; };
+		6221CD4D282F8645002F88C3 /* MilitaryFormationTypeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD4C282F8645002F88C3 /* MilitaryFormationTypeFilter.swift */; };
+		6221CD4F282F8659002F88C3 /* MilitaryManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD4E282F8659002F88C3 /* MilitaryManFilter.swift */; };
+		6221CD51282F871B002F88C3 /* MilitarySpecialtyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD50282F871B002F88C3 /* MilitarySpecialtyFilter.swift */; };
+		6221CD53282F8730002F88C3 /* PageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD52282F8730002F88C3 /* PageFilter.swift */; };
+		6221CD57282F88BF002F88C3 /* RankCategoryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD56282F88BF002F88C3 /* RankCategoryFilter.swift */; };
+		6221CD59282F88D6002F88C3 /* RankFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD58282F88D6002F88C3 /* RankFilter.swift */; };
+		6221CD5B282F8921002F88C3 /* StaffCategoryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD5A282F8921002F88C3 /* StaffCategoryFilter.swift */; };
+		6221CD5D282F8938002F88C3 /* SubjectFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221CD5C282F8938002F88C3 /* SubjectFilter.swift */; };
+		6225A33C283E5A1D00EFA401 /* MilitaryFormationTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225A33B283E5A1D00EFA401 /* MilitaryFormationTypeView.swift */; };
+		6225A33E283E5A6100EFA401 /* MilitaryFormationTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225A33D283E5A6100EFA401 /* MilitaryFormationTypeListView.swift */; };
+		6225A340283E5C6500EFA401 /* SubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225A33F283E5C6500EFA401 /* SubjectView.swift */; };
+		6225A342283E5C8A00EFA401 /* SubjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225A341283E5C8A00EFA401 /* SubjectListView.swift */; };
+		6225E77F2833F22200F04E42 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225E77E2833F22200F04E42 /* HTTPMethod.swift */; };
+		6225E7812833F24900F04E42 /* NetworkRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225E7802833F24900F04E42 /* NetworkRequestError.swift */; };
+		6225E7832833F28800F04E42 /* HTTPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225E7822833F28800F04E42 /* HTTPStatus.swift */; };
+		6225E7852833F48C00F04E42 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225E7842833F48C00F04E42 /* Request.swift */; };
+		6225E7872833F68800F04E42 /* Request+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225E7862833F68800F04E42 /* Request+Helpers.swift */; };
+		6225E7892833F76200F04E42 /* NetworkDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225E7882833F76200F04E42 /* NetworkDispatcher.swift */; };
+		6225E78B2833FCFF00F04E42 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225E78A2833FCFF00F04E42 /* APIClient.swift */; };
+		6225E7932834016C00F04E42 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225E7922834016C00F04E42 /* APIConfig.swift */; };
+		6231A753282CD5E1004C60E3 /* MilitarySystemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A752282CD5E1004C60E3 /* MilitarySystemApp.swift */; };
+		6231A755282CD5E1004C60E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A754282CD5E1004C60E3 /* ContentView.swift */; };
+		6231A757282CD5E1004C60E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6231A756282CD5E1004C60E3 /* Assets.xcassets */; };
+		6231A763282CD6A2004C60E3 /* ArmamentCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A762282CD6A2004C60E3 /* ArmamentCategory.swift */; };
+		6231A765282CD84C004C60E3 /* Armament.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A764282CD84C004C60E3 /* Armament.swift */; };
+		6231A767282CD8AF004C60E3 /* CombatVehicleCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A766282CD8AF004C60E3 /* CombatVehicleCategory.swift */; };
+		6231A769282CD8D7004C60E3 /* CombatVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A768282CD8D7004C60E3 /* CombatVehicle.swift */; };
+		6231A76B282CDA76004C60E3 /* CombatVehicleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A76A282CDA76004C60E3 /* CombatVehicleGroup.swift */; };
+		6231A76D282CDA9D004C60E3 /* Dislocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A76C282CDA9D004C60E3 /* Dislocation.swift */; };
+		6231A76F282CDB67004C60E3 /* DislocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A76E282CDB67004C60E3 /* DislocationType.swift */; };
+		6231A771282CDB81004C60E3 /* MilitaryBuildingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A770282CDB81004C60E3 /* MilitaryBuildingCategory.swift */; };
+		6231A773282CDBA7004C60E3 /* MilitaryBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A772282CDBA7004C60E3 /* MilitaryBuilding.swift */; };
+		6231A775282CDBDC004C60E3 /* MilitaryDistrict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A774282CDBDC004C60E3 /* MilitaryDistrict.swift */; };
+		6231A777282CDC4D004C60E3 /* SimplifiedDislocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A776282CDC4D004C60E3 /* SimplifiedDislocation.swift */; };
+		6231A779282CDC85004C60E3 /* SimplifiedMilitaryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A778282CDC85004C60E3 /* SimplifiedMilitaryMan.swift */; };
+		6231A77B282CDCF8004C60E3 /* MilitaryFormation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A77A282CDCF8004C60E3 /* MilitaryFormation.swift */; };
+		6231A77D282CDD43004C60E3 /* MilitaryFormationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A77C282CDD43004C60E3 /* MilitaryFormationType.swift */; };
+		6231A77F282CDD56004C60E3 /* MilitaryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A77E282CDD56004C60E3 /* MilitaryMan.swift */; };
+		6231A781282CDDC9004C60E3 /* MilitarySpecialty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A780282CDDC9004C60E3 /* MilitarySpecialty.swift */; };
+		6231A783282CDDDF004C60E3 /* RankCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A782282CDDDF004C60E3 /* RankCategory.swift */; };
+		6231A785282CDDF2004C60E3 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A784282CDDF2004C60E3 /* Rank.swift */; };
+		6231A787282CDE16004C60E3 /* StaffCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A786282CDE16004C60E3 /* StaffCategory.swift */; };
+		6231A789282CDE2A004C60E3 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A788282CDE2A004C60E3 /* Subject.swift */; };
+		6231A78C282CDF7E004C60E3 /* ArmamentCategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6231A78B282CDF7E004C60E3 /* ArmamentCategoryService.swift */; };
+		6237EC9F283F1E43002DF04F /* PostEntityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6237EC9E283F1E43002DF04F /* PostEntityRequest.swift */; };
+		623D8B6E2834106C006A191D /* HTTPContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623D8B6D2834106C006A191D /* HTTPContentType.swift */; };
+		623D8B702834109F006A191D /* HTTPHeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623D8B6F2834109F006A191D /* HTTPHeaderField.swift */; };
+		623D8B7328341366006A191D /* CustomDateJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623D8B7228341366006A191D /* CustomDateJSONDecoder.swift */; };
+		623D8B7528342A50006A191D /* CustomTimestampJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623D8B7428342A50006A191D /* CustomTimestampJSONDecoder.swift */; };
+		623D8B7728342A8C006A191D /* CustomTimestampFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623D8B7628342A8C006A191D /* CustomTimestampFormatter.swift */; };
+		623D8B7928342B78006A191D /* CustomDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623D8B7828342B78006A191D /* CustomDateFormatter.swift */; };
+		6248D5A6284276D0007E1B28 /* MilitaryManFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5A5284276D0007E1B28 /* MilitaryManFormView.swift */; };
+		6248D5A828427715007E1B28 /* MilitaryFormationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5A728427715007E1B28 /* MilitaryFormationFormView.swift */; };
+		6248D5AA28427749007E1B28 /* DislocationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5A928427749007E1B28 /* DislocationFormView.swift */; };
+		6248D5AC28427785007E1B28 /* MilitaryFormationTypeFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5AB28427785007E1B28 /* MilitaryFormationTypeFormView.swift */; };
+		6248D5AE2842779E007E1B28 /* EntityFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5AD2842779E007E1B28 /* EntityFormView.swift */; };
+		6248D5B028427954007E1B28 /* SubjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5AF28427954007E1B28 /* SubjectFormView.swift */; };
+		6248D5B228427977007E1B28 /* RankFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5B128427977007E1B28 /* RankFormView.swift */; };
+		6248D5B428427996007E1B28 /* RankCategoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5B328427996007E1B28 /* RankCategoryFormView.swift */; };
+		6248D5B628427A21007E1B28 /* StaffCategoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5B528427A21007E1B28 /* StaffCategoryFormView.swift */; };
+		6248D5B828427A3F007E1B28 /* DislocationTypeFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5B728427A3F007E1B28 /* DislocationTypeFormView.swift */; };
+		6248D5BA28427A62007E1B28 /* MilitarySpecialtyFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5B928427A62007E1B28 /* MilitarySpecialtyFormView.swift */; };
+		6248D5BC28427A83007E1B28 /* MilitaryDistrictFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5BB28427A83007E1B28 /* MilitaryDistrictFormView.swift */; };
+		6248D5BE28427AA5007E1B28 /* MilitaryBuildingFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5BD28427AA5007E1B28 /* MilitaryBuildingFormView.swift */; };
+		6248D5C028427AE5007E1B28 /* CombatVehicleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5BF28427AE5007E1B28 /* CombatVehicleFormView.swift */; };
+		6248D5C228427B04007E1B28 /* CombatVehicleGroupFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5C128427B04007E1B28 /* CombatVehicleGroupFormView.swift */; };
+		6248D5C428427B30007E1B28 /* CombatVehicleCategoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5C328427B30007E1B28 /* CombatVehicleCategoryFormView.swift */; };
+		6248D5C628427BDF007E1B28 /* MilitaryBuildingCategoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5C528427BDF007E1B28 /* MilitaryBuildingCategoryFormView.swift */; };
+		6248D5CE284282E3007E1B28 /* SuccessfulCreateNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5CD284282E3007E1B28 /* SuccessfulCreateNotificationContent.swift */; };
+		6248D5D02842843C007E1B28 /* Optional+boundString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5CF2842843C007E1B28 /* Optional+boundString.swift */; };
+		6248D5D42842957D007E1B28 /* Optional+asString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248D5D32842957D007E1B28 /* Optional+asString.swift */; };
+		625365D82834057E0093DDF6 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625365D72834057E0093DDF6 /* APIError.swift */; };
+		626B90D22834D1D80014EBB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 626B90D42834D1D80014EBB5 /* Localizable.strings */; };
+		626EED31282FF6D9003E3E4C /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626EED30282FF6D9003E3E4C /* SidebarView.swift */; };
+		626EED3A28300E94003E3E4C /* SidebarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626EED3928300E94003E3E4C /* SidebarItemView.swift */; };
+		6286BE4528326D5B00E8ADDB /* ArmamentCategoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6286BE4428326D5B00E8ADDB /* ArmamentCategoryFilterView.swift */; };
+		6286BE4D28326E0F00E8ADDB /* ArmamentCategoryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6286BE4C28326E0F00E8ADDB /* ArmamentCategoryPageView.swift */; };
+		6286BE5B2832801200E8ADDB /* MilitaryManService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6286BE5A2832801200E8ADDB /* MilitaryManService.swift */; };
+		6286BE5D2832804900E8ADDB /* MilitaryManTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6286BE5C2832804900E8ADDB /* MilitaryManTableView.swift */; };
+		6286BE5F2832809700E8ADDB /* MilitaryManPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6286BE5E2832809700E8ADDB /* MilitaryManPageViewModel.swift */; };
+		6286BE612832822C00E8ADDB /* MilitaryManPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6286BE602832822C00E8ADDB /* MilitaryManPageView.swift */; };
+		6286BE632832826900E8ADDB /* MilitaryManFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6286BE622832826900E8ADDB /* MilitaryManFilterView.swift */; };
+		628AD1F5283615A5007BCF24 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628AD1F4283615A5007BCF24 /* NotificationHandler.swift */; };
+		628AD1FD28364F8C007BCF24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628AD1FC28364F8C007BCF24 /* AppDelegate.swift */; };
+		628CC13B283BE98E00CABE7C /* EntityPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CC13A283BE98E00CABE7C /* EntityPageViewModel.swift */; };
+		628CC13F283BEABB00CABE7C /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CC13E283BEABB00CABE7C /* Entity.swift */; };
+		628CC141283BEBB400CABE7C /* FindAllEntitiesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CC140283BEBB400CABE7C /* FindAllEntitiesRequest.swift */; };
+		628CC143283BEC3A00CABE7C /* PutEntityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CC142283BEC3A00CABE7C /* PutEntityRequest.swift */; };
+		628CC145283BEE1500CABE7C /* DeleteEntityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CC144283BEE1400CABE7C /* DeleteEntityRequest.swift */; };
+		628CC149283BF80100CABE7C /* EntityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CC148283BF80100CABE7C /* EntityService.swift */; };
+		628CC14B283BF99400CABE7C /* EntityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CC14A283BF99400CABE7C /* EntityFilter.swift */; };
+		628F48922834FCB4005A7B51 /* PageFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628F48912834FCB4005A7B51 /* PageFilterView.swift */; };
+		62A2718D2835125B002437CD /* MilitaryFormationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2718C2835125B002437CD /* MilitaryFormationService.swift */; };
+		62A2718F283512A6002437CD /* MilitaryFormationTypeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2718E283512A6002437CD /* MilitaryFormationTypeService.swift */; };
+		62A27191283512D9002437CD /* MilitaryFormationPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A27190283512D9002437CD /* MilitaryFormationPageViewModel.swift */; };
+		62A27193283513D5002437CD /* MilitaryFormationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A27192283513D5002437CD /* MilitaryFormationTableView.swift */; };
+		62A2719528351433002437CD /* MilitaryFormationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2719428351433002437CD /* MilitaryFormationPageView.swift */; };
+		62A2719728351E52002437CD /* MilitaryFormationTypePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2719628351E52002437CD /* MilitaryFormationTypePageViewModel.swift */; };
+		62A2719928351EAE002437CD /* MilitaryFormationTypeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2719828351EAE002437CD /* MilitaryFormationTypeTableView.swift */; };
+		62A2719B28351F02002437CD /* MilitaryFormationTypePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2719A28351F02002437CD /* MilitaryFormationTypePageView.swift */; };
+		62A2719F283545CA002437CD /* ReloadToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2719E283545CA002437CD /* ReloadToolbar.swift */; };
+		62A271A5283548DE002437CD /* DislocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A271A4283548DE002437CD /* DislocationService.swift */; };
+		62A271A72835491F002437CD /* DislocationPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A271A62835491F002437CD /* DislocationPageViewModel.swift */; };
+		62A271AA28354A68002437CD /* DislocationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A271A928354A68002437CD /* DislocationTableView.swift */; };
+		62A271AC28354B94002437CD /* DislocationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A271AB28354B94002437CD /* DislocationPageView.swift */; };
+		62A271AF28354D5D002437CD /* ToggleSidebarToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A271AE28354D5D002437CD /* ToggleSidebarToolbar.swift */; };
+		62B006212842009D00C45D6C /* ArmamentCategoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B006202842009D00C45D6C /* ArmamentCategoryFormView.swift */; };
+		62B006232842015600C45D6C /* ArmamentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B006222842015600C45D6C /* ArmamentFormView.swift */; };
+		62BFD8DD283DF33900363580 /* EditEntityCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BFD8DC283DF33900363580 /* EditEntityCardView.swift */; };
+		62C434A52835DA7F0052E32E /* SubjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C434A42835DA7F0052E32E /* SubjectService.swift */; };
+		62C434A72835DC330052E32E /* SubjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C434A62835DC330052E32E /* SubjectTableView.swift */; };
+		62C434A92835DC540052E32E /* SubjectPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C434A82835DC540052E32E /* SubjectPageViewModel.swift */; };
+		62C434AB2835DCFC0052E32E /* SubjectPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C434AA2835DCFC0052E32E /* SubjectPageView.swift */; };
+		62C4D036283E741F0050BB57 /* RankTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D035283E741F0050BB57 /* RankTableView.swift */; };
+		62C4D038283E74660050BB57 /* RankPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D037283E74660050BB57 /* RankPageViewModel.swift */; };
+		62C4D03A283E74930050BB57 /* RankCategoryPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D039283E74930050BB57 /* RankCategoryPageViewModel.swift */; };
+		62C4D03C283E74B20050BB57 /* StaffCategoryPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D03B283E74B20050BB57 /* StaffCategoryPageViewModel.swift */; };
+		62C4D03E283E74D40050BB57 /* ArmamentPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D03D283E74D40050BB57 /* ArmamentPageViewModel.swift */; };
+		62C4D040283E74F70050BB57 /* CombatVehicleCategoryPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D03F283E74F70050BB57 /* CombatVehicleCategoryPageViewModel.swift */; };
+		62C4D042283E751C0050BB57 /* CombatVehicleGroupPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D041283E751C0050BB57 /* CombatVehicleGroupPageViewModel.swift */; };
+		62C4D044283E754C0050BB57 /* CombarVehiclePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D043283E754C0050BB57 /* CombarVehiclePageViewModel.swift */; };
+		62C4D046283E75830050BB57 /* DislocationTypePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D045283E75830050BB57 /* DislocationTypePageViewModel.swift */; };
+		62C4D048283E75B40050BB57 /* MilitaryBuildingPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D047283E75B40050BB57 /* MilitaryBuildingPageViewModel.swift */; };
+		62C4D04A283E75DA0050BB57 /* MilitaryBuildingCategoryPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D049283E75DA0050BB57 /* MilitaryBuildingCategoryPageViewModel.swift */; };
+		62C4D04C283E76000050BB57 /* MilitaryDistrictPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D04B283E76000050BB57 /* MilitaryDistrictPageViewModel.swift */; };
+		62C4D04E283E76340050BB57 /* MilitarySpecialtyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D04D283E76340050BB57 /* MilitarySpecialtyPageViewModel.swift */; };
+		62C4D050283E76E40050BB57 /* RankListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D04F283E76E40050BB57 /* RankListView.swift */; };
+		62C4D052283E770A0050BB57 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D051283E770A0050BB57 /* RankView.swift */; };
+		62C4D054283E77680050BB57 /* RankPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D053283E77680050BB57 /* RankPageView.swift */; };
+		62C4D056283E78180050BB57 /* RankCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D055283E78180050BB57 /* RankCategoryView.swift */; };
+		62C4D058283E78500050BB57 /* RankCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D057283E78500050BB57 /* RankCategoryListView.swift */; };
+		62C4D05A283E78910050BB57 /* RankCategoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D059283E78910050BB57 /* RankCategoryTableView.swift */; };
+		62C4D05C283E78B50050BB57 /* RankCategoryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D05B283E78B50050BB57 /* RankCategoryPageView.swift */; };
+		62C4D05E283E78FA0050BB57 /* StaffCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D05D283E78FA0050BB57 /* StaffCategoryView.swift */; };
+		62C4D060283E7A770050BB57 /* StaffCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D05F283E7A770050BB57 /* StaffCategoryListView.swift */; };
+		62C4D062283E7A9D0050BB57 /* StaffCategoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D061283E7A9D0050BB57 /* StaffCategoryTableView.swift */; };
+		62C4D064283E7ABC0050BB57 /* StaffCategoryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D063283E7ABC0050BB57 /* StaffCategoryPageView.swift */; };
+		62C4D066283E7B310050BB57 /* DislocationTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D065283E7B310050BB57 /* DislocationTypeView.swift */; };
+		62C4D068283E7B6A0050BB57 /* DislocationTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D067283E7B6A0050BB57 /* DislocationTypeListView.swift */; };
+		62C4D06A283E7B920050BB57 /* DislocationTypeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D069283E7B920050BB57 /* DislocationTypeTableView.swift */; };
+		62C4D06C283E7C360050BB57 /* DislocationTypePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D06B283E7C360050BB57 /* DislocationTypePageView.swift */; };
+		62C4D06E283E7CA90050BB57 /* MilitarySpecialtyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D06D283E7CA90050BB57 /* MilitarySpecialtyView.swift */; };
+		62C4D070283E7CDC0050BB57 /* MilitarySpecialtyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D06F283E7CDC0050BB57 /* MilitarySpecialtyListView.swift */; };
+		62C4D072283E7D0D0050BB57 /* MilitarySpecialtyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D071283E7D0D0050BB57 /* MilitarySpecialtyTableView.swift */; };
+		62C4D074283E7D320050BB57 /* MilitarySpecialtyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D073283E7D320050BB57 /* MilitarySpecialtyPageView.swift */; };
+		62C4D076283E7D9F0050BB57 /* MilitaryDistrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D075283E7D9F0050BB57 /* MilitaryDistrictView.swift */; };
+		62C4D078283E7DF40050BB57 /* MilitaryDistrictListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D077283E7DF40050BB57 /* MilitaryDistrictListView.swift */; };
+		62C4D07A283E7E200050BB57 /* MilitaryDistrictTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D079283E7E200050BB57 /* MilitaryDistrictTableView.swift */; };
+		62C4D07C283E7E420050BB57 /* MilitaryDistrictPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D07B283E7E420050BB57 /* MilitaryDistrictPageView.swift */; };
+		62C4D07E283E80460050BB57 /* MilitaryBuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D07D283E80460050BB57 /* MilitaryBuildingView.swift */; };
+		62C4D080283E80AE0050BB57 /* MilitaryBuildingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D07F283E80AE0050BB57 /* MilitaryBuildingListView.swift */; };
+		62C4D082283E80E00050BB57 /* MilitaryBuildingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D081283E80E00050BB57 /* MilitaryBuildingTableView.swift */; };
+		62C4D084283E81250050BB57 /* MilitaryBuildingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D083283E81250050BB57 /* MilitaryBuildingPageView.swift */; };
+		62C4D086283E81AC0050BB57 /* MilitaryBuildingCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D085283E81AC0050BB57 /* MilitaryBuildingCategoryView.swift */; };
+		62C4D088283E81DB0050BB57 /* MilitaryBuildingCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D087283E81DB0050BB57 /* MilitaryBuildingCategoryListView.swift */; };
+		62C4D08A283E82090050BB57 /* MilitaryBuildingCategoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D089283E82090050BB57 /* MilitaryBuildingCategoryTableView.swift */; };
+		62C4D08C283E82300050BB57 /* MilitaryBuildingCategoryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D08B283E82300050BB57 /* MilitaryBuildingCategoryPageView.swift */; };
+		62C4D08E283E82AC0050BB57 /* ArmamentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D08D283E82AC0050BB57 /* ArmamentView.swift */; };
+		62C4D090283E83220050BB57 /* ArmamentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D08F283E83220050BB57 /* ArmamentListView.swift */; };
+		62C4D092283E834F0050BB57 /* ArmamentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D091283E834F0050BB57 /* ArmamentTableView.swift */; };
+		62C4D094283E838F0050BB57 /* ArmamentPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D093283E838F0050BB57 /* ArmamentPageView.swift */; };
+		62C4D096283E84160050BB57 /* CombatVehicleCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D095283E84160050BB57 /* CombatVehicleCategoryView.swift */; };
+		62C4D098283E847F0050BB57 /* CombatVehicleCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D097283E847F0050BB57 /* CombatVehicleCategoryListView.swift */; };
+		62C4D09A283E84ED0050BB57 /* CombatVehicleCategoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D099283E84ED0050BB57 /* CombatVehicleCategoryTableView.swift */; };
+		62C4D09C283E851F0050BB57 /* CombatVehicleCategoryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D09B283E851F0050BB57 /* CombatVehicleCategoryPageView.swift */; };
+		62C4D09E283E857F0050BB57 /* CombatVehicleGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D09D283E857F0050BB57 /* CombatVehicleGroupView.swift */; };
+		62C4D0A0283E85C00050BB57 /* CombatVehicleGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D09F283E85C00050BB57 /* CombatVehicleGroupListView.swift */; };
+		62C4D0A2283E85E90050BB57 /* CombatVehicleGroupTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D0A1283E85E90050BB57 /* CombatVehicleGroupTableView.swift */; };
+		62C4D0A4283E86130050BB57 /* CombatVehicleGroupPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D0A3283E86130050BB57 /* CombatVehicleGroupPageView.swift */; };
+		62C4D0A6283E86720050BB57 /* CombatVehicleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D0A5283E86720050BB57 /* CombatVehicleView.swift */; };
+		62C4D0A8283E86B50050BB57 /* CombatVehicleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D0A7283E86B50050BB57 /* CombatVehicleListView.swift */; };
+		62C4D0AA283E86DA0050BB57 /* CombatVehicleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D0A9283E86DA0050BB57 /* CombatVehicleTableView.swift */; };
+		62C4D0AC283E871A0050BB57 /* CombatVehiclePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4D0AB283E871A0050BB57 /* CombatVehiclePageView.swift */; };
+		62D3E1CF283B7DB900E6A298 /* MilitaryManListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E1CE283B7DB900E6A298 /* MilitaryManListView.swift */; };
+		62D3E1D1283B7DDD00E6A298 /* MilitaryManView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E1D0283B7DDD00E6A298 /* MilitaryManView.swift */; };
+		62D3E1D3283B8E1700E6A298 /* CustomDateJSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E1D2283B8E1700E6A298 /* CustomDateJSONEncoder.swift */; };
+		62D3E1D5283BCD2600E6A298 /* RankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E1D4283BCD2600E6A298 /* RankService.swift */; };
+		62D3E1FB283BDC2D00E6A298 /* ArmamentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E1FA283BDC2D00E6A298 /* ArmamentService.swift */; };
+		62D3E1FD283BDC9300E6A298 /* CombatVehicleCategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E1FC283BDC9300E6A298 /* CombatVehicleCategoryService.swift */; };
+		62D3E1FF283BDCDA00E6A298 /* CombatVehicleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E1FE283BDCDA00E6A298 /* CombatVehicleService.swift */; };
+		62D3E201283BDD0000E6A298 /* CombatVehicleGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E200283BDD0000E6A298 /* CombatVehicleGroupService.swift */; };
+		62D3E203283BDD3000E6A298 /* DislocationTypeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E202283BDD3000E6A298 /* DislocationTypeService.swift */; };
+		62D3E205283BDD8000E6A298 /* MilitaryBuildingCategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E204283BDD8000E6A298 /* MilitaryBuildingCategoryService.swift */; };
+		62D3E207283BDDC500E6A298 /* MilitaryBuildingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E206283BDDC500E6A298 /* MilitaryBuildingService.swift */; };
+		62D3E209283BDDF900E6A298 /* MilitaryDistrictService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E208283BDDF900E6A298 /* MilitaryDistrictService.swift */; };
+		62D3E20B283BDE4900E6A298 /* MilitarySpecialtyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E20A283BDE4900E6A298 /* MilitarySpecialtyService.swift */; };
+		62D3E20E283BDE8000E6A298 /* RankCategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E20D283BDE8000E6A298 /* RankCategoryService.swift */; };
+		62D3E210283BDEBE00E6A298 /* StaffCategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E20F283BDEBE00E6A298 /* StaffCategoryService.swift */; };
+		62D3E212283BE0CB00E6A298 /* NotificationСontent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E211283BE0CB00E6A298 /* NotificationСontent.swift */; };
+		62D3E214283BE3C500E6A298 /* SuccessfulSaveNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E213283BE3C500E6A298 /* SuccessfulSaveNotificationContent.swift */; };
+		62D3E216283BE3D600E6A298 /* SuccessfulDeleteNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E215283BE3D600E6A298 /* SuccessfulDeleteNotificationContent.swift */; };
+		62D3E218283BE4A800E6A298 /* NetworkRequestErrorNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3E217283BE4A800E6A298 /* NetworkRequestErrorNotificationContent.swift */; };
+		62D9462928375E4A005C3FC8 /* ThemePickerCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D9462828375E4A005C3FC8 /* ThemePickerCommands.swift */; };
+		62DB25F7283B434500153F27 /* ArmamentCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DB25F6283B434500153F27 /* ArmamentCategoryListView.swift */; };
+		62DB25F9283B44E000153F27 /* DisplayModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DB25F8283B44E000153F27 /* DisplayModePicker.swift */; };
+		62DB25FD283B453000153F27 /* ViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DB25FC283B453000153F27 /* ViewMode.swift */; };
+		62DB2600283B46A100153F27 /* ArmamentCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DB25FF283B46A100153F27 /* ArmamentCategoryView.swift */; };
+		62DB2609283B5F3300153F27 /* Encodable+asDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DB2608283B5F3300153F27 /* Encodable+asDictionary.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		620624442841526E00DC9CA5 /* FieldStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldStringConvertible.swift; sourceTree = "<group>"; };
+		620624462841F53F00DC9CA5 /* NewEntityCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntityCardView.swift; sourceTree = "<group>"; };
+		62158AEF283E17C800657365 /* MilitaryFormationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationListView.swift; sourceTree = "<group>"; };
+		62158AF1283E17F500657365 /* MilitaryFormationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationView.swift; sourceTree = "<group>"; };
+		62158AF5283E1CA800657365 /* DislocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationView.swift; sourceTree = "<group>"; };
+		62158AF7283E1D0F00657365 /* DislocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationListView.swift; sourceTree = "<group>"; };
+		62158AF9283E228600657365 /* FindAllEntitiesByFilterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAllEntitiesByFilterRequest.swift; sourceTree = "<group>"; };
+		62158AFB283E305B00657365 /* EntityPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityPage.swift; sourceTree = "<group>"; };
+		62158AFD283E333900657365 /* EntityPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityPageView.swift; sourceTree = "<group>"; };
+		62158AFF283E35CC00657365 /* PageSelectorToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSelectorToolbar.swift; sourceTree = "<group>"; };
+		6217AB412842BB3600E7E3D2 /* SearchToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchToolbar.swift; sourceTree = "<group>"; };
+		6221CD2F282F665D002F88C3 /* ArmamentCategoryPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategoryPageViewModel.swift; sourceTree = "<group>"; };
+		6221CD32282F7C7C002F88C3 /* ArmamentCategoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategoryTableView.swift; sourceTree = "<group>"; };
+		6221CD36282F7F75002F88C3 /* ArmamentCategoryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategoryFilter.swift; sourceTree = "<group>"; };
+		6221CD38282F7FC1002F88C3 /* ArmamentFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentFilter.swift; sourceTree = "<group>"; };
+		6221CD3A282F814D002F88C3 /* CombatVehicleCategoryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleCategoryFilter.swift; sourceTree = "<group>"; };
+		6221CD3C282F81AA002F88C3 /* CombatVehicleGroupFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleGroupFilter.swift; sourceTree = "<group>"; };
+		6221CD3E282F82FB002F88C3 /* CombatVehicleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleFilter.swift; sourceTree = "<group>"; };
+		6221CD40282F8385002F88C3 /* DislocationFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationFilter.swift; sourceTree = "<group>"; };
+		6221CD42282F8514002F88C3 /* DislocationTypeFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationTypeFilter.swift; sourceTree = "<group>"; };
+		6221CD44282F856A002F88C3 /* MilitaryBuildingCategoryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingCategoryFilter.swift; sourceTree = "<group>"; };
+		6221CD46282F8596002F88C3 /* MilitaryBuildingFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingFilter.swift; sourceTree = "<group>"; };
+		6221CD48282F85CE002F88C3 /* MilitaryDistrictFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryDistrictFilter.swift; sourceTree = "<group>"; };
+		6221CD4A282F8615002F88C3 /* MilitaryFormationFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationFilter.swift; sourceTree = "<group>"; };
+		6221CD4C282F8645002F88C3 /* MilitaryFormationTypeFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationTypeFilter.swift; sourceTree = "<group>"; };
+		6221CD4E282F8659002F88C3 /* MilitaryManFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryManFilter.swift; sourceTree = "<group>"; };
+		6221CD50282F871B002F88C3 /* MilitarySpecialtyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySpecialtyFilter.swift; sourceTree = "<group>"; };
+		6221CD52282F8730002F88C3 /* PageFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageFilter.swift; sourceTree = "<group>"; };
+		6221CD56282F88BF002F88C3 /* RankCategoryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCategoryFilter.swift; sourceTree = "<group>"; };
+		6221CD58282F88D6002F88C3 /* RankFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankFilter.swift; sourceTree = "<group>"; };
+		6221CD5A282F8921002F88C3 /* StaffCategoryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCategoryFilter.swift; sourceTree = "<group>"; };
+		6221CD5C282F8938002F88C3 /* SubjectFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectFilter.swift; sourceTree = "<group>"; };
+		6225A33B283E5A1D00EFA401 /* MilitaryFormationTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationTypeView.swift; sourceTree = "<group>"; };
+		6225A33D283E5A6100EFA401 /* MilitaryFormationTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationTypeListView.swift; sourceTree = "<group>"; };
+		6225A33F283E5C6500EFA401 /* SubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectView.swift; sourceTree = "<group>"; };
+		6225A341283E5C8A00EFA401 /* SubjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectListView.swift; sourceTree = "<group>"; };
+		6225E77E2833F22200F04E42 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		6225E7802833F24900F04E42 /* NetworkRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestError.swift; sourceTree = "<group>"; };
+		6225E7822833F28800F04E42 /* HTTPStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatus.swift; sourceTree = "<group>"; };
+		6225E7842833F48C00F04E42 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		6225E7862833F68800F04E42 /* Request+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+Helpers.swift"; sourceTree = "<group>"; };
+		6225E7882833F76200F04E42 /* NetworkDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDispatcher.swift; sourceTree = "<group>"; };
+		6225E78A2833FCFF00F04E42 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		6225E7922834016C00F04E42 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		6231A74F282CD5E1004C60E3 /* Военная система.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Военная система.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6231A752282CD5E1004C60E3 /* MilitarySystemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySystemApp.swift; sourceTree = "<group>"; };
+		6231A754282CD5E1004C60E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6231A756282CD5E1004C60E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6231A75B282CD5E1004C60E3 /* MilitarySystem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MilitarySystem.entitlements; sourceTree = "<group>"; };
+		6231A762282CD6A2004C60E3 /* ArmamentCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategory.swift; sourceTree = "<group>"; };
+		6231A764282CD84C004C60E3 /* Armament.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armament.swift; sourceTree = "<group>"; };
+		6231A766282CD8AF004C60E3 /* CombatVehicleCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleCategory.swift; sourceTree = "<group>"; };
+		6231A768282CD8D7004C60E3 /* CombatVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicle.swift; sourceTree = "<group>"; };
+		6231A76A282CDA76004C60E3 /* CombatVehicleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleGroup.swift; sourceTree = "<group>"; };
+		6231A76C282CDA9D004C60E3 /* Dislocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dislocation.swift; sourceTree = "<group>"; };
+		6231A76E282CDB67004C60E3 /* DislocationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationType.swift; sourceTree = "<group>"; };
+		6231A770282CDB81004C60E3 /* MilitaryBuildingCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingCategory.swift; sourceTree = "<group>"; };
+		6231A772282CDBA7004C60E3 /* MilitaryBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuilding.swift; sourceTree = "<group>"; };
+		6231A774282CDBDC004C60E3 /* MilitaryDistrict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryDistrict.swift; sourceTree = "<group>"; };
+		6231A776282CDC4D004C60E3 /* SimplifiedDislocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedDislocation.swift; sourceTree = "<group>"; };
+		6231A778282CDC85004C60E3 /* SimplifiedMilitaryMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedMilitaryMan.swift; sourceTree = "<group>"; };
+		6231A77A282CDCF8004C60E3 /* MilitaryFormation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormation.swift; sourceTree = "<group>"; };
+		6231A77C282CDD43004C60E3 /* MilitaryFormationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationType.swift; sourceTree = "<group>"; };
+		6231A77E282CDD56004C60E3 /* MilitaryMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryMan.swift; sourceTree = "<group>"; };
+		6231A780282CDDC9004C60E3 /* MilitarySpecialty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySpecialty.swift; sourceTree = "<group>"; };
+		6231A782282CDDDF004C60E3 /* RankCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCategory.swift; sourceTree = "<group>"; };
+		6231A784282CDDF2004C60E3 /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
+		6231A786282CDE16004C60E3 /* StaffCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCategory.swift; sourceTree = "<group>"; };
+		6231A788282CDE2A004C60E3 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		6231A78B282CDF7E004C60E3 /* ArmamentCategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategoryService.swift; sourceTree = "<group>"; };
+		6237EC9E283F1E43002DF04F /* PostEntityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEntityRequest.swift; sourceTree = "<group>"; };
+		623D8B6D2834106C006A191D /* HTTPContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPContentType.swift; sourceTree = "<group>"; };
+		623D8B6F2834109F006A191D /* HTTPHeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderField.swift; sourceTree = "<group>"; };
+		623D8B7228341366006A191D /* CustomDateJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateJSONDecoder.swift; sourceTree = "<group>"; };
+		623D8B7428342A50006A191D /* CustomTimestampJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimestampJSONDecoder.swift; sourceTree = "<group>"; };
+		623D8B7628342A8C006A191D /* CustomTimestampFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimestampFormatter.swift; sourceTree = "<group>"; };
+		623D8B7828342B78006A191D /* CustomDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateFormatter.swift; sourceTree = "<group>"; };
+		6248D5A5284276D0007E1B28 /* MilitaryManFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryManFormView.swift; sourceTree = "<group>"; };
+		6248D5A728427715007E1B28 /* MilitaryFormationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationFormView.swift; sourceTree = "<group>"; };
+		6248D5A928427749007E1B28 /* DislocationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationFormView.swift; sourceTree = "<group>"; };
+		6248D5AB28427785007E1B28 /* MilitaryFormationTypeFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationTypeFormView.swift; sourceTree = "<group>"; };
+		6248D5AD2842779E007E1B28 /* EntityFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFormView.swift; sourceTree = "<group>"; };
+		6248D5AF28427954007E1B28 /* SubjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectFormView.swift; sourceTree = "<group>"; };
+		6248D5B128427977007E1B28 /* RankFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankFormView.swift; sourceTree = "<group>"; };
+		6248D5B328427996007E1B28 /* RankCategoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCategoryFormView.swift; sourceTree = "<group>"; };
+		6248D5B528427A21007E1B28 /* StaffCategoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCategoryFormView.swift; sourceTree = "<group>"; };
+		6248D5B728427A3F007E1B28 /* DislocationTypeFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationTypeFormView.swift; sourceTree = "<group>"; };
+		6248D5B928427A62007E1B28 /* MilitarySpecialtyFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySpecialtyFormView.swift; sourceTree = "<group>"; };
+		6248D5BB28427A83007E1B28 /* MilitaryDistrictFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryDistrictFormView.swift; sourceTree = "<group>"; };
+		6248D5BD28427AA5007E1B28 /* MilitaryBuildingFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingFormView.swift; sourceTree = "<group>"; };
+		6248D5BF28427AE5007E1B28 /* CombatVehicleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleFormView.swift; sourceTree = "<group>"; };
+		6248D5C128427B04007E1B28 /* CombatVehicleGroupFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleGroupFormView.swift; sourceTree = "<group>"; };
+		6248D5C328427B30007E1B28 /* CombatVehicleCategoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleCategoryFormView.swift; sourceTree = "<group>"; };
+		6248D5C528427BDF007E1B28 /* MilitaryBuildingCategoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingCategoryFormView.swift; sourceTree = "<group>"; };
+		6248D5CD284282E3007E1B28 /* SuccessfulCreateNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulCreateNotificationContent.swift; sourceTree = "<group>"; };
+		6248D5CF2842843C007E1B28 /* Optional+boundString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+boundString.swift"; sourceTree = "<group>"; };
+		6248D5D32842957D007E1B28 /* Optional+asString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+asString.swift"; sourceTree = "<group>"; };
+		625365D72834057E0093DDF6 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		626B90CD2834D0BA0014EBB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		626B90D32834D1D80014EBB5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		626EED30282FF6D9003E3E4C /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		626EED3928300E94003E3E4C /* SidebarItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarItemView.swift; sourceTree = "<group>"; };
+		6286BE4428326D5B00E8ADDB /* ArmamentCategoryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategoryFilterView.swift; sourceTree = "<group>"; };
+		6286BE4C28326E0F00E8ADDB /* ArmamentCategoryPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategoryPageView.swift; sourceTree = "<group>"; };
+		6286BE5A2832801200E8ADDB /* MilitaryManService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryManService.swift; sourceTree = "<group>"; };
+		6286BE5C2832804900E8ADDB /* MilitaryManTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryManTableView.swift; sourceTree = "<group>"; };
+		6286BE5E2832809700E8ADDB /* MilitaryManPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryManPageViewModel.swift; sourceTree = "<group>"; };
+		6286BE602832822C00E8ADDB /* MilitaryManPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryManPageView.swift; sourceTree = "<group>"; };
+		6286BE622832826900E8ADDB /* MilitaryManFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryManFilterView.swift; sourceTree = "<group>"; };
+		628AD1F4283615A5007BCF24 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		628AD1FC28364F8C007BCF24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		628CC13A283BE98E00CABE7C /* EntityPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityPageViewModel.swift; sourceTree = "<group>"; };
+		628CC13E283BEABB00CABE7C /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		628CC140283BEBB400CABE7C /* FindAllEntitiesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAllEntitiesRequest.swift; sourceTree = "<group>"; };
+		628CC142283BEC3A00CABE7C /* PutEntityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutEntityRequest.swift; sourceTree = "<group>"; };
+		628CC144283BEE1400CABE7C /* DeleteEntityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEntityRequest.swift; sourceTree = "<group>"; };
+		628CC148283BF80100CABE7C /* EntityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityService.swift; sourceTree = "<group>"; };
+		628CC14A283BF99400CABE7C /* EntityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFilter.swift; sourceTree = "<group>"; };
+		628F48912834FCB4005A7B51 /* PageFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageFilterView.swift; sourceTree = "<group>"; };
+		62A2718C2835125B002437CD /* MilitaryFormationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationService.swift; sourceTree = "<group>"; };
+		62A2718E283512A6002437CD /* MilitaryFormationTypeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationTypeService.swift; sourceTree = "<group>"; };
+		62A27190283512D9002437CD /* MilitaryFormationPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationPageViewModel.swift; sourceTree = "<group>"; };
+		62A27192283513D5002437CD /* MilitaryFormationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationTableView.swift; sourceTree = "<group>"; };
+		62A2719428351433002437CD /* MilitaryFormationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationPageView.swift; sourceTree = "<group>"; };
+		62A2719628351E52002437CD /* MilitaryFormationTypePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationTypePageViewModel.swift; sourceTree = "<group>"; };
+		62A2719828351EAE002437CD /* MilitaryFormationTypeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationTypeTableView.swift; sourceTree = "<group>"; };
+		62A2719A28351F02002437CD /* MilitaryFormationTypePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryFormationTypePageView.swift; sourceTree = "<group>"; };
+		62A2719E283545CA002437CD /* ReloadToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadToolbar.swift; sourceTree = "<group>"; };
+		62A271A4283548DE002437CD /* DislocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationService.swift; sourceTree = "<group>"; };
+		62A271A62835491F002437CD /* DislocationPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationPageViewModel.swift; sourceTree = "<group>"; };
+		62A271A928354A68002437CD /* DislocationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationTableView.swift; sourceTree = "<group>"; };
+		62A271AB28354B94002437CD /* DislocationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationPageView.swift; sourceTree = "<group>"; };
+		62A271AE28354D5D002437CD /* ToggleSidebarToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSidebarToolbar.swift; sourceTree = "<group>"; };
+		62B006202842009D00C45D6C /* ArmamentCategoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategoryFormView.swift; sourceTree = "<group>"; };
+		62B006222842015600C45D6C /* ArmamentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentFormView.swift; sourceTree = "<group>"; };
+		62BFD8DC283DF33900363580 /* EditEntityCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEntityCardView.swift; sourceTree = "<group>"; };
+		62C434A42835DA7F0052E32E /* SubjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectService.swift; sourceTree = "<group>"; };
+		62C434A62835DC330052E32E /* SubjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTableView.swift; sourceTree = "<group>"; };
+		62C434A82835DC540052E32E /* SubjectPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPageViewModel.swift; sourceTree = "<group>"; };
+		62C434AA2835DCFC0052E32E /* SubjectPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPageView.swift; sourceTree = "<group>"; };
+		62C4D035283E741F0050BB57 /* RankTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankTableView.swift; sourceTree = "<group>"; };
+		62C4D037283E74660050BB57 /* RankPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D039283E74930050BB57 /* RankCategoryPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCategoryPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D03B283E74B20050BB57 /* StaffCategoryPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCategoryPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D03D283E74D40050BB57 /* ArmamentPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D03F283E74F70050BB57 /* CombatVehicleCategoryPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleCategoryPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D041283E751C0050BB57 /* CombatVehicleGroupPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleGroupPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D043283E754C0050BB57 /* CombarVehiclePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombarVehiclePageViewModel.swift; sourceTree = "<group>"; };
+		62C4D045283E75830050BB57 /* DislocationTypePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationTypePageViewModel.swift; sourceTree = "<group>"; };
+		62C4D047283E75B40050BB57 /* MilitaryBuildingPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D049283E75DA0050BB57 /* MilitaryBuildingCategoryPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingCategoryPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D04B283E76000050BB57 /* MilitaryDistrictPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryDistrictPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D04D283E76340050BB57 /* MilitarySpecialtyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySpecialtyPageViewModel.swift; sourceTree = "<group>"; };
+		62C4D04F283E76E40050BB57 /* RankListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankListView.swift; sourceTree = "<group>"; };
+		62C4D051283E770A0050BB57 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
+		62C4D053283E77680050BB57 /* RankPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankPageView.swift; sourceTree = "<group>"; };
+		62C4D055283E78180050BB57 /* RankCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCategoryView.swift; sourceTree = "<group>"; };
+		62C4D057283E78500050BB57 /* RankCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCategoryListView.swift; sourceTree = "<group>"; };
+		62C4D059283E78910050BB57 /* RankCategoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCategoryTableView.swift; sourceTree = "<group>"; };
+		62C4D05B283E78B50050BB57 /* RankCategoryPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCategoryPageView.swift; sourceTree = "<group>"; };
+		62C4D05D283E78FA0050BB57 /* StaffCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCategoryView.swift; sourceTree = "<group>"; };
+		62C4D05F283E7A770050BB57 /* StaffCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCategoryListView.swift; sourceTree = "<group>"; };
+		62C4D061283E7A9D0050BB57 /* StaffCategoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCategoryTableView.swift; sourceTree = "<group>"; };
+		62C4D063283E7ABC0050BB57 /* StaffCategoryPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCategoryPageView.swift; sourceTree = "<group>"; };
+		62C4D065283E7B310050BB57 /* DislocationTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationTypeView.swift; sourceTree = "<group>"; };
+		62C4D067283E7B6A0050BB57 /* DislocationTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationTypeListView.swift; sourceTree = "<group>"; };
+		62C4D069283E7B920050BB57 /* DislocationTypeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationTypeTableView.swift; sourceTree = "<group>"; };
+		62C4D06B283E7C360050BB57 /* DislocationTypePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationTypePageView.swift; sourceTree = "<group>"; };
+		62C4D06D283E7CA90050BB57 /* MilitarySpecialtyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySpecialtyView.swift; sourceTree = "<group>"; };
+		62C4D06F283E7CDC0050BB57 /* MilitarySpecialtyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySpecialtyListView.swift; sourceTree = "<group>"; };
+		62C4D071283E7D0D0050BB57 /* MilitarySpecialtyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySpecialtyTableView.swift; sourceTree = "<group>"; };
+		62C4D073283E7D320050BB57 /* MilitarySpecialtyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySpecialtyPageView.swift; sourceTree = "<group>"; };
+		62C4D075283E7D9F0050BB57 /* MilitaryDistrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryDistrictView.swift; sourceTree = "<group>"; };
+		62C4D077283E7DF40050BB57 /* MilitaryDistrictListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryDistrictListView.swift; sourceTree = "<group>"; };
+		62C4D079283E7E200050BB57 /* MilitaryDistrictTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryDistrictTableView.swift; sourceTree = "<group>"; };
+		62C4D07B283E7E420050BB57 /* MilitaryDistrictPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryDistrictPageView.swift; sourceTree = "<group>"; };
+		62C4D07D283E80460050BB57 /* MilitaryBuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingView.swift; sourceTree = "<group>"; };
+		62C4D07F283E80AE0050BB57 /* MilitaryBuildingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingListView.swift; sourceTree = "<group>"; };
+		62C4D081283E80E00050BB57 /* MilitaryBuildingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingTableView.swift; sourceTree = "<group>"; };
+		62C4D083283E81250050BB57 /* MilitaryBuildingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingPageView.swift; sourceTree = "<group>"; };
+		62C4D085283E81AC0050BB57 /* MilitaryBuildingCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingCategoryView.swift; sourceTree = "<group>"; };
+		62C4D087283E81DB0050BB57 /* MilitaryBuildingCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingCategoryListView.swift; sourceTree = "<group>"; };
+		62C4D089283E82090050BB57 /* MilitaryBuildingCategoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingCategoryTableView.swift; sourceTree = "<group>"; };
+		62C4D08B283E82300050BB57 /* MilitaryBuildingCategoryPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingCategoryPageView.swift; sourceTree = "<group>"; };
+		62C4D08D283E82AC0050BB57 /* ArmamentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentView.swift; sourceTree = "<group>"; };
+		62C4D08F283E83220050BB57 /* ArmamentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentListView.swift; sourceTree = "<group>"; };
+		62C4D091283E834F0050BB57 /* ArmamentTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentTableView.swift; sourceTree = "<group>"; };
+		62C4D093283E838F0050BB57 /* ArmamentPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentPageView.swift; sourceTree = "<group>"; };
+		62C4D095283E84160050BB57 /* CombatVehicleCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleCategoryView.swift; sourceTree = "<group>"; };
+		62C4D097283E847F0050BB57 /* CombatVehicleCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleCategoryListView.swift; sourceTree = "<group>"; };
+		62C4D099283E84ED0050BB57 /* CombatVehicleCategoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleCategoryTableView.swift; sourceTree = "<group>"; };
+		62C4D09B283E851F0050BB57 /* CombatVehicleCategoryPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleCategoryPageView.swift; sourceTree = "<group>"; };
+		62C4D09D283E857F0050BB57 /* CombatVehicleGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleGroupView.swift; sourceTree = "<group>"; };
+		62C4D09F283E85C00050BB57 /* CombatVehicleGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleGroupListView.swift; sourceTree = "<group>"; };
+		62C4D0A1283E85E90050BB57 /* CombatVehicleGroupTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleGroupTableView.swift; sourceTree = "<group>"; };
+		62C4D0A3283E86130050BB57 /* CombatVehicleGroupPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleGroupPageView.swift; sourceTree = "<group>"; };
+		62C4D0A5283E86720050BB57 /* CombatVehicleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleView.swift; sourceTree = "<group>"; };
+		62C4D0A7283E86B50050BB57 /* CombatVehicleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleListView.swift; sourceTree = "<group>"; };
+		62C4D0A9283E86DA0050BB57 /* CombatVehicleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleTableView.swift; sourceTree = "<group>"; };
+		62C4D0AB283E871A0050BB57 /* CombatVehiclePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehiclePageView.swift; sourceTree = "<group>"; };
+		62D3E1CE283B7DB900E6A298 /* MilitaryManListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryManListView.swift; sourceTree = "<group>"; };
+		62D3E1D0283B7DDD00E6A298 /* MilitaryManView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryManView.swift; sourceTree = "<group>"; };
+		62D3E1D2283B8E1700E6A298 /* CustomDateJSONEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateJSONEncoder.swift; sourceTree = "<group>"; };
+		62D3E1D4283BCD2600E6A298 /* RankService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankService.swift; sourceTree = "<group>"; };
+		62D3E1FA283BDC2D00E6A298 /* ArmamentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentService.swift; sourceTree = "<group>"; };
+		62D3E1FC283BDC9300E6A298 /* CombatVehicleCategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleCategoryService.swift; sourceTree = "<group>"; };
+		62D3E1FE283BDCDA00E6A298 /* CombatVehicleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleService.swift; sourceTree = "<group>"; };
+		62D3E200283BDD0000E6A298 /* CombatVehicleGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatVehicleGroupService.swift; sourceTree = "<group>"; };
+		62D3E202283BDD3000E6A298 /* DislocationTypeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislocationTypeService.swift; sourceTree = "<group>"; };
+		62D3E204283BDD8000E6A298 /* MilitaryBuildingCategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingCategoryService.swift; sourceTree = "<group>"; };
+		62D3E206283BDDC500E6A298 /* MilitaryBuildingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryBuildingService.swift; sourceTree = "<group>"; };
+		62D3E208283BDDF900E6A298 /* MilitaryDistrictService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitaryDistrictService.swift; sourceTree = "<group>"; };
+		62D3E20A283BDE4900E6A298 /* MilitarySpecialtyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilitarySpecialtyService.swift; sourceTree = "<group>"; };
+		62D3E20D283BDE8000E6A298 /* RankCategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCategoryService.swift; sourceTree = "<group>"; };
+		62D3E20F283BDEBE00E6A298 /* StaffCategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCategoryService.swift; sourceTree = "<group>"; };
+		62D3E211283BE0CB00E6A298 /* NotificationСontent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationСontent.swift"; sourceTree = "<group>"; };
+		62D3E213283BE3C500E6A298 /* SuccessfulSaveNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulSaveNotificationContent.swift; sourceTree = "<group>"; };
+		62D3E215283BE3D600E6A298 /* SuccessfulDeleteNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulDeleteNotificationContent.swift; sourceTree = "<group>"; };
+		62D3E217283BE4A800E6A298 /* NetworkRequestErrorNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestErrorNotificationContent.swift; sourceTree = "<group>"; };
+		62D9462828375E4A005C3FC8 /* ThemePickerCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerCommands.swift; sourceTree = "<group>"; };
+		62DB25F6283B434500153F27 /* ArmamentCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategoryListView.swift; sourceTree = "<group>"; };
+		62DB25F8283B44E000153F27 /* DisplayModePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayModePicker.swift; sourceTree = "<group>"; };
+		62DB25FC283B453000153F27 /* ViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMode.swift; sourceTree = "<group>"; };
+		62DB25FF283B46A100153F27 /* ArmamentCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmamentCategoryView.swift; sourceTree = "<group>"; };
+		62DB2608283B5F3300153F27 /* Encodable+asDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+asDictionary.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6231A74C282CD5E1004C60E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6221CD2E282F65BD002F88C3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				62A271A828354936002437CD /* Pages */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		6221CD35282F7F53002F88C3 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				6221CD36282F7F75002F88C3 /* ArmamentCategoryFilter.swift */,
+				6221CD38282F7FC1002F88C3 /* ArmamentFilter.swift */,
+				6221CD3A282F814D002F88C3 /* CombatVehicleCategoryFilter.swift */,
+				6221CD3C282F81AA002F88C3 /* CombatVehicleGroupFilter.swift */,
+				6221CD3E282F82FB002F88C3 /* CombatVehicleFilter.swift */,
+				6221CD40282F8385002F88C3 /* DislocationFilter.swift */,
+				6221CD42282F8514002F88C3 /* DislocationTypeFilter.swift */,
+				6221CD44282F856A002F88C3 /* MilitaryBuildingCategoryFilter.swift */,
+				6221CD46282F8596002F88C3 /* MilitaryBuildingFilter.swift */,
+				6221CD48282F85CE002F88C3 /* MilitaryDistrictFilter.swift */,
+				6221CD4A282F8615002F88C3 /* MilitaryFormationFilter.swift */,
+				6221CD4C282F8645002F88C3 /* MilitaryFormationTypeFilter.swift */,
+				6221CD4E282F8659002F88C3 /* MilitaryManFilter.swift */,
+				6221CD50282F871B002F88C3 /* MilitarySpecialtyFilter.swift */,
+				6221CD52282F8730002F88C3 /* PageFilter.swift */,
+				6221CD56282F88BF002F88C3 /* RankCategoryFilter.swift */,
+				6221CD58282F88D6002F88C3 /* RankFilter.swift */,
+				6221CD5A282F8921002F88C3 /* StaffCategoryFilter.swift */,
+				6221CD5C282F8938002F88C3 /* SubjectFilter.swift */,
+				628CC14A283BF99400CABE7C /* EntityFilter.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		6221CD5E282F8975002F88C3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				62DB2608283B5F3300153F27 /* Encodable+asDictionary.swift */,
+				6248D5CF2842843C007E1B28 /* Optional+boundString.swift */,
+				6248D5D32842957D007E1B28 /* Optional+asString.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6221CD66282F8AE9002F88C3 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				626EED30282FF6D9003E3E4C /* SidebarView.swift */,
+				626EED3928300E94003E3E4C /* SidebarItemView.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		6225E77C2833F06200F04E42 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				62B0061F2841FF9B00C45D6C /* Forms */,
+				62B0061E2841FF7E00C45D6C /* Cards */,
+				62DB25FE283B469000153F27 /* Entities */,
+				62DB25F5283B432500153F27 /* Lists */,
+				62A271AD28354D07002437CD /* Toolbars */,
+				6221CD66282F8AE9002F88C3 /* Sidebar */,
+				6286BE4328326D3D00E8ADDB /* Filters */,
+				6286BE4928326DD500E8ADDB /* Tables */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		6225E77D2833F1D300F04E42 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6225E78E283400B200F04E42 /* Requests */,
+				6225E77E2833F22200F04E42 /* HTTPMethod.swift */,
+				6225E7802833F24900F04E42 /* NetworkRequestError.swift */,
+				6225E7822833F28800F04E42 /* HTTPStatus.swift */,
+				6225E7842833F48C00F04E42 /* Request.swift */,
+				6225E7862833F68800F04E42 /* Request+Helpers.swift */,
+				6225E7882833F76200F04E42 /* NetworkDispatcher.swift */,
+				6225E78A2833FCFF00F04E42 /* APIClient.swift */,
+				625365D72834057E0093DDF6 /* APIError.swift */,
+				623D8B6D2834106C006A191D /* HTTPContentType.swift */,
+				623D8B6F2834109F006A191D /* HTTPHeaderField.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		6225E78E283400B200F04E42 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				628CC140283BEBB400CABE7C /* FindAllEntitiesRequest.swift */,
+				628CC142283BEC3A00CABE7C /* PutEntityRequest.swift */,
+				628CC144283BEE1400CABE7C /* DeleteEntityRequest.swift */,
+				62158AF9283E228600657365 /* FindAllEntitiesByFilterRequest.swift */,
+				6237EC9E283F1E43002DF04F /* PostEntityRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		6225E7912834013700F04E42 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				6225E7922834016C00F04E42 /* APIConfig.swift */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		6231A746282CD5E1004C60E3 = {
+			isa = PBXGroup;
+			children = (
+				6231A751282CD5E1004C60E3 /* MilitarySystem */,
+				6231A750282CD5E1004C60E3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6231A750282CD5E1004C60E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6231A74F282CD5E1004C60E3 /* Военная система.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6231A751282CD5E1004C60E3 /* MilitarySystem */ = {
+			isa = PBXGroup;
+			children = (
+				626B90CD2834D0BA0014EBB5 /* Info.plist */,
+				6231A75B282CD5E1004C60E3 /* MilitarySystem.entitlements */,
+				6231A752282CD5E1004C60E3 /* MilitarySystemApp.swift */,
+				628AD1FC28364F8C007BCF24 /* AppDelegate.swift */,
+				626B90D52834DA120014EBB5 /* Assets */,
+				62D9462728375E0F005C3FC8 /* Commands */,
+				6225E7912834013700F04E42 /* Configs */,
+				6221CD5E282F8975002F88C3 /* Extensions */,
+				6231A761282CD61F004C60E3 /* Models */,
+				6225E77D2833F1D300F04E42 /* Network */,
+				628AD1F32836158B007BCF24 /* Notifications */,
+				626B90CF2834D1A60014EBB5 /* Resources */,
+				6231A78A282CDEA6004C60E3 /* Services */,
+				623D8B7128341345006A191D /* Utils */,
+				6221CD2E282F65BD002F88C3 /* ViewModels */,
+				6231A78D282CE235004C60E3 /* Views */,
+			);
+			path = MilitarySystem;
+			sourceTree = "<group>";
+		};
+		6231A761282CD61F004C60E3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6221CD35282F7F53002F88C3 /* Filters */,
+				626EED32282FFC36003E3E4C /* Entities */,
+				62158AFB283E305B00657365 /* EntityPage.swift */,
+				620624442841526E00DC9CA5 /* FieldStringConvertible.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6231A78A282CDEA6004C60E3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6231A78B282CDF7E004C60E3 /* ArmamentCategoryService.swift */,
+				6286BE5A2832801200E8ADDB /* MilitaryManService.swift */,
+				62A2718C2835125B002437CD /* MilitaryFormationService.swift */,
+				62A271A4283548DE002437CD /* DislocationService.swift */,
+				62C434A42835DA7F0052E32E /* SubjectService.swift */,
+				62A2718E283512A6002437CD /* MilitaryFormationTypeService.swift */,
+				62D3E1D4283BCD2600E6A298 /* RankService.swift */,
+				62D3E1FA283BDC2D00E6A298 /* ArmamentService.swift */,
+				62D3E1FC283BDC9300E6A298 /* CombatVehicleCategoryService.swift */,
+				62D3E1FE283BDCDA00E6A298 /* CombatVehicleService.swift */,
+				62D3E200283BDD0000E6A298 /* CombatVehicleGroupService.swift */,
+				62D3E202283BDD3000E6A298 /* DislocationTypeService.swift */,
+				62D3E204283BDD8000E6A298 /* MilitaryBuildingCategoryService.swift */,
+				62D3E206283BDDC500E6A298 /* MilitaryBuildingService.swift */,
+				62D3E208283BDDF900E6A298 /* MilitaryDistrictService.swift */,
+				62D3E20A283BDE4900E6A298 /* MilitarySpecialtyService.swift */,
+				62D3E20D283BDE8000E6A298 /* RankCategoryService.swift */,
+				62D3E20F283BDEBE00E6A298 /* StaffCategoryService.swift */,
+				628CC148283BF80100CABE7C /* EntityService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6231A78D282CE235004C60E3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6231A754282CD5E1004C60E3 /* ContentView.swift */,
+				6225E77C2833F06200F04E42 /* Components */,
+				6286BE4E28326E8100E8ADDB /* Pages */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		623D8B7128341345006A191D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				623D8B7228341366006A191D /* CustomDateJSONDecoder.swift */,
+				623D8B7428342A50006A191D /* CustomTimestampJSONDecoder.swift */,
+				623D8B7628342A8C006A191D /* CustomTimestampFormatter.swift */,
+				623D8B7828342B78006A191D /* CustomDateFormatter.swift */,
+				62D3E1D2283B8E1700E6A298 /* CustomDateJSONEncoder.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		626B90CF2834D1A60014EBB5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				626B90D42834D1D80014EBB5 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		626B90D52834DA120014EBB5 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				6231A756282CD5E1004C60E3 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		626EED32282FFC36003E3E4C /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				6231A762282CD6A2004C60E3 /* ArmamentCategory.swift */,
+				6231A764282CD84C004C60E3 /* Armament.swift */,
+				6231A766282CD8AF004C60E3 /* CombatVehicleCategory.swift */,
+				6231A768282CD8D7004C60E3 /* CombatVehicle.swift */,
+				6231A76A282CDA76004C60E3 /* CombatVehicleGroup.swift */,
+				6231A76C282CDA9D004C60E3 /* Dislocation.swift */,
+				6231A76E282CDB67004C60E3 /* DislocationType.swift */,
+				6231A770282CDB81004C60E3 /* MilitaryBuildingCategory.swift */,
+				6231A772282CDBA7004C60E3 /* MilitaryBuilding.swift */,
+				6231A774282CDBDC004C60E3 /* MilitaryDistrict.swift */,
+				6231A776282CDC4D004C60E3 /* SimplifiedDislocation.swift */,
+				6231A778282CDC85004C60E3 /* SimplifiedMilitaryMan.swift */,
+				6231A77A282CDCF8004C60E3 /* MilitaryFormation.swift */,
+				6231A77C282CDD43004C60E3 /* MilitaryFormationType.swift */,
+				6231A77E282CDD56004C60E3 /* MilitaryMan.swift */,
+				6231A780282CDDC9004C60E3 /* MilitarySpecialty.swift */,
+				6231A782282CDDDF004C60E3 /* RankCategory.swift */,
+				6231A784282CDDF2004C60E3 /* Rank.swift */,
+				6231A786282CDE16004C60E3 /* StaffCategory.swift */,
+				6231A788282CDE2A004C60E3 /* Subject.swift */,
+				628CC13E283BEABB00CABE7C /* Entity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		6286BE4328326D3D00E8ADDB /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				6286BE4428326D5B00E8ADDB /* ArmamentCategoryFilterView.swift */,
+				6286BE622832826900E8ADDB /* MilitaryManFilterView.swift */,
+				628F48912834FCB4005A7B51 /* PageFilterView.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		6286BE4928326DD500E8ADDB /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				6221CD32282F7C7C002F88C3 /* ArmamentCategoryTableView.swift */,
+				6286BE5C2832804900E8ADDB /* MilitaryManTableView.swift */,
+				62A27192283513D5002437CD /* MilitaryFormationTableView.swift */,
+				62A2719828351EAE002437CD /* MilitaryFormationTypeTableView.swift */,
+				62A271A928354A68002437CD /* DislocationTableView.swift */,
+				62C434A62835DC330052E32E /* SubjectTableView.swift */,
+				62C4D035283E741F0050BB57 /* RankTableView.swift */,
+				62C4D059283E78910050BB57 /* RankCategoryTableView.swift */,
+				62C4D061283E7A9D0050BB57 /* StaffCategoryTableView.swift */,
+				62C4D069283E7B920050BB57 /* DislocationTypeTableView.swift */,
+				62C4D071283E7D0D0050BB57 /* MilitarySpecialtyTableView.swift */,
+				62C4D079283E7E200050BB57 /* MilitaryDistrictTableView.swift */,
+				62C4D081283E80E00050BB57 /* MilitaryBuildingTableView.swift */,
+				62C4D089283E82090050BB57 /* MilitaryBuildingCategoryTableView.swift */,
+				62C4D091283E834F0050BB57 /* ArmamentTableView.swift */,
+				62C4D099283E84ED0050BB57 /* CombatVehicleCategoryTableView.swift */,
+				62C4D0A1283E85E90050BB57 /* CombatVehicleGroupTableView.swift */,
+				62C4D0A9283E86DA0050BB57 /* CombatVehicleTableView.swift */,
+			);
+			path = Tables;
+			sourceTree = "<group>";
+		};
+		6286BE4E28326E8100E8ADDB /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				6286BE4C28326E0F00E8ADDB /* ArmamentCategoryPageView.swift */,
+				6286BE602832822C00E8ADDB /* MilitaryManPageView.swift */,
+				62A2719428351433002437CD /* MilitaryFormationPageView.swift */,
+				62A2719A28351F02002437CD /* MilitaryFormationTypePageView.swift */,
+				62A271AB28354B94002437CD /* DislocationPageView.swift */,
+				62C434AA2835DCFC0052E32E /* SubjectPageView.swift */,
+				62158AFD283E333900657365 /* EntityPageView.swift */,
+				62C4D053283E77680050BB57 /* RankPageView.swift */,
+				62C4D05B283E78B50050BB57 /* RankCategoryPageView.swift */,
+				62C4D063283E7ABC0050BB57 /* StaffCategoryPageView.swift */,
+				62C4D06B283E7C360050BB57 /* DislocationTypePageView.swift */,
+				62C4D073283E7D320050BB57 /* MilitarySpecialtyPageView.swift */,
+				62C4D07B283E7E420050BB57 /* MilitaryDistrictPageView.swift */,
+				62C4D083283E81250050BB57 /* MilitaryBuildingPageView.swift */,
+				62C4D08B283E82300050BB57 /* MilitaryBuildingCategoryPageView.swift */,
+				62C4D093283E838F0050BB57 /* ArmamentPageView.swift */,
+				62C4D09B283E851F0050BB57 /* CombatVehicleCategoryPageView.swift */,
+				62C4D0A3283E86130050BB57 /* CombatVehicleGroupPageView.swift */,
+				62C4D0AB283E871A0050BB57 /* CombatVehiclePageView.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		628AD1F32836158B007BCF24 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				628AD1F4283615A5007BCF24 /* NotificationHandler.swift */,
+				62D3E211283BE0CB00E6A298 /* NotificationСontent.swift */,
+				62D3E213283BE3C500E6A298 /* SuccessfulSaveNotificationContent.swift */,
+				62D3E215283BE3D600E6A298 /* SuccessfulDeleteNotificationContent.swift */,
+				62D3E217283BE4A800E6A298 /* NetworkRequestErrorNotificationContent.swift */,
+				6248D5CD284282E3007E1B28 /* SuccessfulCreateNotificationContent.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		62A271A828354936002437CD /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				6221CD2F282F665D002F88C3 /* ArmamentCategoryPageViewModel.swift */,
+				6286BE5E2832809700E8ADDB /* MilitaryManPageViewModel.swift */,
+				62A27190283512D9002437CD /* MilitaryFormationPageViewModel.swift */,
+				62A2719628351E52002437CD /* MilitaryFormationTypePageViewModel.swift */,
+				62A271A62835491F002437CD /* DislocationPageViewModel.swift */,
+				62C434A82835DC540052E32E /* SubjectPageViewModel.swift */,
+				628CC13A283BE98E00CABE7C /* EntityPageViewModel.swift */,
+				62C4D037283E74660050BB57 /* RankPageViewModel.swift */,
+				62C4D039283E74930050BB57 /* RankCategoryPageViewModel.swift */,
+				62C4D03B283E74B20050BB57 /* StaffCategoryPageViewModel.swift */,
+				62C4D03D283E74D40050BB57 /* ArmamentPageViewModel.swift */,
+				62C4D03F283E74F70050BB57 /* CombatVehicleCategoryPageViewModel.swift */,
+				62C4D041283E751C0050BB57 /* CombatVehicleGroupPageViewModel.swift */,
+				62C4D043283E754C0050BB57 /* CombarVehiclePageViewModel.swift */,
+				62C4D045283E75830050BB57 /* DislocationTypePageViewModel.swift */,
+				62C4D047283E75B40050BB57 /* MilitaryBuildingPageViewModel.swift */,
+				62C4D049283E75DA0050BB57 /* MilitaryBuildingCategoryPageViewModel.swift */,
+				62C4D04B283E76000050BB57 /* MilitaryDistrictPageViewModel.swift */,
+				62C4D04D283E76340050BB57 /* MilitarySpecialtyPageViewModel.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		62A271AD28354D07002437CD /* Toolbars */ = {
+			isa = PBXGroup;
+			children = (
+				62DB25FB283B452300153F27 /* DisplayMode */,
+				62A2719E283545CA002437CD /* ReloadToolbar.swift */,
+				62A271AE28354D5D002437CD /* ToggleSidebarToolbar.swift */,
+				62158AFF283E35CC00657365 /* PageSelectorToolbar.swift */,
+				6217AB412842BB3600E7E3D2 /* SearchToolbar.swift */,
+			);
+			path = Toolbars;
+			sourceTree = "<group>";
+		};
+		62B0061E2841FF7E00C45D6C /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				620624462841F53F00DC9CA5 /* NewEntityCardView.swift */,
+				62BFD8DC283DF33900363580 /* EditEntityCardView.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		62B0061F2841FF9B00C45D6C /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				62B006202842009D00C45D6C /* ArmamentCategoryFormView.swift */,
+				62B006222842015600C45D6C /* ArmamentFormView.swift */,
+				6248D5A5284276D0007E1B28 /* MilitaryManFormView.swift */,
+				6248D5A728427715007E1B28 /* MilitaryFormationFormView.swift */,
+				6248D5A928427749007E1B28 /* DislocationFormView.swift */,
+				6248D5AB28427785007E1B28 /* MilitaryFormationTypeFormView.swift */,
+				6248D5AD2842779E007E1B28 /* EntityFormView.swift */,
+				6248D5AF28427954007E1B28 /* SubjectFormView.swift */,
+				6248D5B128427977007E1B28 /* RankFormView.swift */,
+				6248D5B328427996007E1B28 /* RankCategoryFormView.swift */,
+				6248D5B528427A21007E1B28 /* StaffCategoryFormView.swift */,
+				6248D5B728427A3F007E1B28 /* DislocationTypeFormView.swift */,
+				6248D5B928427A62007E1B28 /* MilitarySpecialtyFormView.swift */,
+				6248D5BB28427A83007E1B28 /* MilitaryDistrictFormView.swift */,
+				6248D5BD28427AA5007E1B28 /* MilitaryBuildingFormView.swift */,
+				6248D5BF28427AE5007E1B28 /* CombatVehicleFormView.swift */,
+				6248D5C128427B04007E1B28 /* CombatVehicleGroupFormView.swift */,
+				6248D5C328427B30007E1B28 /* CombatVehicleCategoryFormView.swift */,
+				6248D5C528427BDF007E1B28 /* MilitaryBuildingCategoryFormView.swift */,
+			);
+			path = Forms;
+			sourceTree = "<group>";
+		};
+		62D9462728375E0F005C3FC8 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				62D9462828375E4A005C3FC8 /* ThemePickerCommands.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
+		62DB25F5283B432500153F27 /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				62DB25F6283B434500153F27 /* ArmamentCategoryListView.swift */,
+				62D3E1CE283B7DB900E6A298 /* MilitaryManListView.swift */,
+				62158AEF283E17C800657365 /* MilitaryFormationListView.swift */,
+				62158AF7283E1D0F00657365 /* DislocationListView.swift */,
+				6225A33D283E5A6100EFA401 /* MilitaryFormationTypeListView.swift */,
+				6225A341283E5C8A00EFA401 /* SubjectListView.swift */,
+				62C4D04F283E76E40050BB57 /* RankListView.swift */,
+				62C4D057283E78500050BB57 /* RankCategoryListView.swift */,
+				62C4D05F283E7A770050BB57 /* StaffCategoryListView.swift */,
+				62C4D067283E7B6A0050BB57 /* DislocationTypeListView.swift */,
+				62C4D06F283E7CDC0050BB57 /* MilitarySpecialtyListView.swift */,
+				62C4D077283E7DF40050BB57 /* MilitaryDistrictListView.swift */,
+				62C4D07F283E80AE0050BB57 /* MilitaryBuildingListView.swift */,
+				62C4D087283E81DB0050BB57 /* MilitaryBuildingCategoryListView.swift */,
+				62C4D08F283E83220050BB57 /* ArmamentListView.swift */,
+				62C4D097283E847F0050BB57 /* CombatVehicleCategoryListView.swift */,
+				62C4D09F283E85C00050BB57 /* CombatVehicleGroupListView.swift */,
+				62C4D0A7283E86B50050BB57 /* CombatVehicleListView.swift */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
+		62DB25FB283B452300153F27 /* DisplayMode */ = {
+			isa = PBXGroup;
+			children = (
+				62DB25F8283B44E000153F27 /* DisplayModePicker.swift */,
+				62DB25FC283B453000153F27 /* ViewMode.swift */,
+			);
+			path = DisplayMode;
+			sourceTree = "<group>";
+		};
+		62DB25FE283B469000153F27 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				62DB25FF283B46A100153F27 /* ArmamentCategoryView.swift */,
+				62D3E1D0283B7DDD00E6A298 /* MilitaryManView.swift */,
+				62158AF1283E17F500657365 /* MilitaryFormationView.swift */,
+				62158AF5283E1CA800657365 /* DislocationView.swift */,
+				6225A33B283E5A1D00EFA401 /* MilitaryFormationTypeView.swift */,
+				6225A33F283E5C6500EFA401 /* SubjectView.swift */,
+				62C4D051283E770A0050BB57 /* RankView.swift */,
+				62C4D055283E78180050BB57 /* RankCategoryView.swift */,
+				62C4D05D283E78FA0050BB57 /* StaffCategoryView.swift */,
+				62C4D065283E7B310050BB57 /* DislocationTypeView.swift */,
+				62C4D06D283E7CA90050BB57 /* MilitarySpecialtyView.swift */,
+				62C4D075283E7D9F0050BB57 /* MilitaryDistrictView.swift */,
+				62C4D07D283E80460050BB57 /* MilitaryBuildingView.swift */,
+				62C4D085283E81AC0050BB57 /* MilitaryBuildingCategoryView.swift */,
+				62C4D08D283E82AC0050BB57 /* ArmamentView.swift */,
+				62C4D095283E84160050BB57 /* CombatVehicleCategoryView.swift */,
+				62C4D09D283E857F0050BB57 /* CombatVehicleGroupView.swift */,
+				62C4D0A5283E86720050BB57 /* CombatVehicleView.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6231A74E282CD5E1004C60E3 /* MilitarySystem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6231A75E282CD5E1004C60E3 /* Build configuration list for PBXNativeTarget "MilitarySystem" */;
+			buildPhases = (
+				6231A74B282CD5E1004C60E3 /* Sources */,
+				6231A74C282CD5E1004C60E3 /* Frameworks */,
+				6231A74D282CD5E1004C60E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MilitarySystem;
+			productName = MilitarySystem;
+			productReference = 6231A74F282CD5E1004C60E3 /* Военная система.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6231A747282CD5E1004C60E3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					6231A74E282CD5E1004C60E3 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 6231A74A282CD5E1004C60E3 /* Build configuration list for PBXProject "MilitarySystem" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ru,
+			);
+			mainGroup = 6231A746282CD5E1004C60E3;
+			productRefGroup = 6231A750282CD5E1004C60E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6231A74E282CD5E1004C60E3 /* MilitarySystem */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6231A74D282CD5E1004C60E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				626B90D22834D1D80014EBB5 /* Localizable.strings in Resources */,
+				6231A757282CD5E1004C60E3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6231A74B282CD5E1004C60E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62C4D088283E81DB0050BB57 /* MilitaryBuildingCategoryListView.swift in Sources */,
+				6221CD3F282F82FB002F88C3 /* CombatVehicleFilter.swift in Sources */,
+				6248D5BA28427A62007E1B28 /* MilitarySpecialtyFormView.swift in Sources */,
+				62C4D0A2283E85E90050BB57 /* CombatVehicleGroupTableView.swift in Sources */,
+				62C4D044283E754C0050BB57 /* CombarVehiclePageViewModel.swift in Sources */,
+				6231A763282CD6A2004C60E3 /* ArmamentCategory.swift in Sources */,
+				62C4D09A283E84ED0050BB57 /* CombatVehicleCategoryTableView.swift in Sources */,
+				6286BE4D28326E0F00E8ADDB /* ArmamentCategoryPageView.swift in Sources */,
+				6231A78C282CDF7E004C60E3 /* ArmamentCategoryService.swift in Sources */,
+				628AD1FD28364F8C007BCF24 /* AppDelegate.swift in Sources */,
+				62D3E203283BDD3000E6A298 /* DislocationTypeService.swift in Sources */,
+				6221CD4D282F8645002F88C3 /* MilitaryFormationTypeFilter.swift in Sources */,
+				6221CD3B282F814D002F88C3 /* CombatVehicleCategoryFilter.swift in Sources */,
+				62C4D09C283E851F0050BB57 /* CombatVehicleCategoryPageView.swift in Sources */,
+				62DB2600283B46A100153F27 /* ArmamentCategoryView.swift in Sources */,
+				62D3E210283BDEBE00E6A298 /* StaffCategoryService.swift in Sources */,
+				62D9462928375E4A005C3FC8 /* ThemePickerCommands.swift in Sources */,
+				6225E7892833F76200F04E42 /* NetworkDispatcher.swift in Sources */,
+				6231A76F282CDB67004C60E3 /* DislocationType.swift in Sources */,
+				6225A342283E5C8A00EFA401 /* SubjectListView.swift in Sources */,
+				6248D5B628427A21007E1B28 /* StaffCategoryFormView.swift in Sources */,
+				6237EC9F283F1E43002DF04F /* PostEntityRequest.swift in Sources */,
+				6248D5CE284282E3007E1B28 /* SuccessfulCreateNotificationContent.swift in Sources */,
+				62A271AF28354D5D002437CD /* ToggleSidebarToolbar.swift in Sources */,
+				62A2719928351EAE002437CD /* MilitaryFormationTypeTableView.swift in Sources */,
+				6231A77D282CDD43004C60E3 /* MilitaryFormationType.swift in Sources */,
+				62B006212842009D00C45D6C /* ArmamentCategoryFormView.swift in Sources */,
+				62158B00283E35CC00657365 /* PageSelectorToolbar.swift in Sources */,
+				62C4D080283E80AE0050BB57 /* MilitaryBuildingListView.swift in Sources */,
+				6231A77B282CDCF8004C60E3 /* MilitaryFormation.swift in Sources */,
+				62C4D072283E7D0D0050BB57 /* MilitarySpecialtyTableView.swift in Sources */,
+				6231A76B282CDA76004C60E3 /* CombatVehicleGroup.swift in Sources */,
+				62D3E214283BE3C500E6A298 /* SuccessfulSaveNotificationContent.swift in Sources */,
+				62C434AB2835DCFC0052E32E /* SubjectPageView.swift in Sources */,
+				62C4D06C283E7C360050BB57 /* DislocationTypePageView.swift in Sources */,
+				62C4D076283E7D9F0050BB57 /* MilitaryDistrictView.swift in Sources */,
+				6221CD47282F8596002F88C3 /* MilitaryBuildingFilter.swift in Sources */,
+				62C4D0A0283E85C00050BB57 /* CombatVehicleGroupListView.swift in Sources */,
+				6248D5C628427BDF007E1B28 /* MilitaryBuildingCategoryFormView.swift in Sources */,
+				6225E7932834016C00F04E42 /* APIConfig.swift in Sources */,
+				620624452841526E00DC9CA5 /* FieldStringConvertible.swift in Sources */,
+				62D3E1CF283B7DB900E6A298 /* MilitaryManListView.swift in Sources */,
+				62A271A72835491F002437CD /* DislocationPageViewModel.swift in Sources */,
+				6286BE5B2832801200E8ADDB /* MilitaryManService.swift in Sources */,
+				62C4D096283E84160050BB57 /* CombatVehicleCategoryView.swift in Sources */,
+				62C4D03A283E74930050BB57 /* RankCategoryPageViewModel.swift in Sources */,
+				628CC145283BEE1500CABE7C /* DeleteEntityRequest.swift in Sources */,
+				62158AFC283E305B00657365 /* EntityPage.swift in Sources */,
+				62C4D036283E741F0050BB57 /* RankTableView.swift in Sources */,
+				628CC141283BEBB400CABE7C /* FindAllEntitiesRequest.swift in Sources */,
+				62C4D098283E847F0050BB57 /* CombatVehicleCategoryListView.swift in Sources */,
+				6248D5BC28427A83007E1B28 /* MilitaryDistrictFormView.swift in Sources */,
+				62C4D04E283E76340050BB57 /* MilitarySpecialtyPageViewModel.swift in Sources */,
+				62C4D0A8283E86B50050BB57 /* CombatVehicleListView.swift in Sources */,
+				62D3E1D3283B8E1700E6A298 /* CustomDateJSONEncoder.swift in Sources */,
+				623D8B7328341366006A191D /* CustomDateJSONDecoder.swift in Sources */,
+				6231A787282CDE16004C60E3 /* StaffCategory.swift in Sources */,
+				62A27191283512D9002437CD /* MilitaryFormationPageViewModel.swift in Sources */,
+				6248D5B028427954007E1B28 /* SubjectFormView.swift in Sources */,
+				623D8B7728342A8C006A191D /* CustomTimestampFormatter.swift in Sources */,
+				62D3E205283BDD8000E6A298 /* MilitaryBuildingCategoryService.swift in Sources */,
+				628AD1F5283615A5007BCF24 /* NotificationHandler.swift in Sources */,
+				62C4D06E283E7CA90050BB57 /* MilitarySpecialtyView.swift in Sources */,
+				62C4D05A283E78910050BB57 /* RankCategoryTableView.swift in Sources */,
+				62C4D092283E834F0050BB57 /* ArmamentTableView.swift in Sources */,
+				62C4D064283E7ABC0050BB57 /* StaffCategoryPageView.swift in Sources */,
+				6248D5D02842843C007E1B28 /* Optional+boundString.swift in Sources */,
+				62C4D066283E7B310050BB57 /* DislocationTypeView.swift in Sources */,
+				62C434A72835DC330052E32E /* SubjectTableView.swift in Sources */,
+				62C4D0AC283E871A0050BB57 /* CombatVehiclePageView.swift in Sources */,
+				62158AF8283E1D0F00657365 /* DislocationListView.swift in Sources */,
+				623D8B6E2834106C006A191D /* HTTPContentType.swift in Sources */,
+				6248D5B428427996007E1B28 /* RankCategoryFormView.swift in Sources */,
+				6231A755282CD5E1004C60E3 /* ContentView.swift in Sources */,
+				62A2719B28351F02002437CD /* MilitaryFormationTypePageView.swift in Sources */,
+				62C4D056283E78180050BB57 /* RankCategoryView.swift in Sources */,
+				6217AB422842BB3600E7E3D2 /* SearchToolbar.swift in Sources */,
+				6248D5AA28427749007E1B28 /* DislocationFormView.swift in Sources */,
+				62C4D042283E751C0050BB57 /* CombatVehicleGroupPageViewModel.swift in Sources */,
+				6231A765282CD84C004C60E3 /* Armament.swift in Sources */,
+				6225E7812833F24900F04E42 /* NetworkRequestError.swift in Sources */,
+				62D3E216283BE3D600E6A298 /* SuccessfulDeleteNotificationContent.swift in Sources */,
+				62A2719F283545CA002437CD /* ReloadToolbar.swift in Sources */,
+				6225A33E283E5A6100EFA401 /* MilitaryFormationTypeListView.swift in Sources */,
+				6221CD59282F88D6002F88C3 /* RankFilter.swift in Sources */,
+				6231A753282CD5E1004C60E3 /* MilitarySystemApp.swift in Sources */,
+				62DB25FD283B453000153F27 /* ViewMode.swift in Sources */,
+				62D3E218283BE4A800E6A298 /* NetworkRequestErrorNotificationContent.swift in Sources */,
+				6286BE612832822C00E8ADDB /* MilitaryManPageView.swift in Sources */,
+				6286BE632832826900E8ADDB /* MilitaryManFilterView.swift in Sources */,
+				628CC13F283BEABB00CABE7C /* Entity.swift in Sources */,
+				6231A777282CDC4D004C60E3 /* SimplifiedDislocation.swift in Sources */,
+				62C4D05C283E78B50050BB57 /* RankCategoryPageView.swift in Sources */,
+				623D8B7928342B78006A191D /* CustomDateFormatter.swift in Sources */,
+				6221CD41282F8385002F88C3 /* DislocationFilter.swift in Sources */,
+				62C4D058283E78500050BB57 /* RankCategoryListView.swift in Sources */,
+				6248D5C428427B30007E1B28 /* CombatVehicleCategoryFormView.swift in Sources */,
+				6248D5A828427715007E1B28 /* MilitaryFormationFormView.swift in Sources */,
+				62A2719728351E52002437CD /* MilitaryFormationTypePageViewModel.swift in Sources */,
+				62C4D086283E81AC0050BB57 /* MilitaryBuildingCategoryView.swift in Sources */,
+				62D3E1D5283BCD2600E6A298 /* RankService.swift in Sources */,
+				6248D5C028427AE5007E1B28 /* CombatVehicleFormView.swift in Sources */,
+				6225E77F2833F22200F04E42 /* HTTPMethod.swift in Sources */,
+				62A271AA28354A68002437CD /* DislocationTableView.swift in Sources */,
+				62C4D054283E77680050BB57 /* RankPageView.swift in Sources */,
+				628F48922834FCB4005A7B51 /* PageFilterView.swift in Sources */,
+				6221CD57282F88BF002F88C3 /* RankCategoryFilter.swift in Sources */,
+				62D3E1FD283BDC9300E6A298 /* CombatVehicleCategoryService.swift in Sources */,
+				62C4D0A4283E86130050BB57 /* CombatVehicleGroupPageView.swift in Sources */,
+				6286BE5D2832804900E8ADDB /* MilitaryManTableView.swift in Sources */,
+				62C4D08E283E82AC0050BB57 /* ArmamentView.swift in Sources */,
+				6221CD45282F856A002F88C3 /* MilitaryBuildingCategoryFilter.swift in Sources */,
+				6231A77F282CDD56004C60E3 /* MilitaryMan.swift in Sources */,
+				62C4D070283E7CDC0050BB57 /* MilitarySpecialtyListView.swift in Sources */,
+				62C4D062283E7A9D0050BB57 /* StaffCategoryTableView.swift in Sources */,
+				6231A76D282CDA9D004C60E3 /* Dislocation.swift in Sources */,
+				62C4D0A6283E86720050BB57 /* CombatVehicleView.swift in Sources */,
+				6231A789282CDE2A004C60E3 /* Subject.swift in Sources */,
+				62D3E20B283BDE4900E6A298 /* MilitarySpecialtyService.swift in Sources */,
+				62C4D052283E770A0050BB57 /* RankView.swift in Sources */,
+				62C4D038283E74660050BB57 /* RankPageViewModel.swift in Sources */,
+				6225E7832833F28800F04E42 /* HTTPStatus.swift in Sources */,
+				628CC149283BF80100CABE7C /* EntityService.swift in Sources */,
+				628CC143283BEC3A00CABE7C /* PutEntityRequest.swift in Sources */,
+				6221CD51282F871B002F88C3 /* MilitarySpecialtyFilter.swift in Sources */,
+				62C4D060283E7A770050BB57 /* StaffCategoryListView.swift in Sources */,
+				62C4D04A283E75DA0050BB57 /* MilitaryBuildingCategoryPageViewModel.swift in Sources */,
+				62C4D08A283E82090050BB57 /* MilitaryBuildingCategoryTableView.swift in Sources */,
+				62C4D07E283E80460050BB57 /* MilitaryBuildingView.swift in Sources */,
+				62A271AC28354B94002437CD /* DislocationPageView.swift in Sources */,
+				6225A340283E5C6500EFA401 /* SubjectView.swift in Sources */,
+				62C4D08C283E82300050BB57 /* MilitaryBuildingCategoryPageView.swift in Sources */,
+				62DB25F7283B434500153F27 /* ArmamentCategoryListView.swift in Sources */,
+				62C4D04C283E76000050BB57 /* MilitaryDistrictPageViewModel.swift in Sources */,
+				62D3E20E283BDE8000E6A298 /* RankCategoryService.swift in Sources */,
+				6221CD5D282F8938002F88C3 /* SubjectFilter.swift in Sources */,
+				62D3E212283BE0CB00E6A298 /* NotificationСontent.swift in Sources */,
+				628CC13B283BE98E00CABE7C /* EntityPageViewModel.swift in Sources */,
+				6248D5D42842957D007E1B28 /* Optional+asString.swift in Sources */,
+				6225E7852833F48C00F04E42 /* Request.swift in Sources */,
+				62C4D07A283E7E200050BB57 /* MilitaryDistrictTableView.swift in Sources */,
+				6231A769282CD8D7004C60E3 /* CombatVehicle.swift in Sources */,
+				623D8B702834109F006A191D /* HTTPHeaderField.swift in Sources */,
+				62C4D074283E7D320050BB57 /* MilitarySpecialtyPageView.swift in Sources */,
+				62C4D068283E7B6A0050BB57 /* DislocationTypeListView.swift in Sources */,
+				62A271A5283548DE002437CD /* DislocationService.swift in Sources */,
+				6221CD53282F8730002F88C3 /* PageFilter.swift in Sources */,
+				6231A773282CDBA7004C60E3 /* MilitaryBuilding.swift in Sources */,
+				6286BE4528326D5B00E8ADDB /* ArmamentCategoryFilterView.swift in Sources */,
+				623D8B7528342A50006A191D /* CustomTimestampJSONDecoder.swift in Sources */,
+				62C4D040283E74F70050BB57 /* CombatVehicleCategoryPageViewModel.swift in Sources */,
+				62C4D078283E7DF40050BB57 /* MilitaryDistrictListView.swift in Sources */,
+				62C4D082283E80E00050BB57 /* MilitaryBuildingTableView.swift in Sources */,
+				6231A785282CDDF2004C60E3 /* Rank.swift in Sources */,
+				62158AF0283E17C800657365 /* MilitaryFormationListView.swift in Sources */,
+				62C4D09E283E857F0050BB57 /* CombatVehicleGroupView.swift in Sources */,
+				62C4D03C283E74B20050BB57 /* StaffCategoryPageViewModel.swift in Sources */,
+				62158AF6283E1CA800657365 /* DislocationView.swift in Sources */,
+				6248D5C228427B04007E1B28 /* CombatVehicleGroupFormView.swift in Sources */,
+				62C4D050283E76E40050BB57 /* RankListView.swift in Sources */,
+				6225E78B2833FCFF00F04E42 /* APIClient.swift in Sources */,
+				62C4D046283E75830050BB57 /* DislocationTypePageViewModel.swift in Sources */,
+				62C4D0AA283E86DA0050BB57 /* CombatVehicleTableView.swift in Sources */,
+				6248D5A6284276D0007E1B28 /* MilitaryManFormView.swift in Sources */,
+				628CC14B283BF99400CABE7C /* EntityFilter.swift in Sources */,
+				62A2719528351433002437CD /* MilitaryFormationPageView.swift in Sources */,
+				6221CD5B282F8921002F88C3 /* StaffCategoryFilter.swift in Sources */,
+				6221CD4F282F8659002F88C3 /* MilitaryManFilter.swift in Sources */,
+				62C4D06A283E7B920050BB57 /* DislocationTypeTableView.swift in Sources */,
+				62C4D07C283E7E420050BB57 /* MilitaryDistrictPageView.swift in Sources */,
+				6286BE5F2832809700E8ADDB /* MilitaryManPageViewModel.swift in Sources */,
+				6221CD39282F7FC1002F88C3 /* ArmamentFilter.swift in Sources */,
+				6248D5AC28427785007E1B28 /* MilitaryFormationTypeFormView.swift in Sources */,
+				62A2718F283512A6002437CD /* MilitaryFormationTypeService.swift in Sources */,
+				62158AFA283E228600657365 /* FindAllEntitiesByFilterRequest.swift in Sources */,
+				62158AF2283E17F500657365 /* MilitaryFormationView.swift in Sources */,
+				62D3E209283BDDF900E6A298 /* MilitaryDistrictService.swift in Sources */,
+				6221CD33282F7C7C002F88C3 /* ArmamentCategoryTableView.swift in Sources */,
+				62C4D084283E81250050BB57 /* MilitaryBuildingPageView.swift in Sources */,
+				62C4D05E283E78FA0050BB57 /* StaffCategoryView.swift in Sources */,
+				62D3E1D1283B7DDD00E6A298 /* MilitaryManView.swift in Sources */,
+				6221CD4B282F8615002F88C3 /* MilitaryFormationFilter.swift in Sources */,
+				625365D82834057E0093DDF6 /* APIError.swift in Sources */,
+				62C434A92835DC540052E32E /* SubjectPageViewModel.swift in Sources */,
+				626EED31282FF6D9003E3E4C /* SidebarView.swift in Sources */,
+				62D3E207283BDDC500E6A298 /* MilitaryBuildingService.swift in Sources */,
+				620624472841F53F00DC9CA5 /* NewEntityCardView.swift in Sources */,
+				62BFD8DD283DF33900363580 /* EditEntityCardView.swift in Sources */,
+				6231A783282CDDDF004C60E3 /* RankCategory.swift in Sources */,
+				6248D5AE2842779E007E1B28 /* EntityFormView.swift in Sources */,
+				6221CD43282F8514002F88C3 /* DislocationTypeFilter.swift in Sources */,
+				6231A771282CDB81004C60E3 /* MilitaryBuildingCategory.swift in Sources */,
+				6221CD49282F85CE002F88C3 /* MilitaryDistrictFilter.swift in Sources */,
+				6225E7872833F68800F04E42 /* Request+Helpers.swift in Sources */,
+				62DB2609283B5F3300153F27 /* Encodable+asDictionary.swift in Sources */,
+				6248D5B828427A3F007E1B28 /* DislocationTypeFormView.swift in Sources */,
+				6231A779282CDC85004C60E3 /* SimplifiedMilitaryMan.swift in Sources */,
+				62158AFE283E333900657365 /* EntityPageView.swift in Sources */,
+				6248D5BE28427AA5007E1B28 /* MilitaryBuildingFormView.swift in Sources */,
+				6225A33C283E5A1D00EFA401 /* MilitaryFormationTypeView.swift in Sources */,
+				6231A781282CDDC9004C60E3 /* MilitarySpecialty.swift in Sources */,
+				62A27193283513D5002437CD /* MilitaryFormationTableView.swift in Sources */,
+				6248D5B228427977007E1B28 /* RankFormView.swift in Sources */,
+				62C434A52835DA7F0052E32E /* SubjectService.swift in Sources */,
+				6221CD3D282F81AB002F88C3 /* CombatVehicleGroupFilter.swift in Sources */,
+				62C4D090283E83220050BB57 /* ArmamentListView.swift in Sources */,
+				6221CD37282F7F75002F88C3 /* ArmamentCategoryFilter.swift in Sources */,
+				62D3E1FB283BDC2D00E6A298 /* ArmamentService.swift in Sources */,
+				6231A775282CDBDC004C60E3 /* MilitaryDistrict.swift in Sources */,
+				62B006232842015600C45D6C /* ArmamentFormView.swift in Sources */,
+				62DB25F9283B44E000153F27 /* DisplayModePicker.swift in Sources */,
+				62C4D048283E75B40050BB57 /* MilitaryBuildingPageViewModel.swift in Sources */,
+				62D3E1FF283BDCDA00E6A298 /* CombatVehicleService.swift in Sources */,
+				6221CD30282F665D002F88C3 /* ArmamentCategoryPageViewModel.swift in Sources */,
+				62D3E201283BDD0000E6A298 /* CombatVehicleGroupService.swift in Sources */,
+				62C4D03E283E74D40050BB57 /* ArmamentPageViewModel.swift in Sources */,
+				62A2718D2835125B002437CD /* MilitaryFormationService.swift in Sources */,
+				626EED3A28300E94003E3E4C /* SidebarItemView.swift in Sources */,
+				62C4D094283E838F0050BB57 /* ArmamentPageView.swift in Sources */,
+				6231A767282CD8AF004C60E3 /* CombatVehicleCategory.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		626B90D42834D1D80014EBB5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				626B90D32834D1D80014EBB5 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6231A75C282CD5E1004C60E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6231A75D282CD5E1004C60E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		6231A75F282CD5E1004C60E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MilitarySystem/MilitarySystem.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 993BDGCL75;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MilitarySystem/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.nsu.fit.MilitarySystem;
+				PRODUCT_NAME = "Военная система";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6231A760282CD5E1004C60E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MilitarySystem/MilitarySystem.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 993BDGCL75;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MilitarySystem/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.nsu.fit.MilitarySystem;
+				PRODUCT_NAME = "Военная система";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6231A74A282CD5E1004C60E3 /* Build configuration list for PBXProject "MilitarySystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6231A75C282CD5E1004C60E3 /* Debug */,
+				6231A75D282CD5E1004C60E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6231A75E282CD5E1004C60E3 /* Build configuration list for PBXNativeTarget "MilitarySystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6231A75F282CD5E1004C60E3 /* Debug */,
+				6231A760282CD5E1004C60E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6231A747282CD5E1004C60E3 /* Project object */;
+}
