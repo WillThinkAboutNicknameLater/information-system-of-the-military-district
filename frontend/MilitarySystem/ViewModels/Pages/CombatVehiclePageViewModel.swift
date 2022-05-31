@@ -1,5 +1,5 @@
 //
-//  CombarVehiclePageViewModel.swift
+//  CombatVehiclePageViewModel.swift
 //  MilitarySystem
 //
 //  Created by Mackem Meya on 25.05.2022.
