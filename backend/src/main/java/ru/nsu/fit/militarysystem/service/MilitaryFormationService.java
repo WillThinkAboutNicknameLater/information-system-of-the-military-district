@@ -66,10 +66,7 @@ public class MilitaryFormationService {
         String searchName = militaryFormationSearchFilter.getSearchName();
         String militaryFormationTypeIds = IterableToPostgresqlArrayConverter.convert(militaryFormationSearchFilter.getMilitaryFormationTypeIds());
         Page<MilitaryFormation> militaryFormations = militaryFormationRepository.findAllByFilter(searchName, militaryFormationTypeIds, pageable);
-        if (militaryFormations.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryFormation[].class,
-                                              Map.of("militaryFormationSearchFilter", militaryFormationSearchFilter.toString()));
-        }
+
         return militaryFormationMapper.entitiesToDtos(militaryFormations);
     }
 

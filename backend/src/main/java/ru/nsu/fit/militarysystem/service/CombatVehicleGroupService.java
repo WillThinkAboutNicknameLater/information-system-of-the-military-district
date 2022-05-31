@@ -44,11 +44,6 @@ public class CombatVehicleGroupService {
         String searchName = combatVehicleGroupSearchFilter.getSearchName();
         Page<CombatVehicleGroup> combatVehicleGroups = combatVehicleGroupRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
 
-        if (combatVehicleGroups.isEmpty()) {
-            throw new EntityNotFoundException(CombatVehicleGroup[].class,
-                                              Map.of("combatVehicleGroupSearchFilter", combatVehicleGroupSearchFilter.toString()));
-        }
-
         return combatVehicleGroupMapper.entitiesToDtos(combatVehicleGroups);
     }
 

@@ -43,10 +43,6 @@ public class StaffCategoryService {
         String searchName = staffCategorySearchFilter.getSearchName();
         Page<StaffCategory> staffCategories = staffCategoryRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
 
-        if (staffCategories.isEmpty()) {
-            throw new EntityNotFoundException(StaffCategory[].class, Map.of("staffCategorySearchFilter", staffCategorySearchFilter.toString()));
-        }
-
         return staffCategoryMapper.entitiesToDtos(staffCategories);
     }
 

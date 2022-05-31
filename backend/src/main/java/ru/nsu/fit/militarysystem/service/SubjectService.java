@@ -41,11 +41,7 @@ public class SubjectService {
                                            subjectSearchFilter.getSortBy().toArray(new String[]{}));
         String searchName = subjectSearchFilter.getSearchName();
         Page<Subject> subjects = subjectRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
-
-        if (subjects.isEmpty()) {
-            throw new EntityNotFoundException(Subject[].class, Map.of("subjectSearchFilter", subjectSearchFilter.toString()));
-        }
-
+        
         return subjectMapper.entitiesToDtos(subjects);
     }
 

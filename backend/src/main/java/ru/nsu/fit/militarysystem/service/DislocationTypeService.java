@@ -43,10 +43,6 @@ public class DislocationTypeService {
         String searchName = dislocationTypeSearchFilter.getSearchName();
         Page<DislocationType> dislocationTypes = dislocationTypeRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
 
-        if (dislocationTypes.isEmpty()) {
-            throw new EntityNotFoundException(DislocationType[].class, Map.of("dislocationTypeSearchFilter", dislocationTypeSearchFilter.toString()));
-        }
-
         return dislocationTypeMapper.entitiesToDtos(dislocationTypes);
     }
 

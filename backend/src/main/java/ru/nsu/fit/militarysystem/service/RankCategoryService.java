@@ -43,10 +43,6 @@ public class RankCategoryService {
         String searchName = rankCategorySearchFilter.getSearchName();
         Page<RankCategory> rankCategories = rankCategoryRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
 
-        if (rankCategories.isEmpty()) {
-            throw new EntityNotFoundException(RankCategory[].class, Map.of("rankCategorySearchFilter", rankCategorySearchFilter.toString()));
-        }
-
         return rankCategoryMapper.entitiesToDtos(rankCategories);
     }
 

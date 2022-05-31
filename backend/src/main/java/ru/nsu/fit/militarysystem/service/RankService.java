@@ -45,10 +45,6 @@ public class RankService {
         String staffCategoryIds = IterableToPostgresqlArrayConverter.convert(rankSearchFilter.getStaffCategoryIds());
         Page<Rank> ranks = rankRepository.findAllByFilter(searchName, rankCategoryIds, staffCategoryIds, pageable);
 
-        if (ranks.isEmpty()) {
-            throw new EntityNotFoundException(Rank[].class, Map.of("rankSearchFilter", rankSearchFilter.toString()));
-        }
-
         return rankMapper.entitiesToDtos(ranks);
     }
 

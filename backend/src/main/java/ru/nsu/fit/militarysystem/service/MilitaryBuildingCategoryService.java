@@ -46,11 +46,6 @@ public class MilitaryBuildingCategoryService {
         Page<MilitaryBuildingCategory> militaryBuildingCategories =
                 militaryBuildingCategoryRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
 
-        if (militaryBuildingCategories.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryBuildingCategory[].class,
-                                              Map.of("militaryBuildingCategorySearchFilter", militaryBuildingCategorySearchFilter.toString()));
-        }
-
         return militaryBuildingCategoryMapper.entitiesToDtos(militaryBuildingCategories);
     }
 

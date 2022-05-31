@@ -44,11 +44,6 @@ public class MilitarySpecialtyService {
         String searchName = militarySpecialtySearchFilter.getSearchName();
         Page<MilitarySpecialty> militarySpecialties = militarySpecialtyRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
 
-        if (militarySpecialties.isEmpty()) {
-            throw new EntityNotFoundException(MilitarySpecialty[].class,
-                                              Map.of("militarySpecialtySearchFilter", militarySpecialtySearchFilter.toString()));
-        }
-
         return militarySpecialtyMapper.entitiesToDtos(militarySpecialties);
     }
 

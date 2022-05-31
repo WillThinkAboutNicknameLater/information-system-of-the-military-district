@@ -48,11 +48,6 @@ public class CombatVehicleCategoryService {
         Page<CombatVehicleCategory> combatVehicleCategories =
                 combatVehicleCategoryRepository.findAllByFilter(searchName, combatVehicleGroupIds, pageable);
 
-        if (combatVehicleCategories.isEmpty()) {
-            throw new EntityNotFoundException(CombatVehicleCategory[].class,
-                                              Map.of("combatVehicleCategorySearchFilter", combatVehicleCategorySearchFilter.toString()));
-        }
-
         return combatVehicleCategoryMapper.entitiesToDtos(combatVehicleCategories);
     }
 

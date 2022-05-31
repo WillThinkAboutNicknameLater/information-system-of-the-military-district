@@ -49,11 +49,6 @@ public class MilitaryBuildingService {
         Page<MilitaryBuilding> militaryBuildings =
                 militaryBuildingRepository.findAllByFilter(searchName, militaryBuildingCategoryIds, militaryFormationIds, pageable);
 
-        if (militaryBuildings.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryBuilding[].class,
-                                              Map.of("militaryBuildingSearchFilter", militaryBuildingSearchFilter.toString()));
-        }
-
         return militaryBuildingMapper.entitiesToDtos(militaryBuildings);
     }
 

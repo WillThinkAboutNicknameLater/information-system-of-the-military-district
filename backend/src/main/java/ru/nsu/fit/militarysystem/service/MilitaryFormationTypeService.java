@@ -45,11 +45,6 @@ public class MilitaryFormationTypeService {
         String searchName = militaryFormationTypeSearchFilter.getSearchName();
         Page<MilitaryFormationType> militaryFormationTypes = militaryFormationTypeRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
 
-        if (militaryFormationTypes.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryFormationType[].class,
-                                              Map.of("militaryFormationTypeSearchFilter", militaryFormationTypeSearchFilter.toString()));
-        }
-
         return militaryFormationTypeMapper.entitiesToDtos(militaryFormationTypes);
     }
 

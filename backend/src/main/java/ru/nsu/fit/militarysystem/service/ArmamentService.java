@@ -46,11 +46,6 @@ public class ArmamentService {
         String militaryFormationIds = IterableToPostgresqlArrayConverter.convert(armamentSearchFilter.getMilitaryFormationIds());
         Page<Armament> armaments = armamentRepository.findAllByFilter(searchName, armamentCategoryIds, militaryFormationIds, pageable);
 
-        if (armaments.isEmpty()) {
-            throw new EntityNotFoundException(Armament[].class,
-                                              Map.of("armamentSearchFilter", armamentSearchFilter.toString()));
-        }
-
         return armamentMapper.entitiesToDtos(armaments);
     }
 

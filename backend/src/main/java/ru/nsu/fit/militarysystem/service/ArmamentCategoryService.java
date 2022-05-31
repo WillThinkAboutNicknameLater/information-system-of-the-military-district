@@ -43,11 +43,6 @@ public class ArmamentCategoryService {
         String searchName = armamentCategorySearchFilter.getSearchName();
         Page<ArmamentCategory> armamentCategories = armamentCategoryRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
 
-        if (armamentCategories.isEmpty()) {
-            throw new EntityNotFoundException(ArmamentCategory[].class,
-                                              Map.of("armamentCategorySearchFilter", armamentCategorySearchFilter.toString()));
-        }
-
         return armamentCategoryMapper.entitiesToDtos(armamentCategories);
     }
 

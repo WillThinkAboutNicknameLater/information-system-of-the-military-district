@@ -44,11 +44,6 @@ public class MilitaryDistrictService {
         String searchName = militaryDistrictSearchFilter.getSearchName();
         Page<MilitaryDistrict> militaryDistricts = militaryDistrictRepository.findAllByNameContainingIgnoreCase(searchName, pageable);
 
-        if (militaryDistricts.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryDistrict[].class,
-                                              Map.of("militaryDistrictSearchFilter", militaryDistrictSearchFilter.toString()));
-        }
-
         return militaryDistrictMapper.entitiesToDtos(militaryDistricts);
     }
 

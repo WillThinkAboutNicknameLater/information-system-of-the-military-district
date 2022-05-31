@@ -67,10 +67,6 @@ public class MilitaryManService {
                 militaryManRepository.findAllByFilter(searchName, rankIds, rankCategoryIds, staffCategoryIds, militarySpecialtyIds,
                                                       militaryFormationIds, pageable);
 
-        if (militaryMen.isEmpty()) {
-            throw new EntityNotFoundException(MilitaryMan[].class, Map.of("militaryManSearchFilter", militaryManSearchFilter.toString()));
-        }
-
         return militaryManMapper.entitiesToDtos(militaryMen);
     }
 

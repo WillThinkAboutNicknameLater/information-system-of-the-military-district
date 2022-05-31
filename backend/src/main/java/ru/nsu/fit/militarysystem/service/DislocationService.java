@@ -47,10 +47,6 @@ public class DislocationService {
         String subjectIds = IterableToPostgresqlArrayConverter.convert(dislocationSearchFilter.getSubjectIds());
         Page<Dislocation> dislocations = dislocationRepository.findAllByFilter(searchName, dislocationTypeIds, subjectIds, pageable);
 
-        if (dislocations.isEmpty()) {
-            throw new EntityNotFoundException(Dislocation[].class, Map.of("dislocationSearchFilter", dislocationSearchFilter.toString()));
-        }
-
         return dislocationMapper.entitiesToDtos(dislocations);
     }
 
